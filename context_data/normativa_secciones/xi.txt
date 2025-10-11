@@ -1,0 +1,7 @@
+{
+    "titulo": "Textiles y sus manufacturas",
+    "Leyes y reglamentos": "Los productos textiles deben cumplir normas de etiquetado de fibras (según la Ley de Protección al Consumidor) y normas de inflamabilidad (Norma ASTM adoptada nacionalmente para ropa de bebés). Existe regulación de origen de textiles para beneficios arancelarios (acuerdos COMIECO).",
+    "Requisitos administrativos": "No hay registro sanitario general para textiles, salvo específicos (textiles médicos deben aprobación de MINSA). Los insumos textiles (fibras) deben declararse en aduana con composición. Para productos con componentes químicos (teñidos) puede requerirse informe toxicológico.",
+    "Entidades competentes": "MIFIC (clasificación y arancel), Ministerio de Salud (control de carcinógenos en textiles especiales), INN/INTN (normas técnicas de fibra y colorantes), DGA.",
+    "Riesgos clave": "Riesgos de incendio (ropa sintética), alergias (colorantes azoicos). Mal etiquetado (por ejemplo, algodón mercantilizado)."
+}

@@ -1,0 +1,7 @@
+{
+    "titulo": "Vehículos, embarcaciones y material de transporte",
+    "Leyes y reglamentos": "La Ley 431/2004 (Transito) y sus reglamentos establecen control de vehículos en carretera. Hay normativas (MIFIC/MTI) para importación de vehículos usados (edad máxima) y emisión de gases. Normas técnicas obligatorias rigen seguridad de vehículos (cinturones, frenos) y emisiones. Existen estándares para neumáticos (distintivos), cristales templados, etc.",
+    "Requisitos administrativos": "Todo vehículo importado requiere matriculación en MTI (antes MTC) con revisión técnica vehicular. Debe contar con certificado de emisiones vehiculares. Para embarcaciones se exige permiso de la Capitanía de Puertos (Armada de NI). Para aeronaves, permisos de la Autoridad Aeronáutica Civil. Los vehículos militares o especiales necesitan autorización del MGP.",
+    "Entidades competentes": "Ministerio de Transporte (MTI) / Dirección de Tránsito, DINARDAP (registro de propiedad de vehículos), INAA (automóviles para discapacitados, exentos), ANTA (antinarcóticos inspecciona carga), DGCP (para importación de unidades de transporte).",
+    "Riesgos clave": "Seguridad vial: vehículos sin control técnico. Emisiones contaminantes (falta de control ambiental). Riesgo aduanero: clasificación de vehículos recreativos vs. comerciales (diferentes impuestos)."
+}

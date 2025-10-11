@@ -1,0 +1,7 @@
+{
+    "titulo": "Manufacturas diversas",
+    "Leyes y reglamentos": "Aplican reglamentos técnicos y normas específicas según el producto (ej. RTCA para paraguas, textiles de cestería, juguetes). No hay una ley global, pero sí reglamentos aduaneros generales y normas de consumo (seguridad de juguetes, inflamabilidad de peluches, etc.).",
+    "Requisitos administrativos": "Varían enormemente: por ejemplo, neumáticos inflables requieren certificaciones de calidad y marcado de país de origen; paraguas deben indicar resistencia al viento; juguetes importados deben llevar marca de conformidad (según NTON de juguetes). En general, se exige factura comercial y cumplimiento de arancel para productos manufacturados.",
+    "Entidades competentes": "MIFIC/DGA (importaciones), INN/INTN (normas técnicas para artículos diversos), Ministerio de Educación (juguetes según políticas escolares), MINSA (productos de cuidado personal empacados).",
+    "Riesgos clave": "Riesgo de seguridad (pequeñas partes en juguetes, materiales inflamables, productos tóxicos de imitación). Control aduanero: amplia gama de clases arancelarias susceptibles a error de clasificación."
+}

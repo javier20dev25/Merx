@@ -1,0 +1,7 @@
+{
+    "titulo": "Armas y municiones",
+    "Leyes y reglamentos": "La importación de armas de fuego está regulada por la Ley 703/2012 y su reglamento (2013) –Ley de Control de Armas, Explosivos y Municiones–. Sólo permite importación por entidades autorizadas (p.ej. seguridad del Estado). Requiere permiso del Ministerio de Gobernación (Dirección General de Armas y Explosivos). Armas y municiones están sujetas a un estricto control estatal.",
+    "Requisitos administrativos": "Todo importador debe obtener Licencia para Fabricar/Comerciar Armas en Gobernación. Cada envío requiere certificado de importación específico expedido por DGA con aval de Gobernación. Se exige registro de tipo de arma, calibre y número de serie. Usuarios civiles pueden importar armas deportivas o de caza sólo con la debida autorización gubernamental.",
+    "Entidades competentes": "Ministerio de Gobernación (control y registro de armas), Policía Nacional (verificación e inspección), DGA/MIFIC (aduanas).",
+    "Riesgos clave": "Alta regulación por seguridad nacional; cualquier falta genera sanciones penales. Riesgo de contrabando y tráfico ilícito. Lesividad social (armas en manos equivocadas)."
+}

@@ -1,0 +1,7 @@
+{
+    "titulo": "Manufacturas de piedra, yeso, cemento, amianto, mica, cerámica, vidrio",
+    "Leyes y reglamentos": "Se aplican normas de construcción (NTC de cemento, reglamentos de calidad de agregados minerales). El asbesto (amianto) está restringido por normativas ambientales (Ley 620 sobre sustancias peligrosas). Cerámica y vidrio para uso alimentario debe cumplir normas de seguridad y migración de plomo (según RTCA o Codex).",
+    "Requisitos administrativos": "El cemento y yeso importados deben certificarse bajo normas nacionales de calidad (pH, resistencia). Encarpetado de yeso y cerámicos requiere cumplir códigos de construcción. Vidrio y loza en contacto con alimentos necesitan registro sanitario (MINSA). Artículos de vidrio, cerámica y loza deben estar libres de metales pesados según normas.",
+    "Entidades competentes": "MIFIC/DGA, INN (normas de construcción e insumos), MARENA (amianto), MINSA (loza sanitaria).",
+    "Riesgos clave": "Amianto: enfermedades pulmonares (prohibido en varios productos). Riesgo de infraestructuras inseguras (cemento defectuoso). Riesgos sanitarios: vidrio/cerámica con plomo o cadmio."
+}

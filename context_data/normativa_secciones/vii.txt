@@ -1,0 +1,7 @@
+{
+    "titulo": "Plásticos y caucho",
+    "Leyes y reglamentos": "Se aplican normas generales ambientales y de residuos (Ley 217/1996 y reglamentos de manejo de residuos sólidos). No existen leyes específicas de plásticos, pero sí RTCA sobre manufacturas de plástico. Etiquetado de productos plásticos en uso alimenticio debe seguir RTCA de inocuidad alimentaria.",
+    "Requisitos administrativos": "Para artículos de plástico (juguetes, envases, tuberías), se exige certificación de calidad bajo normas técnicas nicaragüenses (INS). Materiales plásticos deben estar libres de contaminantes (bisfenoles, plastificantes prohibidos). Hay registros sanitarios cuando se usan con alimentos. La importación de chatarra plástica (no peligroso) está regulada por acuerdos ministeriales específicos.",
+    "Entidades competentes": "MARENA (normas ambientales y residuos), MAG (si son bioplásticos agrícolas), INN/INTN (normas técnicas), MIFIC, DGA.",
+    "Riesgos clave": "Contaminación ambiental (residuos plásticos, microplásticos). Salud (plasticos con aditivos tóxicos, riesgo de asfixia en niños). Riesgo aduanero: chatarra mal declarada."
+}

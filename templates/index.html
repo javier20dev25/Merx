@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buscador Glassmorfismo Interactivo</title>
+<!-- Carga de la fuente Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Contenedor Principal para los pasos 0 y 1 -->
+  <div id="main-container" class="container">
+    <p id="info-text" class="info-text hidden">Pega aqui las partidas y notas de seccion o capitulo</p>
+    
+    <textarea id="main-textarea" placeholder="Describe tu mercancía aquí" class="neumorphic-textarea"></textarea>
+    <div id="result-container" class="neumorphic-textarea hidden"></div>
+    
+    <div style="display:flex; gap:30px; align-items: center;">
+      <!-- Botón Izquierdo (cambia de ícono) -->
+      <button id="left-button" class="glass-btn circle-btn purple-glow" aria-label="Ver categorías">
+        <span><!-- El contenido del botón (SVG) se inyecta aquí por JS --></span>
+      </button>
+      
+      <!-- Botón Derecho (cambia de texto) -->
+      <button id="right-button" class="glass-btn pill-btn orange-glow">
+        <span>Buscar Ubicacion</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenedor para el paso final (Informe) -->
+  <div id="report-view" class="container hidden">
+    <div id="report-content-wrapper">
+      <!-- La animación de carga o el informe se insertarán aquí -->
+    </div>
+    <button id="reset-button" class="glass-btn pill-btn purple-glow">
+      <span>← Volver al inicio</span>
+    </button>
+  </div>
+
+  <!-- Enlace al script de JavaScript -->
+  <script src="/static/main.js"></script>
+</body>
+</html>

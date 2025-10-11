@@ -1,0 +1,7 @@
+{
+    "titulo": "Pieles, cueros, etc.",
+    "Leyes y reglamentos": "Se rigen por la Ley 291 (sanidad animal) en cuanto a pieles de origen animal. Para manufacturas (calzado, marroquinería) se aplican normas técnicas de calidad y etiquetado. El comercio de pieles de especies protegidas está controlado por normas ambientales (CITES, mediante acuerdos de MARENA).",
+    "Requisitos administrativos": "Las pieles crudas importadas requieren certificado sanitario de importación (IPSA). Los cueros manufacturados deben cumplir requisitos fitosanitarios y de presencia de metales pesados (cromo en curtidos). Algunos productos (pieles finas) requieren licencia previa del MAG. Los productos finales (bolsos, carteras) deben etiquetarse con país de origen y composición.",
+    "Entidades competentes": "MAG/IPSA (control fitosanitario de pieles), MIFIC (importación de manufacturas), MINSA (tratamientos con químicos de curtición), MARENA (especies protegidas, CITES), DGA.",
+    "Riesgos clave": "Sanidad: transmisión de enfermedades (triquinosis, ectoparasitos) si hay pieles sin tratamiento. Riesgo ambiental: residuos de curtido (cromo y fenoles). Contrabando de pieles de especies en peligro."
+}

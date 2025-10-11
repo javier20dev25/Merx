@@ -1,0 +1,7 @@
+{
+    "titulo": "Productos minerales",
+    "Leyes y reglamentos": "La Ley No. 387/2006 (Minería) y su Decreto Reglamentario No. 119-2001 establecen el marco para exploración y explotación de minerales. Existen además regulaciones ambientales (p.ej. Ley 217/1996 de Medio Ambiente y la Ley 620/2007 de Biodiversidad) que condicionan permisos. Para combustibles y minerales industriales se aplica la legislación energética y ambiental.",
+    "Requisitos administrativos": "Los explotadores mineros deben obtener concesión del MEM y permisos ambientales (estudio de impacto ambiental, licencias de extracción de agua y permisos de corte forestal). La importación de minerales (p.ej. arena, piedra caliza) se rige por el arancel, pero puede requerir pago de regalías o impuestos especiales si es material de uso industrial. Los fertilizantes minerales, arcillas y piedras ornamentales requieren cumplimiento de normas técnicas de construcción (NTC) y registro en instituciones de normalización.",
+    "Entidades competentes": "MEM (Ministerio de Energía y Minas) autoriza y supervisa minería; MARENA aprueba aspectos ambientales; MAG (a veces recursos minerales no metálicos); INN (normas técnicas); DGA/MIFIC (importación y aranceles).",
+    "Riesgos clave": "Impacto ambiental (erosión, contaminación por metales pesados, sustracción de recurso hídrico). Salud ocupacional en minería. Riesgo aduanero por mala clasificación de minerales (p.ej. arena contra otros minerales) que afecta aranceles. Regulación estricta por decretos oficiales y concesiones."
+}

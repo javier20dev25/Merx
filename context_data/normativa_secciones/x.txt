@@ -1,0 +1,7 @@
+{
+    "titulo": "Pasta de madera, papel y cartón",
+    "Leyes y reglamentos": "Rige la Ley Forestal (referida). Se aplican normas de la industria papelera (NTC) y reglamentos de reciclaje. No hay leyes especiales; se usa normativa de construcción (por ejemplo, para empaques que no contengan sustancias tóxicas).",
+    "Requisitos administrativos": "El papel importado debe cumplir con especificaciones de calidad (resistencia, pH). Materiales reciclados (cartón, papel usado) deben autorizarse por MARENA si son residuos. Se exige registro sanitario si va en contacto con alimentos.",
+    "Entidades competentes": "MAG/MARENA (materia prima forestal), MIFIC/DGA (importación), MINSA (inocuidad en papel contacto alimentos).",
+    "Riesgos clave": "Uso de cloro en blanqueo (impacto ambiental). Riesgo de papel contaminado con metales. Clasificación: p.ej. cartón virgen vs. reciclado."
+}

@@ -1,0 +1,7 @@
+{
+    "titulo": "Metales comunes y manufacturas",
+    "Leyes y reglamentos": "Se aplican normativas ambientales al manejo de metales (p.ej. reglamentos de tratamiento de chatarra). Leyes de salud laboral regulan exposiciones (plomo, cadmio). Existen estándares de resistencia y composición (NTC) para láminas, barras y perfiles metálicos.",
+    "Requisitos administrativos": "El acero, hierro fundido y otros metales básicos importados necesitan certificado de composición química (o pruebas a la llegada). Productos revestidos anticorrosivos deben cumplir normas de espesor de recubrimiento. Equipos metálicos de uso industrial requieren certificaciones de calidad (p.ej. tanques de presión).",
+    "Entidades competentes": "MIFIC/DGA, MARENA (residuos metálicos y reciclaje), INN (normas de metales, ASTM adoptados), Ministerio de Trabajo (seguridad en soldadura, toxinas).",
+    "Riesgos clave": "Contaminación ambiental por residuos metálicos (residuos industriales). Salud ocupacional (soldaduras). Riesgo aduanero: clasificación de chapas vs. perfiles."
+}

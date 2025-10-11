@@ -1,0 +1,7 @@
+{
+    "titulo": "Calzado, sombreros y demás tocados, paraguas, quitasoles, bastones, látigos, etc.",
+    "Leyes y reglamentos": "Se aplican normas técnicas para calzado (resistencia, seguridad) y para sombreros (material no tóxico). No hay leyes específicas, pero el etiquetado de calzado de seguridad (si existe) está regulado por normas industriales.",
+    "Requisitos administrativos": "El calzado importado debe cumplir con especificaciones de fabricación (calce, materiales prohibidos). Los artículos como bastones o bastón luminosos deben cumplir normas eléctricas si llevan baterías.",
+    "Entidades competentes": "MIFIC/DGA (importaciones), INN/INTN (normas técnicas, p.ej. NTC de calzado), MINSA (seguridad en materiales).",
+    "Riesgos clave": "Materiales tóxicos (pegamentos con solventes). Riesgo de falsificación de marcas (propiedad industrial)."
+}

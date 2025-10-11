@@ -1,0 +1,7 @@
+{
+    "titulo": "Grasas y aceites, productos de desdoblamiento y ceras",
+    "Leyes y reglamentos": "Se aplican normas de inocuidad alimentaria (Ley No. 423/2015, Reglamento de Alimentos) y el Reglamento Técnico Centroamericano (RTCA) sobre especificaciones de grasas y aceites comestibles. En Nicaragua la NTON 03.075-07 implementa el RTCA 67.04.40:07 (grasas y aceites). También aplica la Ley General de Salud y reglamentos de etiquetado alimentario. Leyes de comercio regulan importación, pero sin aranceles especiales.",
+    "Requisitos administrativos": "Para aceites comestibles (vegetales o animales) se exige registro sanitario en MINSA y cumplimiento de especificaciones (pureza, niveles de acidez, sustancias permitidas) según normas del Codex/RTCA. Productos como margarina y mantecas deben etiquetarse con contenido energético. Algunas grasas (p.ej. exportación de cera) pueden requerir certificado de origen. Permiso de importación estándar (DGA/MIFIC).",
+    "Entidades competentes": "MINSA (etiquetado, calidad e inocuidad alimentaria), MIFIC (comercio exterior), MAG (en caso de aceites vegetales o para consumo animal), DGA (aduanas).",
+    "Riesgos clave": "Salud: grasas saturadas y trans (obesidad, colesterol) si no se informa bien. Control de calidad (productos rancios o adulterados). Medidas ambientales mínimas (producción de aceite genera aguas residuales). Riesgo aduanero por mala clasificación (aceites comestibles vs. uso industrial)."
+}

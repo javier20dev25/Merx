@@ -1,0 +1,7 @@
+{
+    "titulo": "Instrumentos ópticos, fotográficos, cinematográficos, de medida, control o precisión; aparatos médico-quirúrgicos; relojes; instrumentos musicales",
+    "Leyes y reglamentos": "Equipos médicos y de diagnóstico (rayos X, ultrasonido) requieren registro sanitario en MINSA. Normas técnicas (NTC) para equipos ópticos (lentes, equipos fotográficos) cubren calidad y etiquetado. Instrumentos de medición (balanzas) deben estar verificados por INM (Instituto Nacional de Metrología).",
+    "Requisitos administrativos": "Aparatos médicos importados deben contar con registro sanitario y aprobación de MINSA. Dispositivos ópticos deben pasar control de calidad de lentes (perfil del material). Instrumentos de precisión (paquímetros, espirómetros) se verán sometidos a calibración y trazabilidad. Muchos de estos aparatos están exentos de arancel para salud/educación.",
+    "Entidades competentes": "MINSA (equipos médicos y ópticos), INM/INM (verificación de instrumentos de medida), MIFIC/DGA, CIFRA (instituto normativo de instrumentos musicales, no existe nacionalmente), Colegio de Ópticos.",
+    "Riesgos clave": "Riesgos sanitarios: equipos médicos defectuosos (radiación no regulada). Riesgo de mediciones incorrectas (balanzas adulteradas). Riesgos de contrabando (equipos valiosos, relojes de lujo)."
+}

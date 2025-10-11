@@ -1,0 +1,7 @@
+{
+    "titulo": "Objetos de arte o de colección y antigüedades",
+    "Leyes y reglamentos": "La Ley 445/1997 (Cultura) y sus reglamentos protegen el patrimonio cultural. Establecen que antigüedades nacionales (anteriores a 100 años o de valor cultural) no pueden exportarse sin permiso del Instituto Nicaragüense de Cultura. Los objetos valiosos importados no tienen restricciones específicas, pero la importación de ciertos animales o artefactos arqueológicos requiere permiso del INAP.",
+    "Requisitos administrativos": "Los importadores deben declarar obras de arte mayores a cierto valor; antigüedades nacionales en exportación necesitan permiso de Cultura (INCAE). Museos o instituciones pueden requerir certificación de autenticidad. La clasificación arancelaria distingue arte moderno de antigüedades (tarifas reducidas o cero arancel) según tratados culturales.",
+    "Entidades competentes": "Ministerio de Cultura (patrimonio), MIFIC/DGA (comercio y tarifas), Ministerio de Hacienda (si hubiera tasas específicas), Policía de Patrimonio para contrabando cultural.",
+    "Riesgos clave": "Riesgo patrimonial: saqueo o exportación ilegal de bienes nacionales. Falsificación de antigüedades. Clasificación aduanera para beneficios arancelarios (arte original vs. réplica)."
+}

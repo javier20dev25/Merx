@@ -1,0 +1,7 @@
+{
+    "titulo": "Máquinas y aparatos, material eléctrico y partes",
+    "Leyes y reglamentos": "Las importaciones de maquinaria deben cumplir normas eléctricas (NTC) y de seguridad industrial. El Reglamento Eléctrico Nacional (DISA/ICE) cubre instalaciones, pero no armoniza totalmente en NI. Se aplican RTCA internacionales adoptados (p.ej. IEC) para aparatos eléctricos de consumo. La Ley 274 y reglamentos de residuos peligrosos se aplican a baterías y componentes tóxicos (plomo, mercurio).",
+    "Requisitos administrativos": "Electrodomésticos y aparatos eléctricos requieren certificación de conformidad con estándares (INATEC/INTN puede certificar bajo NTC). Equipos electrónicos deben cumplir RoHS-like (restricción de sustancias peligrosas). Se exige registro e importación autorizada de torres eólicas, paneles solares (Ministerio de Energía). Las baterías y cables tienen requisitos de embalaje de seguridad.",
+    "Entidades competentes": "MIFIC/DGA, INN/INTN (certificación de producto), ENATREL (para medidores eléctricos), telcos (URSEC para aparatos de comunicación), MARENA (componentes electrónicos con PCB), Colegio de Ingenieros (no regula, pero asesora seguridad).",
+    "Riesgos clave": "Riesgo de incendios por aparatos defectuosos (normas de protección). Seguridad eléctrica (aislamiento). Riesgo aduanero: productos electrónicos clasificados como maquinaria pesada o viceversa. Impacto ambiental por residuos electrónicos."
+}

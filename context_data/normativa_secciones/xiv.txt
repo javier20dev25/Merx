@@ -1,0 +1,7 @@
+{
+    "titulo": "Perlas, piedras y metales preciosos, bisutería y monedas",
+    "Leyes y reglamentos": "La Ley 387/2006 (Minería) regula extracción de metales preciosos. El Banco Central de Nicaragua regula acuñación de monedas y exportación de metales preciosos. La Ley de Protección al Consumidor exige autenticidad en metales (ley 789 sobre garantías mínimas de joyería).",
+    "Requisitos administrativos": "El oro, plata u otros metales nobles deben declarar su peso y pureza. Importación de joyería fina no requiere registro sanitario, pero sí factura de origen y pago de impuestos especiales. La exportación de productos culturales valiosos (antigüedades de oro) puede requerir permiso del Instituto de Cultura. La manipulación de diamantes/lustros apply CTC (código de trazabilidad).",
+    "Entidades competentes": "MEM (explotación minera), Banco Central (monedas), MIFIC/DGA (importación/exportación de joyas), Ministerio de Economía (valor de metales), Ministerio de Cultura (exportación de objetos patrimoniales).",
+    "Riesgos clave": "Falsificación y tráfico de metales preciosos. Contrabando (alto valor). Riesgo jurídico en clasificación (p.ej. calibrar quilates). Peligro por ladrones (oro/joyería de alto valor)."
+}

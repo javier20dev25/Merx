@@ -1,0 +1,14 @@
+{
+  "name": "merxv2.1",
+  "version": "2.1",
+  "description": "Asistente de clasificación arancelaria con Gemini",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "sac": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "node-fetch": "^2.7.0"
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "titulo": "Madera y manufacturas de madera",
+    "Leyes y reglamentos": "La Ley 462/2003 (Ley Forestal) y su Reglamento (Decreto 02-2015) regulan el aprovechamiento y comercio de productos forestales. Se aplican normas fitosanitarias (IPSA: fumigación, certificados Fitosanitarios). Hay reglamentos técnicos para madera aserrada y muebles.",
+    "Requisitos administrativos": "La madera de talas autorizadas requiere permisos de tala (INAFOR/MAG) y certificados de origen. Toda importación de madera o productos de madera debe acompañarse de certificado fitosanitario del origen (libre de insectos). Para maderas exóticas se exige permiso especial (CITES). Los muebles o pisos de madera deben cumplir normas de calidad (humedad, libre de plagas) y etiquetado del material.",
+    "Entidades competentes": "MAG/INAFOR (Forestal y fitosanitario), IPSA (plagas en madera), MARENA (áreas protegidas), MIFIC/DGA.",
+    "Riesgos clave": "Plagas forestales (escarabajos, hongos invasores). Deforestación ilegal. Riesgo aduanero: reclasificación fraudulenta (p.ej. madera sin certificado)."
+}
