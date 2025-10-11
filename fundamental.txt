@@ -26,3 +26,20 @@ Este archivo resume las soluciones críticas que se implementaron para asegurar 
 4. Prevención de Errores de Sintaxis (Soluciona fallos de arranque del servidor):
    - Problema: Un error recurrente era incluir tres backticks (```) dentro de una cadena de texto de JavaScript (`...`), lo que causaba un error de sintaxis que impedía que el servidor siquiera arrancara.
    - Solución: Se estableció como regla fundamental eliminar estas secuencias problemáticas del texto de los prompts. Es más seguro instruir al modelo con palabras ("no uses bloques de código") que incluir caracteres que rompen el propio código.
+
+---
+
+# ⚠️ Regla Persistente de Generación de Informe
+# No modificar ni fusionar esta lógica.
+
+# Instrucción para el agente Gemini:
+# Mantén fija la arquitectura de generación de informes en dos fases:
+#  1. Primera llamada -> generar clasificaciónPropuesta, scoreFiabilidad y argumentoMerciologico.
+#  2. Segunda llamada -> generar fundamentoLegal (reglas y notas aplicadas).
+
+# Estas llamadas deben combinarse en el servidor y no deben fusionarse en una sola solicitud a Gemini,
+# ya que eso genera respuestas inválidas o JSON corruptos.
+
+# Si se detectan futuras optimizaciones o refactors, conserva esta separación lógica como norma
+# ("Regla de estabilidad de generación de informe").
+# No intentes simplificar ni consolidar el flujo en una sola llamada, aunque parezca más eficiente.
