@@ -1,0 +1,28 @@
+Resumen de Arreglos Fundamentales - Proyecto Merx
+
+Este archivo resume las soluciones críticas que se implementaron para asegurar el funcionamiento estable y robusto del servidor.
+
+1. Selección Dinámica del Modelo de IA (Soluciona errores 404 NOT FOUND):
+   - Problema: El nombre del modelo de Gemini estaba fijo en el código (ej. 'gemini-2.5-flash'), pero la clave de API no tenía acceso a él, causando un error 404.
+   - Solución: Se implementó una función `chooseModel` que:
+     a. Llama a la API de Gemini para obtener la lista de modelos REALMENTE disponibles para la clave.
+     b. Intenta seleccionar un modelo de una lista de preferencia (ej. la versión 'preview').
+     c. Si el preferido no está, usa un modelo de respaldo estable y conocido (`gemini-pro`).
+     d. Esto evita que la aplicación falle por un nombre de modelo incorrecto.
+
+2. Parseo Robusto de Respuestas JSON (Soluciona informes incompletos o errores de formato):
+   - Problema: La API de Gemini a veces devuelve el JSON correcto, pero envuelto en bloques de código Markdown (```json...```) o con texto adicional, lo que rompía `JSON.parse()`.
+   - Solución: Se implementaron dos funciones de ayuda (`cleanModelJsonString` y `tryParseModelJson`):
+     a. Primero, el código limpia la respuesta cruda, eliminando los bloques de Markdown y otros caracteres no deseados.
+     b. Luego, intenta procesar el texto limpio. Si falla, tiene un segundo mecanismo de rescate que busca el primer '{' y el último '}' y trata de procesar solo esa parte.
+     c. Esto asegura que el JSON se extraiga correctamente incluso si la respuesta del modelo no es perfecta.
+
+3. Estabilidad y Portabilidad del Servidor (Soluciona cuelgues y problemas de entorno):
+   - Problema: El servidor se quedaba colgado si la API de Gemini tardaba mucho en responder. Además, usaba rutas de archivo absolutas, lo que impedía que funcionara en otras máquinas.
+   - Solución:
+     a. Se implementó una función `fetchWithTimeout` que cancela la llamada a la API si no responde en 60 segundos.
+     b. Todas las rutas de archivos (ej. a la carpeta 'conocimientos') se cambiaron a relativas, haciendo el proyecto portable.
+
+4. Prevención de Errores de Sintaxis (Soluciona fallos de arranque del servidor):
+   - Problema: Un error recurrente era incluir tres backticks (```) dentro de una cadena de texto de JavaScript (`...`), lo que causaba un error de sintaxis que impedía que el servidor siquiera arrancara.
+   - Solución: Se estableció como regla fundamental eliminar estas secuencias problemáticas del texto de los prompts. Es más seguro instruir al modelo con palabras ("no uses bloques de código") que incluir caracteres que rompen el propio código.
