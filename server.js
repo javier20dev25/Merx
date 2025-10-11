@@ -118,4 +118,106 @@ async function callLegalBasis(apiKey, modelName, arancelCode) {
     } catch (e) {
         console.warn('No se pudo cargar contexto legal desde disco.');
     }
-  const prompt = `Toma este código arancelario: "${arancelCode}" y el contexto legal provisto. Devuelve ÚNICAMENTE un JSON válido con la estructura: {"fundamentoLegal": {"applied_rules": [ { "rule_id": "...", "descripcion": "..." } ],
+  const prompt = `Toma este código arancelario: "${arancelCode}" y el contexto legal provisto. Devuelve ÚNICAMENTE un JSON válido con la estructura:
+{
+  "fundamentoLegal": {
+    "applied_rules": [ { "rule_id": "...", "descripcion": "..." } ],
+    "notes_applied": [ { "note_id": "...", "descripcion": "..." } ]
+  }
+}
+No agregues texto adicional fuera del JSON. Basa tu respuesta únicamente en el contexto.
+Contexto: ${contextText}`;
+  const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`;
+  const resp = await fetchWithTimeout(geminiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
+  if (!resp.ok) {
+    const body = await resp.text();
+    throw new Error(`LegalBasis API error ${resp.status}: ${body}`);
+  }
+  const rawData = await resp.json();
+  const rawText = rawData.candidates[0].content.parts[0].text;
+  return tryParseModelJson(rawText);
+}
+
+async function generateReportFlow(description, location, notes) {
+  const apiKey = await getApiKey();
+  const modelName = await chooseModel(apiKey);
+  const classResp = await callClassification(apiKey, modelName, description, notes);
+  if (!classResp || !classResp.clasificacionPropuesta || !classResp.clasificacionPropuesta.codigo) {
+    throw new Error('La llamada de clasificación inicial no devolvió una estructura válida.');
+  }
+  const codigo = classResp.clasificacionPropuesta.codigo;
+  let legalResp = {};
+  try {
+      legalResp = await callLegalBasis(apiKey, modelName, codigo);
+  } catch (e) {
+      console.error(`Fallo al obtener fundamento legal, se devolverá un informe parcial. Error: ${e.message}`);
+  }
+  const finalReport = { ...classResp, fundamentoLegal: (legalResp && legalResp.fundamentoLegal) || { applied_rules: [], notes_applied: [] }, conclusion: 'Informe generado en dos pasos.' };
+  return finalReport;
+}
+
+
+// --- Servidor Express ---
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'static')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'templates', 'index.html'));
+});
+
+app.post('/api/find-sac-chapter', async (req, res) => {
+    try {
+        const { description } = req.body;
+        if (!description) return res.status(400).json({ error: 'La descripción no puede estar vacía.' });
+        const apiKey = await getApiKey();
+        const modelName = await chooseModel(apiKey);
+        const sacContextPath = path.join(__dirname, 'conocimientos', 'secciones-capitulos.json');
+        if (!fsSync.existsSync(sacContextPath)) {
+            return res.status(500).json({ error: 'Archivo de contexto "secciones-capitulos.json" no encontrado.' });
+        }
+        const sacContext = JSON.parse(await fs.readFile(sacContextPath, 'utf-8'));
+        const prompt = `Basado en el siguiente índice del SAC: ${JSON.stringify(sacContext, null, 2)}
+
+Analiza: ''${description}''
+
+Tu tarea es identificar la Sección y el Capítulo más probables. Responde únicamente con el formato: 'Ve a buscar a la Sección <número de sección en números romanos> y Capítulo <número de capítulo>'.`;
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`;
+        const geminiResponse = await fetchWithTimeout(geminiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
+        if (!geminiResponse.ok) {
+            const errorBody = await geminiResponse.text();
+            throw new Error(`API Error: ${geminiResponse.status} ${errorBody}`);
+        }
+        const geminiData = await geminiResponse.json();
+        const location = geminiData.candidates[0].content.parts[0].text;
+        res.json({ location });
+    } catch (error) {
+        console.error('Handler exception in /api/find-sac-chapter:', error.stack || error);
+        res.status(500).json({ error: 'INTERNAL_SERVER_ERROR', message: error.message });
+    }
+});
+
+app.post('/api/generate-report', async (req, res) => {
+  try {
+    const { description, location, notes } = req.body || {};
+    if (!description) return res.status(400).json({ ok: false, error: 'Falta campo description' });
+    const finalReport = await generateReportFlow(description, location, notes);
+    const reportToSend = { ...finalReport };
+    reportToSend.clasificacionPropuesta = reportToSend.clasificacionPropuesta || {};
+    reportToSend.clasificacionPropuesta.codigo = reportToSend.clasificacionPropuesta.codigo || 'N/A';
+    reportToSend.clasificacionPropuesta.descripcion = reportToSend.clasificacionPropuesta.descripcion || 'N/A';
+    reportToSend.scoreFiabilidad = (typeof reportToSend.scoreFiabilidad !== 'undefined') ? reportToSend.scoreFiabilidad : null;
+    reportToSend.argumentoMerciologico = reportToSend.argumentoMerciologico || '';
+    reportToSend.fundamentoLegal = reportToSend.fundamentoLegal || { applied_rules: [], notes_applied: [] };
+    reportToSend.conclusion = reportToSend.conclusion || '';
+    return res.status(200).json({ ok: true, report: reportToSend });
+  } catch (err) {
+    console.error('Error en /api/generate-report:', err.stack || err);
+    return res.status(500).json({ ok: false, error: 'Error interno generando el informe.', message: err.message });
+  }
+});
+
+// Exportar la app para Vercel
+module.exports = app;
