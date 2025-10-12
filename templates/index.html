@@ -50,9 +50,11 @@
       <p class="credits">Con documentación de Lic. Axel Troche</p>
       
       <div class="contact-section">
-        <h4>Sugerencias o Contacto</h4>
-        <textarea id="contact-message" class="neumorphic-textarea small" placeholder="Escribe tu mensaje aquí..."></textarea>
-        <button id="send-whatsapp" class="glass-btn pill-btn blue-glow">Enviar por WhatsApp</button>
+        <h4 id="contact-toggle">Sugerencias o Contacto <span id="contact-arrow">▼</span></h4>
+        <div id="contact-collapsible" class="hidden">
+          <textarea id="contact-message" class="neumorphic-textarea small" placeholder="Escribe tu mensaje aquí..."></textarea>
+          <button id="send-whatsapp" class="glass-btn pill-btn blue-glow">Enviar por WhatsApp</button>
+        </div>
       </div>
     </div>
 

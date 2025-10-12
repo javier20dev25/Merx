@@ -229,4 +229,13 @@ document.addEventListener('DOMContentLoaded', () => {
             contactMessage.value = ''; // Limpia el textarea después de enviar
         }
     });
+
+    // --- Lógica para la sección de contacto desplegable ---
+    const contactToggle = document.getElementById('contact-toggle');
+    const contactCollapsible = document.getElementById('contact-collapsible');
+
+    contactToggle.addEventListener('click', () => {
+        contactToggle.classList.toggle('open');
+        contactCollapsible.classList.toggle('open');
+    });
 });

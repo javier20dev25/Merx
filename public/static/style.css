@@ -400,6 +400,9 @@ body {
   font-weight: 500;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
+  min-width: 90px; /* Ancho mínimo para todos los tags */
+  text-align: center; /* Centra el texto dentro del tag */
+  display: inline-block; /* Permite que el ancho y centrado funcionen */
 }
 
 .tag:hover {
@@ -412,12 +415,44 @@ body {
   padding-top: 20px;
   border-top: 1px solid var(--dark-shadow);
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.contact-section h4 {
+#contact-toggle {
+  cursor: pointer;
+  user-select: none; /* Evita que el texto se seleccione al hacer clic */
   font-size: 1.1rem;
   color: var(--text-color);
   margin: 0 0 15px 0;
+}
+
+#contact-arrow {
+  display: inline-block; /* Permite transformar la flecha */
+  transition: transform 0.3s ease-in-out;
+}
+
+#contact-toggle.open #contact-arrow {
+  transform: rotate(180deg);
+}
+
+#contact-collapsible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease-out;
+  max-height: 0;
+  opacity: 0;
+}
+
+#contact-collapsible.open {
+  max-height: 300px; /* Altura suficiente para el contenido */
+  opacity: 1;
+  margin-top: 15px;
 }
 
 .neumorphic-textarea.small {
