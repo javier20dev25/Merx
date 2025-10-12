@@ -235,7 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactCollapsible = document.getElementById('contact-collapsible');
 
     contactToggle.addEventListener('click', () => {
-        contactToggle.classList.toggle('open');
-        contactCollapsible.classList.toggle('open');
+        contactCollapsible.classList.toggle('hidden');
     });
 });
