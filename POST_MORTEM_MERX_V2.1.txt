@@ -1,0 +1,51 @@
+POST-MORTEM DE DESARROLLO - MERX v2.1
+
+Este documento resume los problemas encontrados durante el desarrollo y depuración de Merx v2.1, las soluciones aplicadas y las lecciones aprendidas para futuras iteraciones.
+
+---
+
+1.  Problema: Confusión con el nombre del modelo de Gemini y configuración de la API Key.
+    *   Descripción: El código usaba "gemini-pro", pero se requería "gemini 2.5 flash". La API Key no estaba configurada en Vercel.
+    *   Solución: Se actualizó `server.js` para usar `gemini-2.5-flash-lite` y se configuró la `GEMINI_API_KEY` en Vercel usando el CLI.
+    *   Lección Aprendida / Qué No Tocar:
+        *   Identificadores de Modelo: Siempre verificar el identificador exacto del modelo de la API (ej. `gemini-1.5-flash-latest`, `gemini-2.5-flash-lite`), ya que los nombres comerciales pueden no coincidir.
+        *   Variables de Entorno: Las claves de API y otras configuraciones sensibles deben estar SIEMPRE correctamente establecidas en el entorno de despliegue (Vercel) como variables de entorno.
+
+---
+
+2.  Problema: Timeout en la llamada a la API de Gemini.
+    *   Descripción: El modelo `gemini-2.5-flash` era demasiado lento y causaba que la solicitud excediera el límite de 9 segundos del `fetchWithTimeout`.
+    *   Solución: Se cambió al modelo `gemini-2.5-flash-lite`, una versión optimizada para velocidad.
+    *   Lección Aprendida / Qué No Tocar:
+        *   Rendimiento del Modelo: Considerar siempre el rendimiento (velocidad y latencia) del modelo de IA elegido. Modelos más grandes o experimentales pueden ser lentos. En entornos serverless con límites de tiempo estrictos, priorizar modelos "lite" o más rápidos para evitar timeouts.
+
+---
+
+3.  Problema: `Chunk no procesable` (Manejo incorrecto de Streaming).
+    *   Descripción: El endpoint `/api/find-sac-chapter` usaba streaming, pero el backend intentaba parsear fragmentos incompletos como JSON, generando errores.
+    *   Solución: Se deshabilitó el streaming para ese endpoint. El backend ahora espera la respuesta completa de la API de Gemini antes de procesarla.
+    *   Lección Aprendida / Qué No Tocar:
+        *   Streaming vs. No Streaming: Si la API de IA ofrece streaming, el cliente debe ensamblar los fragmentos de datos antes de procesarlos. Si no se necesita streaming, usar el endpoint no-streaming. No mezclar lógicas de cliente de streaming con llamadas no-streaming, o viceversa.
+
+---
+
+4.  Problema: `400 Bad Request` (`responseMimeType` no soportado).
+    *   Descripción: La propiedad `responseMimeType` en `generationConfig` no es compatible con el endpoint `generateContent` de Gemini, causando errores `400`. El parseo de JSON también era frágil.
+    *   Solución: Se eliminó `responseMimeType` de todas las llamadas a la API. Se reintrodujeron y usaron funciones robustas (`cleanModelJsonString`, `tryParseModelJson`) para parsear las respuestas del modelo.
+    *   Lección Aprendida / Qué No Tocar:
+        *   Documentación de la API: Siempre adherirse estrictamente a la documentación de la API para los parámetros. No asumir propiedades sin verificar.
+        *   Parseo Robusto: Las respuestas de los modelos de IA, incluso cuando se les pide JSON, pueden contener texto adicional o estar mal formadas. Siempre usar mecanismos de parseo defensivos.
+
+---
+
+5.  Problema: Frontend mostrando JSON crudo (problema de visualización).
+    *   Descripción: El backend enviaba JSON estructurado, pero el frontend lo mostraba directamente, haciéndolo ilegible.
+    *   Solución: Se implementó una función `classificationToUI` en el backend para formatear el JSON en un `ui_text` amigable. Los endpoints del backend se modificaron para usarla, y el frontend se actualizó para mostrar el `ui_text` directamente.
+    *   Lección Aprendida / Qué No Tocar:
+        *   Backend para Frontend (BFF) / Formateo de Datos: El backend debe preparar los datos en un formato fácil para el frontend. Evitar enviar respuestas crudas y complejas de la API directamente a un frontend simple.
+
+---
+
+**Conclusión General:**
+
+La estabilidad y precisión de la aplicación dependen de la **adherencia estricta a la documentación de la API**, la **robustez en el manejo de sus respuestas** y una **clara separación de responsabilidades entre el backend y el frontend** para la presentación de datos. La depuración iterativa y el uso de logs de producción son herramientas esenciales.
