@@ -433,3 +433,16 @@ body {
     inset 0 0 15px 2px rgba(204, 229, 255, 0.7);
 }
 
+.github-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px; /* Espacio entre el tag y el texto */
+}
+
+.github-label {
+  font-size: 0.7rem;
+  color: #a0a0a5;
+  font-style: italic;
+}
+
