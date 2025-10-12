@@ -1,1 +1,9 @@
 .vercel
+
+# Dependencies
+node_modules/
+
+# Credentials & Environment
+credencialgemini
+.env
+
