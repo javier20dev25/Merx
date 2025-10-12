@@ -22,6 +22,30 @@ async function fetchWithTimeout(url, options = {}, timeout = 9000) { // Reducido
   }
 }
 
+// Helpers para limpiar y parsear JSON devuelto por el modelo
+function cleanModelJsonString(raw) {
+  if (!raw || typeof raw !== 'string') return raw;
+  let s = raw.replace(/^\uFEFF/, '').trim();
+  s = s.replace(/^```(?:[a-zA-Z0-9_-]+\s*)?\n?/, '');
+  s = s.replace(/\n?```$/, '');
+  return s.trim();
+}
+
+function tryParseModelJson(raw) {
+  const cleaned = cleanModelJsonString(raw);
+  try {
+    return JSON.parse(cleaned);
+  } catch (e) {
+    const first = cleaned.indexOf('{');
+    const last = cleaned.lastIndexOf('}');
+    if (first !== -1 && last !== -1 && last > first) {
+      const candidate = cleaned.slice(first, last + 1);
+      try { return JSON.parse(candidate); } catch (e2) { /* seguirá abajo */ }
+    }
+    throw new Error('No se pudo parsear JSON del modelo');
+  }
+}
+
 // --- Helpers de Modelo y API Key (Adaptado para Vercel) ---
 async function getApiKey() {
   // **MODIFICADO PARA VERCEL:** Lee la API key desde las variables de entorno.
@@ -91,8 +115,7 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema:
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
               "temperature": 0.2,
-              "maxOutputTokens": 1024,
-              "responseMimeType": "application/json",
+              "maxOutputTokens": 1024
           }
       })
   });
@@ -101,8 +124,17 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema:
     throw new Error(`Classification API error ${resp.status}: ${body}`);
   }
   const rawData = await resp.json();
-  const responseJson = rawData.candidates[0].content.parts[0].text;
-  return JSON.parse(responseJson);
+  const candidateText = rawData?.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!candidateText) {
+    console.error('Respuesta inesperada del modelo en callClassification:', JSON.stringify(rawData).slice(0, 1000));
+    throw new Error('Modelo devolvió estructura inesperada');
+  }
+  try {
+    return tryParseModelJson(candidateText);
+  } catch (err) {
+    console.error('Error parseando JSON del modelo en callClassification:', err.message);
+    return { raw_text: candidateText }; // Fallback
+  }
 }
 
 async function callLegalBasis(apiKey, modelName, arancelCode) {
@@ -142,8 +174,7 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema:
           contents: [{ parts: [{ text: prompt }] }],
           generationConfig: {
               "temperature": 0.0,
-              "maxOutputTokens": 2048,
-              "responseMimeType": "application/json",
+              "maxOutputTokens": 2048
           }
       })
   });
@@ -152,8 +183,17 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema:
     throw new Error(`LegalBasis API error ${resp.status}: ${body}`);
   }
   const rawData = await resp.json();
-  const responseJson = rawData.candidates[0].content.parts[0].text;
-  return JSON.parse(responseJson);
+  const candidateText = rawData?.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!candidateText) {
+    console.error('Respuesta inesperada del modelo en callLegalBasis:', JSON.stringify(rawData).slice(0, 1000));
+    throw new Error('Modelo devolvió estructura inesperada');
+  }
+  try {
+    return tryParseModelJson(candidateText);
+  } catch (err) {
+    console.error('Error parseando JSON del modelo en callLegalBasis:', err.message);
+    return { raw_text: candidateText }; // Fallback
+  }
 }
 
 async function generateReportFlow(description, location, notes) {
@@ -275,8 +315,7 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicion
                 contents: [{ parts: [{ text: prompt }] }],
                 generationConfig: {
                     "temperature": 0.1,
-                    "maxOutputTokens": 512,
-                    "responseMimeType": "application/json"
+                    "maxOutputTokens": 512
                 }
             })
         });
@@ -287,10 +326,19 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicion
         }
 
         const rawData = await geminiResponse.json();
-        const responseJson = rawData.candidates[0].content.parts[0].text;
-        const finalJson = JSON.parse(responseJson);
-
-        res.status(200).json(finalJson);
+        const candidateText = rawData?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!candidateText) {
+          console.error('Respuesta inesperada del modelo en find-sac-chapter:', JSON.stringify(rawData).slice(0, 1000));
+          throw new Error('Modelo devolvió estructura inesperada');
+        }
+        
+        try {
+          const finalJson = tryParseModelJson(candidateText);
+          res.status(200).json(finalJson);
+        } catch (err) {
+          console.error('Error parseando JSON del modelo en find-sac-chapter:', err.message);
+          res.status(500).json({ error: 'El modelo devolvió una respuesta no válida', raw_text: candidateText });
+        }
 
     } catch (error) {
         console.error('Handler exception in /api/find-sac-chapter:', error.stack || error);
