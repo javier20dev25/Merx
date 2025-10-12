@@ -74,43 +74,63 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
     async function findSacLocation() {
-        sessionData.description = mainTextarea.value;
-        if (!sessionData.description.trim()) return;
-
-        const logo = document.getElementById('logo');
-        logo.classList.add('loading-animation');
-
-        transitionElements(mainTextarea, resultContainer);
-        resultContainer.innerHTML = `<p class="result-text"></p>`;
-        const resultTextElement = resultContainer.querySelector('.result-text');
-        rightButton.disabled = true;
-
-        try {
-            const response = await fetch('/api/find-sac-chapter', { 
-                method: 'POST', 
-                headers: { 'Content-Type': 'application/json' }, 
-                body: JSON.stringify({ description: sessionData.description }) 
-            });
-
-            if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
-            
-            // **MODIFICADO: Leer la respuesta de texto directamente**
-            const responseText = await response.text();
-            resultTextElement.innerHTML = responseText.replace(/\n/g, '<br>');
-
-            sessionData.location = responseText; // Guardar el resultado completo
-            animateTextChange(rightButtonContent, "Siguiente");
-            subState = 1;
-
-        } catch (error) {
-            resultTextElement.innerHTML = `<p class="result-text" style="color: #ffb8b8;">Error al buscar</p>`;
-            console.error('Error en findSacLocation:', error);
-        } finally {
-            rightButton.disabled = false;
-            logo.classList.remove('loading-animation');
+            sessionData.description = mainTextarea.value;
+            if (!sessionData.description.trim()) return;
+    
+            const logo = document.getElementById('logo');
+            logo.classList.add('loading-animation');
+    
+            transitionElements(mainTextarea, resultContainer);
+            resultContainer.innerHTML = ''; // Limpiar contenedor
+            rightButton.disabled = true;
+    
+            try {
+                const response = await fetch('/api/find-sac-chapter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ description: sessionData.description })
+                });
+    
+                if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
+                
+                const data = await response.json(); // Esperar respuesta JSON
+    
+                // Crear contenedor para Sección y Capítulo
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'result-info';
+                if (data.section || data.chapter) {
+                    infoDiv.innerHTML = `
+                        <p><strong>Sección:</strong> ${data.section || 'No encontrada'}</p>
+                        <p><strong>Capítulo:</strong> ${data.chapter || 'No encontrado'}</p>
+                    `;
+                } else {
+                    infoDiv.innerHTML = `<p>No se encontró clasificación.</p>`;
+                }
+    
+                // Crear contenedor para el Motivo
+                const rationaleDiv = document.createElement('div');
+                rationaleDiv.className = 'result-rationale';
+                if (data.rationale) {
+                    rationaleDiv.innerHTML = `<p>${data.rationale}</p>`;
+                }
+    
+                resultContainer.appendChild(infoDiv);
+                if (data.rationale) {
+                    resultContainer.appendChild(rationaleDiv);
+                }
+    
+                sessionData.location = `${data.section} - ${data.chapter}`; // Guardar data relevante
+                animateTextChange(rightButtonContent, "Siguiente");
+                subState = 1;
+    
+            } catch (error) {
+                resultContainer.innerHTML = `<p class="result-text" style="color: #ffb8b8;">Error al buscar</p>`;
+                console.error('Error en findSacLocation:', error);
+            } finally {
+                rightButton.disabled = false;
+                logo.classList.remove('loading-animation');
+            }
         }
-    }
-
         } catch (error) {
             resultTextElement.innerHTML = `<p class="result-text" style="color: #ffb8b8;">Error al buscar</p>`;
             console.error('Error en findSacLocation:', error);

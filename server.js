@@ -251,31 +251,27 @@ function classificationToUI(parsed) {
   const section = candidate.section || candidate.seccion || candidate.sectionName || null;
   const chapter = candidate.chapter || candidate.capitulo || candidate.chapterName || null;
   const heading = candidate.heading_or_partida || candidate.partida || candidate.codigo || candidate.descripcion || null;
-  // confidence puede venir 0-1 o 0-10; normalizamos a 0-1
   let confidence = null;
   if (typeof candidate.confidence === 'number') confidence = candidate.confidence;
   else if (typeof candidate.scoreFiabilidad === 'number') confidence = Math.min(1, candidate.scoreFiabilidad / 10);
   else if (typeof candidate.score === 'number') confidence = candidate.score;
-
   const confidencePct = (typeof confidence === 'number') ? Math.round(confidence * 100) + '%' : 'n.d.';
   const rationale = candidate.rationale || candidate.argumentoMerciologico || candidate.reason || '';
 
-  // --- NUEVA LÓGICA DE FORMATEO PARA UI ---
+  // --- LÓGICA DE FORMATEO PARA UI ---
   const cleanSection = section && section.includes(':') ? section.split(':')[1].trim() : section;
   const cleanChapter = chapter && chapter.includes(':') ? chapter.split(':')[1].trim() : chapter;
-  
-  const rationaleWords = rationale.split(' ');
-  const shortRationale = rationaleWords.slice(0, 12).join(' ') + (rationaleWords.length > 12 ? '...' : '');
 
+  // El ui_text ahora es para el reporte final, la UI principal usará ui_struct
   const ui_text = [
-    cleanSection ? `Sección: ${cleanSection}` : null,
-    cleanChapter ? `Capítulo: ${cleanChapter}` : null,
-    shortRationale ? `Motivo: ${shortRationale}` : null
-  ].filter(Boolean).join('\n'); // Usar saltos de línea
+    `Sección: ${cleanSection}`,
+    `Capítulo: ${cleanChapter}`,
+    `Motivo: ${rationale}`
+  ].filter(Boolean).join('\n\n');
 
   return {
     ui_text,
-    ui_struct: { section, chapter, heading, confidence, confidencePct, rationale }
+    ui_struct: { section: cleanSection, chapter: cleanChapter, heading, confidence, confidencePct, rationale }
   };
 }
 
@@ -389,16 +385,8 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicion
 
         const userView = classificationToUI(finalJson);
 
-        if (process.env.NODE_ENV === 'production') {
-          res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-          return res.status(200).send(userView.ui_text);
-        } else {
-          return res.status(200).json({
-            ui_text: userView.ui_text,
-            ui: userView.ui_struct,
-            debug_raw: finalJson
-          });
-        }
+        // Devolver siempre el objeto JSON estructurado para que el frontend pueda construir la UI
+        return res.status(200).json(userView.ui_struct);
 
     } catch (error) {
         console.error('Handler exception in /api/find-sac-chapter:', error.stack || error);
