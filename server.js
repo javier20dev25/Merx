@@ -139,20 +139,34 @@ Contexto: ${contextText}`;
 }
 
 async function generateReportFlow(description, location, notes) {
+  console.log('[DEBUG] Entering generateReportFlow.');
   const apiKey = await getApiKey();
+  console.log(`[DEBUG] API Key retrieved. Length: ${apiKey ? apiKey.length : 0}`);
   const modelName = await chooseModel(apiKey);
+  console.log(`[DEBUG] Model chosen: ${modelName}`);
+  
+  console.log('[DEBUG] Calling classification model...');
   const classResp = await callClassification(apiKey, modelName, description, notes);
+  console.log('[DEBUG] Classification response received.');
+
   if (!classResp || !classResp.clasificacionPropuesta || !classResp.clasificacionPropuesta.codigo) {
+    console.error('[DEBUG] Invalid structure from classification call:', JSON.stringify(classResp));
     throw new Error('La llamada de clasificación inicial no devolvió una estructura válida.');
   }
   const codigo = classResp.clasificacionPropuesta.codigo;
+  console.log(`[DEBUG] Classification successful. Code: ${codigo}`);
+  
   let legalResp = {};
   try {
+      console.log('[DEBUG] Calling legal basis model...');
       legalResp = await callLegalBasis(apiKey, modelName, codigo);
+      console.log('[DEBUG] Legal basis response received.');
   } catch (e) {
-      console.error(`Fallo al obtener fundamento legal, se devolverá un informe parcial. Error: ${e.message}`);
+      console.error(`[DEBUG] Failed to get legal basis, will return partial report. Error: ${e.message}`);
   }
+  
   const finalReport = { ...classResp, fundamentoLegal: (legalResp && legalResp.fundamentoLegal) || { applied_rules: [], notes_applied: [] }, conclusion: 'Informe generado en dos pasos.' };
+  console.log('[DEBUG] Final report constructed. Sending response.');
   return finalReport;
 }
 
@@ -166,6 +180,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'index.html'));
+});
+
+app.get('/api/debug-env', (req, res) => {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (apiKey) {
+    res.status(200).json({
+      message: 'GEMINI_API_KEY is present.',
+      keyExists: true,
+      keyLength: apiKey.length,
+      firstChars: apiKey.substring(0, 4)
+    });
+  } else {
+    res.status(404).json({
+      message: 'GEMINI_API_KEY is NOT found in process.env.',
+      keyExists: false
+    });
+  }
 });
 
 app.post('/api/find-sac-chapter', async (req, res) => {
