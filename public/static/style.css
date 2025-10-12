@@ -497,6 +497,30 @@ body {
   box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 }
 
+/* --- ANIMACIONES DE ENTRADA --- */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-footer > * {
+  opacity: 0; /* Inicia invisible para animar */
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+/* Stagger (escalonamiento) de las animaciones */
+.page-footer > .tech-stack { animation-delay: 0.2s; }
+.page-footer > .credits:nth-of-type(1) { animation-delay: 0.3s; }
+.page-footer > .credits:nth-of-type(2) { animation-delay: 0.4s; }
+.page-footer > .contact-section { animation-delay: 0.5s; }
+
 .github-wrapper {
   display: flex;
   flex-direction: column;
