@@ -203,6 +203,7 @@ app.post('/api/find-sac-chapter', async (req, res) => {
     try {
         const { description } = req.body;
         if (!description) return res.status(400).json({ error: 'La descripción no puede estar vacía.' });
+
         const apiKey = await getApiKey();
         const modelName = await chooseModel(apiKey);
         const sacContextPath = path.join(__dirname, 'conocimientos', 'secciones-capitulos.json');
@@ -215,18 +216,50 @@ app.post('/api/find-sac-chapter', async (req, res) => {
 Analiza: ''${description}''
 
 Tu tarea es identificar la Sección y el Capítulo más probables. Responde únicamente con el formato: 'Ve a buscar a la Sección <número de sección en números romanos> y Capítulo <número de capítulo>'.`;
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`;
-        const geminiResponse = await fetchWithTimeout(geminiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
+
+        // Usar el endpoint de streaming
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:streamGenerateContent?key=${apiKey}`;
+        
+        const geminiResponse = await fetch(geminiUrl, { // No usar fetchWithTimeout aquí
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+
         if (!geminiResponse.ok) {
             const errorBody = await geminiResponse.text();
             throw new Error(`API Error: ${geminiResponse.status} ${errorBody}`);
         }
-        const geminiData = await geminiResponse.json();
-        const location = geminiData.candidates[0].content.parts[0].text;
-        res.json({ location });
+
+        // Configurar cabeceras para streaming
+        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+        res.setHeader('Transfer-Encoding', 'chunked');
+
+        // Leer el stream y pasarlo al cliente
+        for await (const chunk of geminiResponse.body) {
+            // El chunk es un Buffer, lo decodificamos a string
+            const rawChunk = chunk.toString('utf8');
+            try {
+                // La respuesta del stream viene en formato JSON, pero en trozos.
+                // Cada trozo es un JSON que contiene un array de candidatos.
+                const chunkData = JSON.parse(rawChunk.replace('data: ', ''));
+                const textPart = chunkData.candidates[0].content.parts[0].text;
+                res.write(textPart); // Escribimos solo el texto en el stream de respuesta
+            } catch (e) {
+                // Ignorar trozos que no son JSON válido (pueden ser delimitadores o chunks vacíos)
+                console.warn('Chunk no procesable, ignorando:', rawChunk);
+            }
+        }
+
+        res.end(); // Finalizar la respuesta de streaming
+
     } catch (error) {
         console.error('Handler exception in /api/find-sac-chapter:', error.stack || error);
-        res.status(500).json({ error: 'INTERNAL_SERVER_ERROR', message: error.message });
+        // Si el stream ya empezó, no podemos enviar un status 500.
+        // El error ya se logueó, y el cliente simplemente dejará de recibir datos.
+        if (!res.headersSent) {
+            res.status(500).json({ error: 'INTERNAL_SERVER_ERROR', message: error.message });
+        }
     }
 });
 

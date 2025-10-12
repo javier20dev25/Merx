@@ -46,20 +46,39 @@ document.addEventListener('DOMContentLoaded', () => {
         logo.classList.add('loading-animation');
 
         transitionElements(mainTextarea, resultContainer);
-        resultContainer.innerHTML = `<div class="loader"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div>`;
+        resultContainer.innerHTML = `<p class="result-text"></p>`; // Iniciar con un párrafo vacío
+        const resultTextElement = resultContainer.querySelector('.result-text');
         rightButton.disabled = true;
 
         try {
-            const response = await fetch('/api/find-sac-chapter', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ description: sessionData.description }) });
+            const response = await fetch('/api/find-sac-chapter', { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' }, 
+                body: JSON.stringify({ description: sessionData.description }) 
+            });
+
             if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
-            const data = await response.json();
-            sessionData.location = data.location || 'No se encontró ubicación.';
-            const formattedLocation = sessionData.location.replace(' y ', '<br>');
-            resultContainer.innerHTML = `<p class="result-text">${formattedLocation}</p>`;
+            
+            // Leer la respuesta como un stream
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let fullLocation = '';
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                const chunk = decoder.decode(value, { stream: true });
+                fullLocation += chunk;
+                // Reemplazar saltos de línea para una mejor visualización en HTML
+                resultTextElement.innerHTML = fullLocation.replace(/\n/g, '<br>');
+            }
+
+            sessionData.location = fullLocation; // Guardar el resultado completo
             animateTextChange(rightButtonContent, "Siguiente");
             subState = 1;
+
         } catch (error) {
-            resultContainer.innerHTML = `<p class="result-text" style="color: #ffb8b8;">Error al buscar</p>`;
+            resultTextElement.innerHTML = `<p class="result-text" style="color: #ffb8b8;">Error al buscar</p>`;
             console.error('Error en findSacLocation:', error);
         } finally {
             rightButton.disabled = false;
