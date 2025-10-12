@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "sac": "node server.js",
-    "logs": "vercel logs"
+    "logs": "vercel logs merx-alpha.vercel.app"
   },
   "dependencies": {
     "express": "^4.19.2",
