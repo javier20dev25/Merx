@@ -22,30 +22,6 @@ async function fetchWithTimeout(url, options = {}, timeout = 9000) { // Reducido
   }
 }
 
-// --- Helpers de Parseo y Limpieza de JSON ---
-function cleanModelJsonString(raw) {
-  if (!raw || typeof raw !== 'string') return raw;
-  let s = raw.replace(/^\uFEFF/, '').trim();
-  s = s.replace(/^```(?:[a-zA-Z0-9_-]+\s*)?\n?/, '');
-  s = s.replace(/\n?```$/, '');
-  return s.trim();
-}
-
-function tryParseModelJson(raw) {
-  const cleaned = cleanModelJsonString(raw);
-  try {
-    return JSON.parse(cleaned);
-  } catch (err) {
-    const first = cleaned.indexOf('{');
-    const last = cleaned.lastIndexOf('}');
-    if (first !== -1 && last !== -1 && last > first) {
-      const candidate = cleaned.slice(first, last + 1);
-      try { return JSON.parse(candidate); } catch (e) {}
-    }
-    throw err;
-  }
-}
-
 // --- Helpers de Modelo y API Key (Adaptado para Vercel) ---
 async function getApiKey() {
   // **MODIFICADO PARA VERCEL:** Lee la API key desde las variables de entorno.
@@ -86,53 +62,104 @@ async function chooseModel(apiKey) {
 // --- Flujo de Generación de Reporte ---
 // (Las funciones callClassification, callLegalBasis, y generateReportFlow permanecen igual)
 async function callClassification(apiKey, modelName, description, notes) {
-  const prompt = `Eres un sistema experto en clasificación arancelaria. Analiza la descripción y devuelve ÚNICAMENTE un JSON válido con la estructura: {"clasificacionPropuesta": { "codigo": "...", "descripcion": "..." },"scoreFiabilidad": 0-10,"argumentoMerciologico": "..."}. No incluyas explicaciones ni bloques de código. Descripción: "${description}". Notas: "${notes}"`;
+  const prompt = `
+Eres un sistema experto en clasificación arancelaria. Tu única fuente de verdad es la descripción de la mercancía. No uses conocimiento externo.
+INSTRUCCIÓN: Para la descripción de mercancía, determina la clasificación más probable.
+Reglas:
+1. Devuelve ÚNICAMENTE un JSON válido.
+2. El campo "codigo" debe ser un código arancelario plausible.
+3. El "argumentoMerciologico" debe ser una justificación técnica concisa.
+
+Descripción: "${description}"
+Notas Adicionales: "${notes}"
+
+Salida: Sólo devuelve JSON siguiendo exactamente este esquema:
+{
+  "clasificacionPropuesta": { 
+    "codigo": "<código arancelario>", 
+    "descripcion": "<descripción de la partida>" 
+  },
+  "scoreFiabilidad": 0.0,
+  "argumentoMerciologico": "<justificación técnica>"
+}
+`;
   const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`;
-  const resp = await fetchWithTimeout(geminiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
+  const resp = await fetchWithTimeout(geminiUrl, { 
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' }, 
+      body: JSON.stringify({ 
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+              "temperature": 0.2,
+              "maxOutputTokens": 1024,
+              "responseMimeType": "application/json",
+          }
+      })
+  });
   if (!resp.ok) {
     const body = await resp.text();
     throw new Error(`Classification API error ${resp.status}: ${body}`);
   }
   const rawData = await resp.json();
-  const rawText = rawData.candidates[0].content.parts[0].text;
-  return tryParseModelJson(rawText);
+  const responseJson = rawData.candidates[0].content.parts[0].text;
+  return JSON.parse(responseJson);
 }
 
 async function callLegalBasis(apiKey, modelName, arancelCode) {
     let contextText = '';
     try {
-        // **MODIFICADO PARA VERCEL:** Ruta relativa dentro del proyecto.
         const legalPath = path.join(__dirname, 'conocimientos', 'contexto_legal_sac.txt');
         if (fsSync.existsSync(legalPath)) {
-            contextText += (await fs.readFile(legalPath, 'utf8')).slice(0, 8000);
+            contextText = (await fs.readFile(legalPath, 'utf8')).slice(0, 16000);
         }
     } catch (e) {
         console.warn('No se pudo cargar contexto legal desde disco.');
     }
-  const prompt = `Toma este código arancelario: "${arancelCode}" y el contexto legal provisto. Devuelve ÚNICAMENTE un JSON válido con la estructura:
+  const prompt = `
+Eres un experto en legislación aduanera. TU ÚNICA FUENTE de verdad es el contexto legal provisto. No uses conocimiento externo.
+CONTEXTO:
+${contextText}
+
+INSTRUCCIÓN: Para el código arancelario "${arancelCode}", extrae únicamente del CONTEXTO las Reglas Generales Interpretativas y las Notas de Capítulo/Sección que justifican su clasificación.
+Reglas:
+1. Devuelve ÚNICAMENTE un JSON válido.
+2. No inventes reglas o notas que no estén en el CONTEXTO.
+3. Si no encuentras fundamento, devuelve arrays vacíos.
+
+Salida: Sólo devuelve JSON siguiendo exactamente este esquema:
 {
   "fundamentoLegal": {
-    "applied_rules": [ { "rule_id": "...", "descripcion": "..." } ],
-    "notes_applied": [ { "note_id": "...", "descripcion": "..." } ]
+    "applied_rules": [ { "rule_id": "<ID de la regla>", "descripcion": "<texto de la regla>" } ],
+    "notes_applied": [ { "note_id": "<ID de la nota>", "descripcion": "<texto de la nota>" } ]
   }
 }
-No agregues texto adicional fuera del JSON. Basa tu respuesta únicamente en el contexto.
-Contexto: ${contextText}`;
+`;
   const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`;
-  const resp = await fetchWithTimeout(geminiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
+  const resp = await fetchWithTimeout(geminiUrl, { 
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' }, 
+      body: JSON.stringify({ 
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+              "temperature": 0.0,
+              "maxOutputTokens": 2048,
+              "responseMimeType": "application/json",
+          }
+      })
+  });
   if (!resp.ok) {
     const body = await resp.text();
     throw new Error(`LegalBasis API error ${resp.status}: ${body}`);
   }
   const rawData = await resp.json();
-  const rawText = rawData.candidates[0].content.parts[0].text;
-  return tryParseModelJson(rawText);
+  const responseJson = rawData.candidates[0].content.parts[0].text;
+  return JSON.parse(responseJson);
 }
 
 async function generateReportFlow(description, location, notes) {
   console.log('[DEBUG] Entering generateReportFlow.');
   const apiKey = await getApiKey();
-  console.log(`[DEBUG] API Key retrieved. Length: ${apiKey ? apiKey.length : 0}`);
+  console.log(`[DEBUG] API Key retrieved.`);
   const modelName = await chooseModel(apiKey);
   console.log(`[DEBUG] Model chosen: ${modelName}`);
   
@@ -156,7 +183,11 @@ async function generateReportFlow(description, location, notes) {
       console.error(`[DEBUG] Failed to get legal basis, will return partial report. Error: ${e.message}`);
   }
   
-  const finalReport = { ...classResp, fundamentoLegal: (legalResp && legalResp.fundamentoLegal) || { applied_rules: [], notes_applied: [] }, conclusion: 'Informe generado en dos pasos.' };
+  const finalReport = { 
+      ...classResp, 
+      fundamentoLegal: (legalResp && legalResp.fundamentoLegal) || { applied_rules: [], notes_applied: [] }, 
+      conclusion: 'Informe generado en dos pasos con prompts mejorados.' 
+  };
   console.log('[DEBUG] Final report constructed. Sending response.');
   return finalReport;
 }
@@ -197,25 +228,57 @@ app.post('/api/find-sac-chapter', async (req, res) => {
 
         const apiKey = await getApiKey();
         const modelName = await chooseModel(apiKey);
+        
         const sacContextPath = path.join(__dirname, 'conocimientos', 'secciones-capitulos.json');
         if (!fsSync.existsSync(sacContextPath)) {
             return res.status(500).json({ error: 'Archivo de contexto "secciones-capitulos.json" no encontrado.' });
         }
-        const sacContext = JSON.parse(await fs.readFile(sacContextPath, 'utf-8'));
-        const prompt = `Basado en el siguiente índice del SAC: ${JSON.stringify(sacContext, null, 2)}
+        const indiceText = await fs.readFile(sacContextPath, 'utf-8');
 
-Analiza: ''${description}''
+        const prompt = `
+Eres un asistente experto en clasificación arancelaria (merciología). TU ÚNICA FUENTE de verdad para ubicar mercancías en el SAC será el índice que te entregue el usuario en este mismo request. No uses conocimiento externo. Basate estrictamente en el texto del índice. Si no hay coincidencia clara, devuelve alternativas. Devuelve siempre ÚNICAMENTE JSON válido.
 
-Tu tarea es identificar la Sección y el Capítulo más probables. Responde únicamente con el formato: 'Ve a buscar a la Sección <número de sección en números romanos> y Capítulo <número de capítulo>'.`;
+INDICE:
+${indiceText}
 
-        // **MODIFICADO: Usar el endpoint normal (no streaming)**
+INSTRUCCIÓN: Dada la siguiente descripción de mercancía, determina la mejor Sección y Capítulo del SAC usando sólo el INDICE.
+Reglas:
+1. No inventes números o nombres que no estén en el INDICE.
+2. Prefiere coincidencias textuales.
+3. Devuelve hasta 2 candidatos ordenados por confianza (confidence 0-1).
+4. Ignora precio, marca o contexto comercial.
+5. Si no encuentras nada, devuelve 'candidates' vacío.
+
+Descripción: "${description}"
+
+Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicional):
+{
+  "query": "<texto de entrada tal cual>",
+  "candidates": [
+    {
+      "section": "<Sección exacta del INDICE o null>",
+      "chapter": "<Capítulo exacto del INDICE o null>",
+      "matched_index_lines": ["<línea 1 exacta del INDICE>", "..."],
+      "confidence": 0.00,
+      "rationale": "<breve justificación técnica (1–3 frases)>"
+    }
+  ]
+}
+`;
+
         const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`;
         
-        // **MODIFICADO: Usar fetchWithTimeout para seguridad**
         const geminiResponse = await fetchWithTimeout(geminiUrl, { 
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            body: JSON.stringify({ 
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: {
+                    "temperature": 0.1,
+                    "maxOutputTokens": 512,
+                    "responseMimeType": "application/json"
+                }
+            })
         });
 
         if (!geminiResponse.ok) {
@@ -223,13 +286,11 @@ Tu tarea es identificar la Sección y el Capítulo más probables. Responde úni
             throw new Error(`API Error: ${geminiResponse.status} ${errorBody}`);
         }
 
-        // **MODIFICADO: Procesar la respuesta completa**
         const rawData = await geminiResponse.json();
-        const text = rawData.candidates[0].content.parts[0].text;
+        const responseJson = rawData.candidates[0].content.parts[0].text;
+        const finalJson = JSON.parse(responseJson);
 
-        // Enviar la respuesta completa como texto plano
-        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-        res.status(200).send(text);
+        res.status(200).json(finalJson);
 
     } catch (error) {
         console.error('Handler exception in /api/find-sac-chapter:', error.stack || error);
