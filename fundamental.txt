@@ -1,45 +1,39 @@
-Resumen de Arreglos Fundamentales - Proyecto Merx
+### **Análisis Post-Mortem: Diagnóstico y Solución de Errores en Despliegue (Vercel)**
 
-Este archivo resume las soluciones críticas que se implementaron para asegurar el funcionamiento estable y robusto del servidor.
+El proceso de depuración para estabilizar la aplicación `merx` en producción involucró la resolución de 3 problemas principales que se manifestaron de forma consecutiva.
 
-1. Selección Dinámica del Modelo de IA (Soluciona errores 404 NOT FOUND):
-   - Problema: El nombre del modelo de Gemini estaba fijo en el código (ej. 'gemini-2.5-flash'), pero la clave de API no tenía acceso a él, causando un error 404.
-   - Solución: Se implementó una función `chooseModel` que:
-     a. Llama a la API de Gemini para obtener la lista de modelos REALMENTE disponibles para la clave.
-     b. Intenta seleccionar un modelo de una lista de preferencia (ej. la versión 'preview').
-     c. Si el preferido no está, usa un modelo de respaldo estable y conocido (`gemini-pro`).
-     d. Esto evita que la aplicación falle por un nombre de modelo incorrecto.
+**1. Problema de Archivos Estáticos (Error Visual/404 en CSS/JS):**
+*   **Síntoma:** La página cargaba sin estilos o sin funcionalidades del lado del cliente.
+*   **Causa:** Vercel, por convención, busca los archivos estáticos (CSS, JS, imágenes) en un directorio raíz llamado `public`. Nuestro proyecto los tenía en una carpeta `static`, que no es servida por defecto.
+*   **Solución:** Se creó la carpeta `public` y se movieron los archivos estáticos a ella. Se actualizó la línea `app.use(express.static(...))` en `server.js` para que apuntara a `public`.
 
-2. Parseo Robusto de Respuestas JSON (Soluciona informes incompletos o errores de formato):
-   - Problema: La API de Gemini a veces devuelve el JSON correcto, pero envuelto en bloques de código Markdown (```json...```) o con texto adicional, lo que rompía `JSON.parse()`.
-   - Solución: Se implementaron dos funciones de ayuda (`cleanModelJsonString` y `tryParseModelJson`):
-     a. Primero, el código limpia la respuesta cruda, eliminando los bloques de Markdown y otros caracteres no deseados.
-     b. Luego, intenta procesar el texto limpio. Si falla, tiene un segundo mecanismo de rescate que busca el primer '{' y el último '}' y trata de procesar solo esa parte.
-     c. Esto asegura que el JSON se extraiga correctamente incluso si la respuesta del modelo no es perfecta.
+**2. Corrupción del Repositorio Local de Git (Comandos Inconsistentes):**
+*   **Síntoma:** `git status` no mostraba los archivos nuevos que se añadían, lo que impedía confirmar los cambios y desplegar la solución anterior.
+*   **Causa:** El índice de Git (el área de preparación o "staging") estaba en un estado corrupto o inconsistente, un problema poco común pero muy bloqueante.
+*   **Solución:** Se forzó la reconstrucción del índice de Git ejecutando `git rm -r --cached .` (para "olvidar" temporalmente todos los archivos) seguido de `git add .` (para re-evaluarlos todos desde cero). Esto limpió el estado anómalo.
 
-3. Estabilidad y Portabilidad del Servidor (Soluciona cuelgues y problemas de entorno):
-   - Problema: El servidor se quedaba colgado si la API de Gemini tardaba mucho en responder. Además, usaba rutas de archivo absolutas, lo que impedía que funcionara en otras máquinas.
-   - Solución:
-     a. Se implementó una función `fetchWithTimeout` que cancela la llamada a la API si no responde en 60 segundos.
-     b. Todas las rutas de archivos (ej. a la carpeta 'conocimientos') se cambiaron a relativas, haciendo el proyecto portable.
-
-4. Prevención de Errores de Sintaxis (Soluciona fallos de arranque del servidor):
-   - Problema: Un error recurrente era incluir tres backticks (```) dentro de una cadena de texto de JavaScript (`...`), lo que causaba un error de sintaxis que impedía que el servidor siquiera arrancara.
-   - Solución: Se estableció como regla fundamental eliminar estas secuencias problemáticas del texto de los prompts. Es más seguro instruir al modelo con palabras ("no uses bloques de código") que incluir caracteres que rompen el propio código.
+**3. Error 500 en la API (La Causa Raíz del Fallo en Producción):**
+*   **Síntoma:** La aplicación fallaba con un "Error Interno del Servidor" al intentar usar la funcionalidad principal.
+*   **Causa:** El código en el servidor (`server.js`) intentaba leer archivos de contexto (`.json`, `.txt`) desde una carpeta local (`conocimientos/`). Sin embargo, esta carpeta no estaba dentro del directorio del proyecto (`merxv2.1`), por lo que no se subió a Vercel. El servidor en la nube no podía encontrar los archivos y crasheaba.
+*   **Solución:** Se copió la carpeta `conocimientos` con sus archivos necesarios al interior del proyecto `merxv2.1`. Al hacer esto, los archivos se incluyeron en el repositorio de Git y, por lo tanto, en el despliegue de Vercel, volviéndose accesibles para el código.
 
 ---
 
-# ⚠️ Regla Persistente de Generación de Informe
-# No modificar ni fusionar esta lógica.
+### **Reglas Fundamentales y Buenas Prácticas para Evitar Errores**
 
-# Instrucción para el agente Gemini:
-# Mantén fija la arquitectura de generación de informes en dos fases:
-#  1. Primera llamada -> generar clasificaciónPropuesta, scoreFiabilidad y argumentoMerciologico.
-#  2. Segunda llamada -> generar fundamentoLegal (reglas y notas aplicadas).
+**1. Las Dependencias Externas son tu Principal Foco de Atención:**
+*   **Archivos Locales:** Si tu código necesita leer un archivo (`fs.readFile`), ese archivo **DEBE** estar dentro de la carpeta de tu proyecto y comprometido en Git. El servidor en la nube no tiene acceso a los archivos de tu computadora personal.
+*   **Variables de Entorno (API Keys, Secretos):** NUNCA escribas una clave o contraseña directamente en el código.
+    *   Utiliza siempre las **Variables de Entorno** que ofrece tu plataforma de despliegue (Vercel, Netlify, etc.).
+    *   **¡El nombre debe ser EXACTO!** Un error de una sola letra entre el nombre en Vercel (`GEMINI_API_KEY`) y el nombre en tu código (`process.env.GEMINI_API_KEY`) hará que todo falle. Revisa dos veces.
 
-# Estas llamadas deben combinarse en el servidor y no deben fusionarse en una sola solicitud a Gemini,
-# ya que eso genera respuestas inválidas o JSON corruptos.
+**2. Respeta las Convenciones de tu Plataforma (Vercel):**
+*   **Directorio `public`:** Para todo lo que el navegador del usuario debe ver (CSS, JS de cliente, imágenes, fuentes), colócalo aquí. Es la regla de oro para archivos estáticos en Vercel.
+*   **Rutas de API:** Tus rutas en Express (`app.post('/api/...')`) se convierten en "Serverless Functions". Son efímeras: se ejecutan, hacen su trabajo y se apagan. No pueden guardar archivos o mantener un estado interno entre llamadas.
 
-# Si se detectan futuras optimizaciones o refactors, conserva esta separación lógica como norma
-# ("Regla de estabilidad de generación de informe").
-# No intentes simplificar ni consolidar el flujo en una sola llamada, aunque parezca más eficiente.
+**3. `console.log()` es tu Mejor Amigo para Depurar:**
+*   Cuando algo falle en producción, la única forma de saber qué pasa adentro es a través de los logs.
+*   No esperes a que algo falle. Añade `console.log()` en puntos clave de tu código para dejar un rastro (`"Entrando a la función X"`, `"Llamando a la API externa..."`, `"Error capturado: " + error.message`).
+*   La pestaña **"Logs"** en tu dashboard de Vercel es tu herramienta de diagnóstico más importante. Revísala siempre primero.
+
+---
