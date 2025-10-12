@@ -77,8 +77,8 @@ async function listModels(apiKey) {
 }
 
 async function chooseModel(apiKey) {
-  // **MODIFICADO:** Se fuerza el uso del modelo "Gemini 2.5 flash" según el requisito obligatorio.
-  const modelName = "gemini-2.5-flash";
+  // **MODIFICADO:** Se fuerza el uso del modelo "gemini-2.5-flash-lite" según el requisito.
+  const modelName = "gemini-2.5-flash-lite";
   console.log(`[INFO] Using mandatory model as required: ${modelName}`);
   return modelName;
 }
