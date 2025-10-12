@@ -213,4 +213,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateUI(0);
+
+    // --- Lógica para el formulario de contacto de WhatsApp ---
+    const contactMessage = document.getElementById('contact-message');
+    const sendWhatsappBtn = document.getElementById('send-whatsapp');
+
+    sendWhatsappBtn.addEventListener('click', () => {
+        const message = contactMessage.value.trim();
+        if (message) {
+            const phoneNumber = '50588378547'; // Tu número de teléfono
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+            contactMessage.value = ''; // Limpia el textarea después de enviar
+        }
+    });
 });

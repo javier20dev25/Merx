@@ -349,39 +349,35 @@ button::-moz-focus-inner, input::-moz-focus-inner {
     -5px -5px 15px var(--light-shadow); 
 }
 
-/* --- NUEVOS ESTILOS PARA HEADER Y FOOTER --- */
+/* --- NUEVOS ESTILOS PARA LAYOUT Y FOOTER --- */
 
 body {
-  display: flex;
-  flex-direction: column; /* Apila los elementos verticalmente */
-  justify-content: space-between; /* Empuja el footer hacia abajo */
+  padding: 20px 0; /* Añade espacio vertical si el contenido es muy alto */
 }
 
-.site-header {
-  padding: 20px 0;
-  text-align: center;
-}
-
-.site-header h1 {
-  font-size: 4rem;
+.site-title {
+  font-size: 3.5rem;
   font-weight: 700;
   color: #d1d1d6;
-  margin: 0;
+  margin: 0 0 20px 0;
   text-shadow: 4px 4px 10px var(--dark-shadow), -4px -4px 10px var(--light-shadow);
 }
 
-.site-footer {
-  padding: 20px;
+.page-footer {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px; /* Limita el ancho del footer */
   text-align: center;
+}
+
+.credits {
   font-size: 0.9rem;
   color: #a0a0a5;
+  margin: 0;
 }
-
-.site-footer p {
-  margin: 5px 0;
-}
-
-/* Eliminada la regla específica para .credit para que ambos párrafos sean iguales */
 
 .tech-stack {
   margin-top: 15px;
@@ -396,45 +392,44 @@ body {
 }
 
 .tag {
-  background: rgba(255, 165, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 165, 0, 0.2);
+  background-color: #007bff; /* Azul normal */
+  color: white; /* Fuente blanca */
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: 15px;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #ffddb8; /* Color de texto anaranjado claro para legibilidad */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), 
-              -4px -4px 10px rgba(255, 255, 255, 0.05), 
-              inset 0 0 0 0.5px rgba(255, 165, 0, 0.4);
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 .tag:hover {
-  background: rgba(255, 165, 0, 0.2);
-  color: #ffe8cc;
   transform: translateY(-2px);
-  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15), 
-              -6px -6px 15px rgba(255, 255, 255, 0.05);
+  background-color: #0056b3; /* Azul más oscuro en hover */
 }
 
-.github-tag {
-  animation: github-pulse 2.5s infinite ease-in-out;
+.contact-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--dark-shadow);
+  width: 100%;
 }
 
-@keyframes github-pulse {
-  0%, 100% {
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), 
-                -4px -4px 10px rgba(255, 255, 255, 0.05), 
-                inset 0 0 0 0.5px rgba(255, 165, 0, 0.4);
-  }
-  50% {
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), 
-                -4px -4px 10px rgba(255, 255, 255, 0.05), 
-                inset 0 0 0 0.5px rgba(255, 165, 0, 0.4),
-                0 0 15px 3px rgba(255, 165, 0, 0.3);
-  }
+.contact-section h4 {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin: 0 0 15px 0;
 }
+
+.neumorphic-textarea.small {
+  height: 80px;
+  min-height: 80px;
+}
+
+.blue-glow {
+    box-shadow: 
+    15px 15px 30px var(--dark-shadow), 
+    -15px -15px 30px var(--light-shadow),
+    0 0 10px 1px rgba(0, 123, 255, 0.2),
+    inset 0 0 15px 2px rgba(204, 229, 255, 0.7);
+}
+
