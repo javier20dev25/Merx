@@ -392,22 +392,24 @@ body {
 }
 
 .tag {
-  background-color: #007bff; /* Azul normal */
-  color: white; /* Fuente blanca */
-  padding: 6px 14px;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 0; /* Padding vertical */
+  width: 120px; /* Ancho fijo para todos los tags */
   border-radius: 15px;
   font-size: 0.8rem;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
-  min-width: 90px; /* Ancho mínimo para todos los tags */
-  text-align: center; /* Centra el texto dentro del tag */
-  display: inline-block; /* Permite que el ancho y centrado funcionen */
+  text-align: center;
+  display: inline-block;
+  box-shadow: 2px 2px 5px var(--dark-shadow);
 }
 
 .tag:hover {
   transform: translateY(-2px);
-  background-color: #0056b3; /* Azul más oscuro en hover */
+  background-color: #0056b3;
+  box-shadow: 4px 4px 8px var(--dark-shadow);
 }
 
 .contact-section {
@@ -422,14 +424,21 @@ body {
 
 #contact-toggle {
   cursor: pointer;
-  user-select: none; /* Evita que el texto se seleccione al hacer clic */
+  user-select: none;
   font-size: 1.1rem;
   color: var(--text-color);
   margin: 0 0 15px 0;
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+#contact-toggle:hover {
+  background-color: rgba(0,0,0,0.05);
 }
 
 #contact-arrow {
-  display: inline-block; /* Permite transformar la flecha */
+  display: inline-block;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -450,7 +459,7 @@ body {
 }
 
 #contact-collapsible.open {
-  max-height: 300px; /* Altura suficiente para el contenido */
+  max-height: 300px;
   opacity: 1;
   margin-top: 15px;
 }
@@ -460,12 +469,32 @@ body {
   min-height: 80px;
 }
 
-.blue-glow {
-    box-shadow: 
-    15px 15px 30px var(--dark-shadow), 
-    -15px -15px 30px var(--light-shadow),
-    0 0 10px 1px rgba(0, 123, 255, 0.2),
-    inset 0 0 15px 2px rgba(204, 229, 255, 0.7);
+.whatsapp-btn {
+  background-color: #25D366; /* Color de WhatsApp */
+  color: white;
+  border: none;
+  border-radius: 25px; /* Bordes redondeados */
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Espacio entre ícono y texto */
+  transition: all 0.2s ease-in-out;
+  box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-2px);
+  background-color: #1EBE57;
+  box-shadow: 5px 5px 12px rgba(0,0,0,0.25);
+}
+
+.whatsapp-btn:active {
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 }
 
 .github-wrapper {
