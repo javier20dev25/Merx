@@ -232,6 +232,49 @@ async function generateReportFlow(description, location, notes) {
   return finalReport;
 }
 
+// ----------------- Helpers UI -----------------
+function classificationToUI(parsed) {
+  // Normaliza varias formas de respuesta esperadas
+  const candidate =
+    parsed?.candidates?.[0] ||
+    parsed?.clasificacionPropuesta ||
+    (parsed && typeof parsed === 'object' ? parsed : null);
+
+  if (!candidate) {
+    return {
+      ui_text: 'No se encontró una clasificación confiable para esta descripción.',
+      ui_struct: { section: null, chapter: null, heading: null, confidence: 0, rationale: null }
+    };
+  }
+
+  // intentar leer campos comunes (adapta si tus keys son distintas)
+  const section = candidate.section || candidate.seccion || candidate.sectionName || null;
+  const chapter = candidate.chapter || candidate.capitulo || candidate.chapterName || null;
+  const heading = candidate.heading_or_partida || candidate.partida || candidate.codigo || candidate.descripcion || null;
+  // confidence puede venir 0-1 o 0-10; normalizamos a 0-1
+  let confidence = null;
+  if (typeof candidate.confidence === 'number') confidence = candidate.confidence;
+  else if (typeof candidate.scoreFiabilidad === 'number') confidence = Math.min(1, candidate.scoreFiabilidad / 10);
+  else if (typeof candidate.score === 'number') confidence = candidate.score;
+
+  const confidencePct = (typeof confidence === 'number') ? Math.round(confidence * 100) + '%' : 'n.d.';
+  const rationale = candidate.rationale || candidate.argumentoMerciologico || candidate.reason || '';
+
+  // Texto corto y legible para mostrar en la UI
+  const ui_text = [
+    heading ? `Partida: ${heading}` : 'Partida: —',
+    section ? `Sección: ${section}` : 'Sección: —',
+    chapter ? `Capítulo: ${chapter}` : 'Capítulo: —',
+    `Confianza: ${confidencePct}`,
+    rationale ? `Motivo: ${rationale}` : ''
+  ].filter(Boolean).join(' — ');
+
+  return {
+    ui_text,
+    ui_struct: { section, chapter, heading, confidence, confidencePct, rationale }
+  };
+}
+
 
 // --- Servidor Express ---
 const app = express();
@@ -332,12 +375,25 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicion
           throw new Error('Modelo devolvió estructura inesperada');
         }
         
+        let finalJson;
         try {
-          const finalJson = tryParseModelJson(candidateText);
-          res.status(200).json(finalJson);
+          finalJson = tryParseModelJson(candidateText);
         } catch (err) {
           console.error('Error parseando JSON del modelo en find-sac-chapter:', err.message);
-          res.status(500).json({ error: 'El modelo devolvió una respuesta no válida', raw_text: candidateText });
+          return res.status(500).json({ error: 'El modelo devolvió una respuesta no válida', raw_text: candidateText });
+        }
+
+        const userView = classificationToUI(finalJson);
+
+        if (process.env.NODE_ENV === 'production') {
+          res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+          return res.status(200).send(userView.ui_text);
+        } else {
+          return res.status(200).json({
+            ui_text: userView.ui_text,
+            ui: userView.ui_struct,
+            debug_raw: finalJson
+          });
         }
 
     } catch (error) {
@@ -352,16 +408,28 @@ app.post('/api/generate-report', async (req, res) => {
   try {
     const { description, location, notes } = req.body || {};
     if (!description) return res.status(400).json({ ok: false, error: 'Falta campo description' });
+    
     const finalReport = await generateReportFlow(description, location, notes);
-    const reportToSend = { ...finalReport };
-    reportToSend.clasificacionPropuesta = reportToSend.clasificacionPropuesta || {};
-    reportToSend.clasificacionPropuesta.codigo = reportToSend.clasificacionPropuesta.codigo || 'N/A';
-    reportToSend.clasificacionPropuesta.descripcion = reportToSend.clasificacionPropuesta.descripcion || 'N/A';
-    reportToSend.scoreFiabilidad = (typeof reportToSend.scoreFiabilidad !== 'undefined') ? reportToSend.scoreFiabilidad : null;
-    reportToSend.argumentoMerciologico = reportToSend.argumentoMerciologico || '';
-    reportToSend.fundamentoLegal = reportToSend.fundamentoLegal || { applied_rules: [], notes_applied: [] };
-    reportToSend.conclusion = reportToSend.conclusion || '';
-    return res.status(200).json({ ok: true, report: reportToSend });
+    const userView = classificationToUI(finalReport);
+
+    if (process.env.NODE_ENV === 'production') {
+      // En producción, devolvemos un objeto simple con el texto para la UI y el reporte completo
+      return res.status(200).json({ 
+        ok: true, 
+        ui_text: userView.ui_text, 
+        report: finalReport 
+      });
+    } else {
+      // En desarrollo, incluimos todo para depuración
+      return res.status(200).json({ 
+        ok: true, 
+        ui_text: userView.ui_text, 
+        ui: userView.ui_struct,
+        report: finalReport, 
+        debug_raw: finalReport 
+      });
+    }
+
   } catch (err) {
     console.error('Error en /api/generate-report:', err.stack || err);
     return res.status(500).json({ ok: false, error: 'Error interno generando el informe.', message: err.message });
