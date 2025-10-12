@@ -73,64 +73,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 resultTextElement.innerHTML = fullLocation.replace(/\n/g, '<br>');
             }
 
-    async function findSacLocation() {
-            sessionData.description = mainTextarea.value;
-            if (!sessionData.description.trim()) return;
-    
-            const logo = document.getElementById('logo');
-            logo.classList.add('loading-animation');
-    
-            transitionElements(mainTextarea, resultContainer);
-            resultContainer.innerHTML = ''; // Limpiar contenedor
-            rightButton.disabled = true;
-    
-            try {
-                const response = await fetch('/api/find-sac-chapter', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ description: sessionData.description })
-                });
-    
-                if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
-                
-                const data = await response.json(); // Esperar respuesta JSON
-    
-                // Crear contenedor para Sección y Capítulo
-                const infoDiv = document.createElement('div');
-                infoDiv.className = 'result-info';
-                if (data.section || data.chapter) {
-                    infoDiv.innerHTML = `
-                        <p><strong>Sección:</strong> ${data.section || 'No encontrada'}</p>
-                        <p><strong>Capítulo:</strong> ${data.chapter || 'No encontrado'}</p>
-                    `;
-                } else {
-                    infoDiv.innerHTML = `<p>No se encontró clasificación.</p>`;
-                }
-    
-                // Crear contenedor para el Motivo
-                const rationaleDiv = document.createElement('div');
-                rationaleDiv.className = 'result-rationale';
-                if (data.rationale) {
-                    rationaleDiv.innerHTML = `<p>${data.rationale}</p>`;
-                }
-    
-                resultContainer.appendChild(infoDiv);
-                if (data.rationale) {
-                    resultContainer.appendChild(rationaleDiv);
-                }
-    
-                sessionData.location = `${data.section} - ${data.chapter}`; // Guardar data relevante
-                animateTextChange(rightButtonContent, "Siguiente");
-                subState = 1;
-    
-            } catch (error) {
-                resultContainer.innerHTML = `<p class="result-text" style="color: #ffb8b8;">Error al buscar</p>`;
-                console.error('Error en findSacLocation:', error);
-            } finally {
-                rightButton.disabled = false;
-                logo.classList.remove('loading-animation');
+async function findSacLocation() {
+        sessionData.description = mainTextarea.value;
+        if (!sessionData.description.trim()) return;
+
+        const logo = document.getElementById('logo');
+        logo.classList.add('loading-animation');
+        
+        const resultCard = document.getElementById('result-card');
+        // El ID del textarea de resultados ahora es result-card, no resultContainer
+        transitionElements(mainTextarea, resultCard);
+        resultCard.innerHTML = ''; // Limpiar contenedor
+        rightButton.disabled = true;
+
+        try {
+            const response = await fetch('/api/find-sac-chapter', { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' }, 
+                body: JSON.stringify({ description: sessionData.description }) 
+            });
+
+            if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
+            
+            const data = await response.json();
+
+            let uiText;
+            // Lógica de fallback robusta
+            if (data.section || data.chapter) {
+                const section = data.section || '—';
+                const chapter = data.chapter || '—';
+                const rationale = data.rationale || '';
+                // Usar saltos de línea para un formato vertical
+                uiText = `Sección: ${section}\nCapítulo: ${chapter}${rationale ? '\n\nMotivo: ' + rationale : ''}`;
+            } else if (data.raw_text) {
+                uiText = data.raw_text;
+            } else {
+                uiText = 'No se encontró clasificación confiable.';
             }
+
+            // Usar innerText para seguridad y para que los \n se interpreten gracias a 'white-space: pre-wrap'
+            resultCard.innerText = uiText;
+
+            sessionData.location = uiText; // Guardar el resultado para el siguiente paso
+            animateTextChange(rightButtonContent, "Siguiente");
+            subState = 1;
+
+        } catch (error) {
+            resultCard.innerText = 'Error al procesar la respuesta del servidor.';
+            console.error('Error en findSacLocation:', error);
+        } finally {
+            rightButton.disabled = false;
+            logo.classList.remove('loading-animation');
         }
+    }
         } catch (error) {
             resultTextElement.innerHTML = `<p class="result-text" style="color: #ffb8b8;">Error al buscar</p>`;
             console.error('Error en findSacLocation:', error);

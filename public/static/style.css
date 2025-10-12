@@ -193,49 +193,28 @@ body {
   color: var(--text-color);
 }
 
-#result-container {
-  display: flex; /* Cambiado a flex para alinear los nuevos contenedores */
-  flex-direction: column; /* Apilar verticalmente */
-  align-items: stretch; /* Estirar para ocupar el ancho */
-  gap: 10px; /* Espacio entre los nuevos contenedores */
-  background: linear-gradient(145deg, #8e44ad, #9b59b6);
-  box-shadow: 4px 4px 8px #dcdbe3, -4px -4px 8px #ffffff;
-  min-height: 80px;
-  height: auto;
-  padding: 15px;
+.result-card {
+  background: linear-gradient(180deg, #7b3bd6, #8f5be0);
+  color: #fff;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  max-width: 92%;
+  margin: 0 auto;
+  word-wrap: break-word;        /* rompe palabras largas */
+  white-space: pre-wrap;        /* permite saltos de línea */
+  overflow-wrap: anywhere;
 }
 
 .result-text {
-  font-size: 18px;
-  font-weight: 600;
-  color: #f0e6f6;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-  white-space: pre-wrap; /* Cambiado para respetar los saltos de línea (\n) */
+  font-size: 16px;
+  line-height: 1.35;
   text-align: center;
-  line-height: 1.5;
-  overflow-wrap: break-word; /* Añadido para forzar el ajuste de palabras largas */
-  width: 100%; /* Asegura que el texto use el ancho completo del contenedor */
 }
 
-/* Nuevos estilos para los sub-contenedores */
-.result-info, .result-rationale {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  padding: 12px 15px;
-  color: #f0e6f6;
-  text-align: left;
-}
-
-.result-info p, .result-rationale p {
-  margin: 0;
-  padding: 2px 0;
-}
-
-.result-rationale {
-  background: rgba(0, 0, 0, 0.1);
-  font-style: italic;
-  font-size: 0.9em;
-}
+/* 'Ver más' detalles */
+.result-details { margin-top: 12px; text-align: left; color: rgba(255,255,255,0.95); }
+.result-details strong { color: #fff; }
 
 #report-content-wrapper {
   width: 100%;
