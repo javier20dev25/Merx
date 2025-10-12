@@ -77,19 +77,10 @@ async function listModels(apiKey) {
 }
 
 async function chooseModel(apiKey) {
-  const preferred = ["gemini-pro"]; // Simplificado para máxima compatibilidad en Vercel
-  try {
-    const models = await listModels(apiKey);
-    const names = models.map(m => (m.name || m.model || "").replace("models/", "")).filter(Boolean);
-    for (const p of preferred) {
-      if (names.includes(p)) return p;
-    }
-    if (names.length > 0) return names[0];
-    throw new Error('No models available for this API key.');
-  } catch (error) {
-    console.error(`Could not dynamically choose model: ${error.message}. Falling back to "gemini-pro".`);
-    return 'gemini-pro';
-  }
+  // **MODIFICADO:** Se fuerza el uso del modelo "Gemini 2.5 flash" según el requisito obligatorio.
+  const modelName = "gemini-2.5-flash";
+  console.log(`[INFO] Using mandatory model as required: ${modelName}`);
+  return modelName;
 }
 
 // --- Flujo de Generación de Reporte ---
