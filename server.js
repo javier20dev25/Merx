@@ -260,14 +260,18 @@ function classificationToUI(parsed) {
   const confidencePct = (typeof confidence === 'number') ? Math.round(confidence * 100) + '%' : 'n.d.';
   const rationale = candidate.rationale || candidate.argumentoMerciologico || candidate.reason || '';
 
-  // Texto corto y legible para mostrar en la UI
+  // --- NUEVA LÓGICA DE FORMATEO PARA UI ---
+  const cleanSection = section && section.includes(':') ? section.split(':')[1].trim() : section;
+  const cleanChapter = chapter && chapter.includes(':') ? chapter.split(':')[1].trim() : chapter;
+  
+  const rationaleWords = rationale.split(' ');
+  const shortRationale = rationaleWords.slice(0, 12).join(' ') + (rationaleWords.length > 12 ? '...' : '');
+
   const ui_text = [
-    heading ? `Partida: ${heading}` : 'Partida: —',
-    section ? `Sección: ${section}` : 'Sección: —',
-    chapter ? `Capítulo: ${chapter}` : 'Capítulo: —',
-    `Confianza: ${confidencePct}`,
-    rationale ? `Motivo: ${rationale}` : ''
-  ].filter(Boolean).join(' — ');
+    cleanSection ? `Sección: ${cleanSection}` : null,
+    cleanChapter ? `Capítulo: ${cleanChapter}` : null,
+    shortRationale ? `Motivo: ${shortRationale}` : null
+  ].filter(Boolean).join('\n'); // Usar saltos de línea
 
   return {
     ui_text,
