@@ -73,9 +73,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 resultTextElement.innerHTML = fullLocation.replace(/\n/g, '<br>');
             }
 
-            sessionData.location = fullLocation; // Guardar el resultado completo
+    async function findSacLocation() {
+        sessionData.description = mainTextarea.value;
+        if (!sessionData.description.trim()) return;
+
+        const logo = document.getElementById('logo');
+        logo.classList.add('loading-animation');
+
+        transitionElements(mainTextarea, resultContainer);
+        resultContainer.innerHTML = `<p class="result-text"></p>`;
+        const resultTextElement = resultContainer.querySelector('.result-text');
+        rightButton.disabled = true;
+
+        try {
+            const response = await fetch('/api/find-sac-chapter', { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' }, 
+                body: JSON.stringify({ description: sessionData.description }) 
+            });
+
+            if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
+            
+            // **MODIFICADO: Leer la respuesta de texto directamente**
+            const responseText = await response.text();
+            resultTextElement.innerHTML = responseText.replace(/\n/g, '<br>');
+
+            sessionData.location = responseText; // Guardar el resultado completo
             animateTextChange(rightButtonContent, "Siguiente");
             subState = 1;
+
+        } catch (error) {
+            resultTextElement.innerHTML = `<p class="result-text" style="color: #ffb8b8;">Error al buscar</p>`;
+            console.error('Error en findSacLocation:', error);
+        } finally {
+            rightButton.disabled = false;
+            logo.classList.remove('loading-animation');
+        }
+    }
 
         } catch (error) {
             resultTextElement.innerHTML = `<p class="result-text" style="color: #ffb8b8;">Error al buscar</p>`;
@@ -103,80 +137,34 @@ document.addEventListener('DOMContentLoaded', () => {
             const reportWrapper = document.getElementById('report-content-wrapper');
             reportWrapper.innerHTML = `<div class="loader"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div>`;
             reportView.classList.add('fade-in');
-            logo.classList.add('loading-animation'); // Iniciar animación aquí
+            logo.classList.add('loading-animation');
         }, { once: true });
 
         try {
             const payload = { description: sessionData.description, location: sessionData.location, notes: notes };
             const resp = await fetch('/api/generate-report', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-            const raw = await resp.text();
-            console.log('RAW /api/generate-report response:', raw.slice(0, 5000));
-
-            let data;
-            try {
-                data = JSON.parse(raw);
-            } catch (err) {
-                console.error('Respuesta no-JSON del servidor:', err);
-                showError('El servidor devolvió una respuesta no JSON. Mira la consola para más detalles.');
-                return;
+            
+            if (!resp.ok) {
+                throw new Error(`Error del servidor: ${resp.statusText}`);
             }
 
-            const reportData = (data && data.report) ? data.report : data;
+            const data = await resp.json();
 
-            if (!reportData || !reportData.clasificacionPropuesta || !reportData.clasificacionPropuesta.codigo) {
-                console.error('Informe inválido del backend:', data);
-                showError('El informe está incompleto. Revisa la consola (Network → response) para ver la respuesta completa.');
+            if (!data || !data.ui_text) {
+                console.error('Respuesta inválida del backend:', data);
+                showError('El servidor no devolvió un texto de UI válido.');
                 return;
             }
 
             const reportWrapper = document.getElementById('report-content-wrapper');
-            reportWrapper.innerHTML = '';
-            let reportHtml = '';
-            const renderSection = (title, content) => {
-                if (content) {
-                    reportHtml += `<div class="report-section-title">${title}</div>`;
-                    reportHtml += `<div class="report-section-content">${content.replace(/\n/g, '<br>')}</div>`;
-                }
-            };
-
-            if (reportData.clasificacionPropuesta && reportData.clasificacionPropuesta.codigo) {
-                reportHtml += `<div class="report-section-title">Clasificación Arancelaria Propuesta:</div>`;
-                reportHtml += `<div class="report-section-content">Código: <strong>${reportData.clasificacionPropuesta.codigo}</strong><br>Descripción: ${reportData.clasificacionPropuesta.descripcion}<br>Unidad: ${reportData.clasificacionPropuesta.unidad}<br>Arancel Estimado: ${reportData.clasificacionPropuesta.arancel_estimado}</div>`;
-            }
-
-            if (reportData.scoreFiabilidad) {
-                let scoreClass = 'score-red';
-                if (reportData.scoreFiabilidad >= 8) scoreClass = 'score-green';
-                else if (reportData.scoreFiabilidad >= 5) scoreClass = 'score-yellow';
-                reportHtml += `<div class="report-section-title">Score de Fiabilidad:</div>`;
-                reportHtml += `<div class="score-display ${scoreClass}">${reportData.scoreFiabilidad}/10</div>`;
-            }
-
-            renderSection('Argumento Merciológico:', reportData.argumentoMerciologico);
-
-            if (reportData.fundamentoLegal) {
-                reportHtml += `<div class="report-section-title">Fundamento Legal:</div>`;
-                if (reportData.fundamentoLegal.applied_rules && reportData.fundamentoLegal.applied_rules.length > 0) {
-                    reportHtml += `<div class="report-section-content"><strong>Reglas Aplicadas:</strong><ul>`;
-                    reportData.fundamentoLegal.applied_rules.forEach(rule => { reportHtml += `<li>${rule.rule_id}: ${rule.descripcion || 'N/A'}</li>`; });
-                    reportHtml += `</ul></div>`;
-                }
-                if (reportData.fundamentoLegal.notes_applied && reportData.fundamentoLegal.notes_applied.length > 0) {
-                    reportHtml += `<div class="report-section-content"><strong>Notas Aplicadas:</strong><ul>`;
-                    reportData.fundamentoLegal.notes_applied.forEach(note => { reportHtml += `<li>${note.note_id}: ${note.descripcion || 'N/A'}</li>`; });
-                    reportHtml += `</ul></div>`;
-                }
-            }
-
-            renderSection('Conclusión:', reportData.conclusion);
-
-            reportWrapper.innerHTML = reportHtml;
+            // **MODIFICADO: Usar ui_text directamente**
+            reportWrapper.innerHTML = `<p class="report-final-text">${data.ui_text.replace(/ — /g, '<br><br>')}</p>`;
 
         } catch (error) {
             console.error('Error en generateReport:', error);
             showError('Ocurrió un error inesperado al generar el informe.');
         } finally {
-            logo.classList.remove('loading-animation'); // Detener animación al final
+            logo.classList.remove('loading-animation');
         }
     }
 
