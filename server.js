@@ -319,33 +319,23 @@ app.post('/api/find-sac-chapter', async (req, res) => {
         const indiceText = await fs.readFile(sacContextPath, 'utf-8');
 
         const prompt = `
-Eres un asistente experto en clasificación arancelaria (merciología). TU ÚNICA FUENTE de verdad para ubicar mercancías en el SAC será el índice que te entregue el usuario en este mismo request. No uses conocimiento externo. Basate estrictamente en el texto del índice. Si no hay coincidencia clara, devuelve alternativas. Devuelve siempre ÚNICAMENTE JSON válido.
+Eres un asistente experto en clasificación arancelaria (merciología). TU ÚNICA FUENTE de verdad para ubicar mercancías en el SAC será el índice que te entregue el usuario en este mismo request. No uses conocimiento externo. Basate estrictamente en el texto del índice.
 
 INDICE:
 ${indiceText}
 
-INSTRUCCIÓN: Dada la siguiente descripción de mercancía, determina la mejor Sección y Capítulo del SAC usando sólo el INDICE.
+INSTRUCCIÓN: Dada la siguiente descripción de mercancía, determina el número de capítulo del SAC.
 Reglas:
-1. No inventes números o nombres que no estén en el INDICE.
-2. Prefiere coincidencias textuales.
-3. Devuelve hasta 2 candidatos ordenados por confianza (confidence 0-1).
-4. Ignora precio, marca o contexto comercial.
-5. Si no encuentras nada, devuelve 'candidates' vacío.
+1. Devuelve ÚNICAMENTE un JSON válido.
+2. No inventes números o nombres que no estén en el INDICE.
+3. El campo 'chapter_number' debe ser un número entero.
 
 Descripción: "${description}"
 
 Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicional):
 {
-  "query": "<texto de entrada tal cual>",
-  "candidates": [
-    {
-      "section": "<Sección exacta del INDICE o null>",
-      "chapter": "<Capítulo exacto del INDICE o null>",
-      "matched_index_lines": ["<línea 1 exacta del INDICE>", "..."],
-      "confidence": 0.00,
-      "rationale": "<breve justificación técnica (1–3 frases)>"
-    }
-  ]
+  "chapter_number": <Número entero del capítulo>,
+  "rationale": "<Breve justificación técnica de por qué pertenece a ese capítulo>"
 }
 `;
 
@@ -358,7 +348,7 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicion
                 contents: [{ parts: [{ text: prompt }] }],
                 generationConfig: {
                     "temperature": 0.1,
-                    "maxOutputTokens": 512
+                    "maxOutputTokens": 256
                 }
             })
         });
@@ -371,22 +361,43 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicion
         const rawData = await geminiResponse.json();
         const candidateText = rawData?.candidates?.[0]?.content?.parts?.[0]?.text;
         if (!candidateText) {
-          console.error('Respuesta inesperada del modelo en find-sac-chapter:', JSON.stringify(rawData).slice(0, 1000));
           throw new Error('Modelo devolvió estructura inesperada');
         }
         
-        let finalJson;
-        try {
-          finalJson = tryParseModelJson(candidateText);
-        } catch (err) {
-          console.error('Error parseando JSON del modelo en find-sac-chapter:', err.message);
-          return res.status(500).json({ error: 'El modelo devolvió una respuesta no válida', raw_text: candidateText });
+        const aiResult = tryParseModelJson(candidateText);
+        const chapterNumber = aiResult.chapter_number;
+        const rationale = aiResult.rationale;
+
+        if (!chapterNumber) {
+            return res.status(404).json({ error: 'El modelo no pudo determinar un capítulo.', rationale });
         }
 
-        const userView = classificationToUI(finalJson);
+        // Lógica para buscar el nombre de la sección y capítulo usando el número
+        const sectionsData = JSON.parse(indiceText);
+        let foundSection = null;
+        let foundChapter = null;
 
-        // Devolver siempre el objeto JSON estructurado para que el frontend pueda construir la UI
-        return res.status(200).json(userView.ui_struct);
+        for (const section of sectionsData) {
+            const chapter = section.chapters.find(c => c.number === chapterNumber);
+            if (chapter) {
+                foundSection = section;
+                foundChapter = chapter;
+                break;
+            }
+        }
+
+        if (!foundSection || !foundChapter) {
+            return res.status(404).json({ error: `Capítulo ${chapterNumber} no encontrado en el índice.` });
+        }
+
+        const cleanSectionName = foundSection.name.split(':')[0]; // Extrae "SECCIÓN II" del nombre completo
+
+        // Devolver el objeto JSON estructurado y limpio
+        return res.status(200).json({
+            section: cleanSectionName,
+            chapter: foundChapter.name,
+            rationale: rationale
+        });
 
     } catch (error) {
         console.error('Handler exception in /api/find-sac-chapter:', error.stack || error);
