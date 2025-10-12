@@ -1,0 +1,623 @@
+[
+  {
+    "name": "SECCIÓN I: ANIMALES VIVOS Y PRODUCTOS DEL REINO ANIMAL",
+    "start_page": 11,
+    "chapters": [
+      {
+        "number": 1,
+        "name": "Animales vivos",
+        "page": 12
+      },
+      {
+        "number": 2,
+        "name": "Carne y despojos comestibles",
+        "page": 14
+      },
+      {
+        "number": 3,
+        "name": "Pescados y crustáceos, moluscos y demás invertebrados acuáticos",
+        "page": 19
+      },
+      {
+        "number": 4,
+        "name": "Leche y productos lácteos; huevos de ave; miel natural; productos comestibles de origen animal, no expresados ni comprendidos en otra parte",
+        "page": 24
+      },
+      {
+        "number": 5,
+        "name": "Los demás productos de origen animal no expresados ni comprendidos en otra parte",
+        "page": 29
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN II: PRODUCTOS DEL REINO VEGETAL",
+    "start_page": 31,
+    "chapters": [
+      {
+        "number": 6,
+        "name": "Plantas vivas y productos de la floricultura",
+        "page": 32
+      },
+      {
+        "number": 7,
+        "name": "Hortalizas, plantas, raíces y tubérculos alimenticios",
+        "page": 34
+      },
+      {
+        "number": 8,
+        "name": "Frutas y frutos comestibles; cortezas de agrios (cítricos), melones o sandías",
+        "page": 39
+      },
+      {
+        "number": 9,
+        "name": "Café, té, yerba mate y especias",
+        "page": 44
+      },
+      {
+        "number": 10,
+        "name": "Cereales",
+        "page": 47
+      },
+      {
+        "number": 11,
+        "name": "Productos de la molinería; malta; almidón y fécula; inulina; gluten de trigo",
+        "page": 49
+      },
+      {
+        "number": 12,
+        "name": "Semillas y frutos oleaginosos; semillas y frutos diversos; plantas industriales o medicinales; paja y forraje",
+        "page": 52
+      },
+      {
+        "number": 13,
+        "name": "Gomas, resinas y demás jugos y extractos vegetales",
+        "page": 56
+      },
+      {
+        "number": 14,
+        "name": "Materias trenzables y demás productos de origen vegetal, no expresados ni comprendidos en otra parte",
+        "page": 58
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN III: GRASAS Y ACEITES, ANIMALES, VEGETALES O DE ORIGEN MICROBIANO, Y PRODUCTOS DE SU DESDOBLAMIENTO; GRASAS ALIMENTICIAS ELABORADAS; CERAS DE ORIGEN ANIMAL O VEGETAL",
+    "start_page": 59,
+    "chapters": [
+      {
+        "number": 15,
+        "name": "Grasas y aceites, animales, vegetales o de origen microbiano, y productos de su desdoblamiento; grasas alimenticias elaboradas; ceras de origen animal o vegetal",
+        "page": 60
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN IV: PRODUCTOS DE LAS INDUSTRIAS ALIMENTARIAS; BEBIDAS, LÍQUIDOS ALCOHÓLICOS Y VINAGRE; TABACO Y SUCEDÁNEOS DEL TABACO, ELABORADOS; PRODUCTOS, INCLUSO CON NICOTINA, DESTINADOS PARA LA INHALACIÓN SIN COMBUSTIÓN; OTROS PRODUCTOS QUE CONTENGAN NICOTINA DESTINADOS PARA LA ABSORCIÓN DE NICOTINA EN EL CUERPO HUMANO",
+    "start_page": 65,
+    "chapters": [
+      {
+        "number": 16,
+        "name": "Preparaciones de carne, pescado, crustáceos, moluscos o demás invertebrados acuáticos, o de insectos",
+        "page": 66
+      },
+      {
+        "number": 17,
+        "name": "Azúcares y artículos de confitería",
+        "page": 69
+      },
+      {
+        "number": 18,
+        "name": "Cacao y sus preparaciones",
+        "page": 71
+      },
+      {
+        "number": 19,
+        "name": "Preparaciones a base de cereales, harina, almidón, fécula o leche; productos de pastelería",
+        "page": 72
+      },
+      {
+        "number": 20,
+        "name": "Preparaciones de hortalizas, frutas u otros frutos o demás partes de plantas",
+        "page": 75
+      },
+      {
+        "number": 21,
+        "name": "Preparaciones alimenticias diversas",
+        "page": 80
+      },
+      {
+        "number": 22,
+        "name": "Bebidas, líquidos alcohólicos y vinagre",
+        "page": 83
+      },
+      {
+        "number": 23,
+        "name": "Residuos y desperdicios de las industrias alimentarias; alimentos preparados para animales",
+        "page": 86
+      },
+      {
+        "number": 24,
+        "name": "Tabaco y sucedáneos del tabaco elaborados; productos, incluso con nicotina, destinados para la inhalación sin combustión; otros productos que contengan nicotina destinados para la absorción de nicotina en el cuerpo humano",
+        "page": 90
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN V: PRODUCTOS MINERALES",
+    "start_page": 92,
+    "chapters": [
+      {
+        "number": 25,
+        "name": "Sal; azufre; tierras y piedras; yesos, cales y cementos",
+        "page": 93
+      },
+      {
+        "number": 26,
+        "name": "Minerales metalíferos, escorias y cenizas",
+        "page": 98
+      },
+      {
+        "number": 27,
+        "name": "Combustibles minerales, aceites minerales y productos de su destilación; materias bituminosas; ceras minerales",
+        "page": 101
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN VI: PRODUCTOS DE LAS INDUSTRIAS QUÍMICAS O DE LAS INDUSTRIAS CONEXAS",
+    "start_page": 107,
+    "chapters": [
+      {
+        "number": 28,
+        "name": "Productos químicos inorgánicos; compuestos inorgánicos u orgánicos de metal precioso, de elementos radiactivos, de metales de las tierras raras o de isótopos",
+        "page": 108
+      },
+      {
+        "number": 29,
+        "name": "Productos químicos orgánicos",
+        "page": 118
+      },
+      {
+        "number": 30,
+        "name": "Productos farmacéuticos",
+        "page": 141
+      },
+      {
+        "number": 31,
+        "name": "Abonos",
+        "page": 148
+      },
+      {
+        "number": 32,
+        "name": "Extractos curtientes o tintóreos; taninos y sus derivados; pigmentos y demás materias colorantes; pinturas y barnices; mástiques; tintas",
+        "page": 151
+      },
+      {
+        "number": 33,
+        "name": "Aceites esenciales y resinoides; preparaciones de perfumería, de tocador o de cosmética",
+        "page": 157
+      },
+      {
+        "number": 34,
+        "name": "Jabón, agentes de superficie orgánicos, preparaciones para lavar, preparaciones lubricantes, ceras artificiales, ceras preparadas, productos de limpieza, velas y artículos similares, pastas para modelar, \"ceras para odontología\" y preparaciones para odontología a base de yeso fraguable",
+        "page": 160
+      },
+      {
+        "number": 35,
+        "name": "Materias albuminoideas; productos a base de almidón o de fécula modificados; colas; enzimas",
+        "page": 164
+      },
+      {
+        "number": 36,
+        "name": "Pólvoras y explosivos; artículos de pirotecnia; fósforos (cerillas); aleaciones pirofóricas; materias inflamables",
+        "page": 166
+      },
+      {
+        "number": 37,
+        "name": "Productos fotográficos o cinematográficos",
+        "page": 168
+      },
+      {
+        "number": 38,
+        "name": "Productos diversos de las industrias químicas",
+        "page": 171
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN VII: PLÁSTICO Y SUS MANUFACTURAS; CAUCHO Y SUS MANUFACTURAS",
+    "start_page": 184,
+    "chapters": [
+      {
+        "number": 39,
+        "name": "Plástico y sus manufacturas",
+        "page": 185
+      },
+      {
+        "number": 40,
+        "name": "Caucho y sus manufacturas",
+        "page": 199
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN VIII: PIELES, CUEROS, PELETERÍA Y MANUFACTURAS DE ESTAS MATERIAS; ARTÍCULOS DE TALABARTERÍA O GUARNICIONERÍA; ARTÍCULOS DE VIAJE, BOLSOS DE MANO (CARTERAS) Y CONTINENTES SIMILARES; MANUFACTURAS DE TRIPA",
+    "start_page": 206,
+    "chapters": [
+      {
+        "number": 41,
+        "name": "Pieles (excepto la peletería) y cueros",
+        "page": 207
+      },
+      {
+        "number": 42,
+        "name": "Manufacturas de cuero; artículos de talabartería y guarnicionería, artículos de viaje, bolsos de mano (carteras) y continentes similares; manufacturas de tripa",
+        "page": 211
+      },
+      {
+        "number": 43,
+        "name": "Peletería y confecciones de peletería; peletería facticia o artificial",
+        "page": 214
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN IX: MADERA, CARBÓN VEGETAL Y MANUFACTURAS DE MADERA; CORCHO Y SUS MANUFACTURAS; MANUFACTURAS DE ESPARTERÍA O CESTERÍA",
+    "start_page": 216,
+    "chapters": [
+      {
+        "number": 44,
+        "name": "Madera, carbón vegetal y manufacturas de madera",
+        "page": 217
+      },
+      {
+        "number": 45,
+        "name": "Corcho y sus manufacturas",
+        "page": 227
+      },
+      {
+        "number": 46,
+        "name": "Manufacturas de espartería o cestería",
+        "page": 228
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN X: PASTA DE MADERA O DE LAS DEMÁS MATERIAS FIBROSAS CELULÓSICAS; PAPEL O CARTÓN PARA RECICLAR (DESPERDICIOS O DESECHOS); PAPEL O CARTÓN Y SUS APLICACIONES",
+    "start_page": 230,
+    "chapters": [
+      {
+        "number": 47,
+        "name": "Pasta de madera o de las demás materias fibrosas celulósicas; papel o cartón para reciclar (desperdicios y desechos)",
+        "page": 231
+      },
+      {
+        "number": 48,
+        "name": "Papel y cartón; manufacturas de pasta de celulosa, de papel o cartón",
+        "page": 233
+      },
+      {
+        "number": 49,
+        "name": "Productos editoriales, de la prensa y de las demás industrias gráficas; textos manuscritos o mecanografiados y planos",
+        "page": 251
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XI: MATERIAS TEXTILES Y SUS MANUFACTURAS",
+    "start_page": 254,
+    "chapters": [
+      {
+        "number": 50,
+        "name": "Seda",
+        "page": 261
+      },
+      {
+        "number": 51,
+        "name": "Lana y pelo fino u ordinario; hilados y tejidos de crin",
+        "page": 262
+      },
+      {
+        "number": 52,
+        "name": "Algodón",
+        "page": 264
+      },
+      {
+        "number": 53,
+        "name": "Las demás fibras textiles vegetales; hilados de papel y tejidos de hilados de papel",
+        "page": 270
+      },
+      {
+        "number": 54,
+        "name": "Filamentos sintéticos o artificiales; tiras y formas similares de materia textil sintética o artificial",
+        "page": 272
+      },
+      {
+        "number": 55,
+        "name": "Fibras sintéticas o artificiales discontinuas",
+        "page": 276
+      },
+      {
+        "number": 56,
+        "name": "Guata, fieltro y tela sin tejer; hilados especiales; cordeles, cuerdas y cordajes; artículos de cordelería",
+        "page": 282
+      },
+      {
+        "number": 57,
+        "name": "Alfombras y demás revestimientos para el suelo, de materia textil",
+        "page": 285
+      },
+      {
+        "number": 58,
+        "name": "Tejidos especiales; superficies textiles con mechón insertado; encajes; tapicería; pasamanería; bordados",
+        "page": 287
+      },
+      {
+        "number": 59,
+        "name": "Telas impregnadas, recubiertas, revestidas o estratificadas; artículos técnicos de materia textil",
+        "page": 290
+      },
+      {
+        "number": 60,
+        "name": "Tejidos de punto",
+        "page": 295
+      },
+      {
+        "number": 61,
+        "name": "Prendas y complementos (accesorios), de vestir, de punto",
+        "page": 298
+      },
+      {
+        "number": 62,
+        "name": "Prendas y complementos (accesorios), de vestir, excepto los de punto",
+        "page": 305
+      },
+      {
+        "number": 63,
+        "name": "Los demás artículos textiles confeccionados; juegos; prendería y trapos",
+        "page": 312
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XII: CALZADO, SOMBREROS Y DEMÁS TOCADOS, PARAGUAS, QUITASOLES, BASTONES, LÁTIGOS, FUSTAS, Y SUS PARTES; PLUMAS PREPARADAS Y ARTÍCULOS DE PLUMAS; FLORES ARTIFICIALES; MANUFACTURAS DE CABELLO",
+    "start_page": 316,
+    "chapters": [
+      {
+        "number": 64,
+        "name": "Calzado, polainas y artículos análogos; partes de estos artículos",
+        "page": 317
+      },
+      {
+        "number": 65,
+        "name": "Sombreros, demás tocados y sus partes",
+        "page": 320
+      },
+      {
+        "number": 66,
+        "name": "Paraguas, sombrillas, quitasoles, bastones, bastones asiento, látigos, fustas, y sus partes",
+        "page": 321
+      },
+      {
+        "number": 67,
+        "name": "Plumas y plumón preparados y artículos de plumas o plumón; flores artificiales; manufacturas de cabello",
+        "page": 322
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XIII: MANUFACTURAS DE PIEDRA, YESO FRAGUABLE, CEMENTO, AMIANTO (ASBESTO), MICA O MATERIAS ANÁLOGAS; PRODUCTOS CERÁMICOS; VIDRIO Y MANUFACTURAS DE VIDRIO",
+    "start_page": 324,
+    "chapters": [
+      {
+        "number": 68,
+        "name": "Manufacturas de piedra, yeso fraguable, cemento, amianto (asbesto), mica o materias análogas",
+        "page": 325
+      },
+      {
+        "number": 69,
+        "name": "Productos cerámicos",
+        "page": 330
+      },
+      {
+        "number": 70,
+        "name": "Vidrio y sus manufacturas",
+        "page": 334
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XIV: PERLAS FINAS (NATURALES) O CULTIVADAS, PIEDRAS PRECIOSAS O SEMIPRECIOSAS, METALES PRECIOSOS, CHAPADOS DE METAL PRECIOSO (PLAQUÉ) Y MANUFACTURAS DE ESTAS MATERIAS; BISUTERÍA; MONEDAS",
+    "start_page": 340,
+    "chapters": [
+      {
+        "number": 71,
+        "name": "Perlas finas (naturales) o cultivadas, piedras preciosas o semipreciosas, metales preciosos, chapados de metal precioso (plaqué) y manufacturas de estas materias; bisutería; monedas",
+        "page": 341
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XV: METALES COMUNES Y MANUFACTURAS DE ESTOS METALES",
+    "start_page": 347,
+    "chapters": [
+      {
+        "number": 72,
+        "name": "Fundición, hierro y acero",
+        "page": 351
+      },
+      {
+        "number": 73,
+        "name": "Manufacturas de fundición, hierro o acero",
+        "page": 365
+      },
+      {
+        "number": 74,
+        "name": "Cobre y sus manufacturas",
+        "page": 372
+      },
+      {
+        "number": 75,
+        "name": "Níquel y sus manufacturas",
+        "page": 377
+      },
+      {
+        "number": 76,
+        "name": "Aluminio y sus manufacturas",
+        "page": 379
+      },
+      {
+        "number": 77,
+        "name": "(Reservado para una futura utilización del Sistema Armonizado)",
+        "page": 383
+      },
+      {
+        "number": 78,
+        "name": "Plomo y sus manufacturas",
+        "page": 384
+      },
+      {
+        "number": 79,
+        "name": "Cinc y sus manufacturas",
+        "page": 386
+      },
+      {
+        "number": 80,
+        "name": "Estaño y sus manufacturas",
+        "page": 387
+      },
+      {
+        "number": 81,
+        "name": "Los demás metales comunes; cermets; manufacturas de estas materias",
+        "page": 388
+      },
+      {
+        "number": 82,
+        "name": "Herramientas y útiles, artículos de cuchillería y cubiertos de mesa, de metal común; partes de estos artículos, de metal común",
+        "page": 391
+      },
+      {
+        "number": 83,
+        "name": "Manufacturas diversas de metal común",
+        "page": 396
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XVI: MÁQUINAS Y APARATOS, MATERIAL ELÉCTRICO Y SUS PARTES; APARATOS DE GRABACIÓN O REPRODUCCIÓN DE SONIDO, APARATOS DE GRABACIÓN O REPRODUCCIÓN DE IMAGEN Y SONIDO EN TELEVISIÓN, Y LAS PARTES Y ACCESORIOS DE ESTOS APARATOS",
+    "start_page": 399,
+    "chapters": [
+      {
+        "number": 84,
+        "name": "Reactores nucleares, calderas, máquinas, aparatos y artefactos mecánicos; partes de estas máquinas o aparatos",
+        "page": 401
+      },
+      {
+        "number": 85,
+        "name": "Máquinas, aparatos y material eléctrico, y sus partes; aparatos de grabación o reproducción de sonido, aparatos de grabación o reproducción de imagen y sonido en televisión, y las partes y accesorios de estos aparatos",
+        "page": 432
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XVII: MATERIAL DE TRANSPORTE",
+    "start_page": 459,
+    "chapters": [
+      {
+        "number": 86,
+        "name": "Vehículos y material para vías férreas o similares, y sus partes; aparatos mecánicos (incluso electromecánicos) de señalización para vías de comunicación",
+        "page": 461
+      },
+      {
+        "number": 87,
+        "name": "Vehículos automóviles, tractores, velocípedos y demás vehículos terrestres; sus partes y accesorios",
+        "page": 463
+      },
+      {
+        "number": 88,
+        "name": "Aeronaves, vehículos espaciales, y sus partes",
+        "page": 484
+      },
+      {
+        "number": 89,
+        "name": "Barcos y demás artefactos flotantes",
+        "page": 487
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XVIII: INSTRUMENTOS Y APARATOS DE ÓPTICA, FOTOGRAFÍA O CINEMATOGRAFÍA, DE MEDIDA, CONTROL O PRECISIÓN; INSTRUMENTOS Y APARATOS MEDICOQUIRÚRGICOS; APARATOS DE RELOJERÍA; INSTRUMENTOS MUSICALES; PARTES Y ACCESORIOS DE ESTOS INSTRUMENTOS O APARATOS",
+    "start_page": 490,
+    "chapters": [
+      {
+        "number": 90,
+        "name": "Instrumentos y aparatos de óptica, fotografía o cinematografía, de medida, control o precisión; instrumentos y aparatos medicoquirúrgicos; partes y accesorios de estos instrumentos o aparatos",
+        "page": 491
+      },
+      {
+        "number": 91,
+        "name": "Aparatos de relojería y sus partes",
+        "page": 501
+      },
+      {
+        "number": 92,
+        "name": "Instrumentos musicales; sus partes y accesorios",
+        "page": 504
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XIX: ARMAS, MUNICIONES, Y SUS PARTES Y ACCESORIOS",
+    "start_page": 506,
+    "chapters": [
+      {
+        "number": 93,
+        "name": "Armas, municiones, y sus partes y accesorios",
+        "page": 507
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XX: MERCANCÍAS Y PRODUCTOS DIVERSOS",
+    "start_page": 509,
+    "chapters": [
+      {
+        "number": 94,
+        "name": "Muebles; mobiliario medicoquirúrgico; artículos de cama y similares; luminarias y aparatos de alumbrado no expresados ni comprendidos en otra parte; anuncios, letreros y placas indicadoras luminosos y artículos similares; construcciones prefabricadas",
+        "page": 510
+      },
+      {
+        "number": 95,
+        "name": "Juguetes, juegos y artículos para recreo o deporte; sus partes y accesorios",
+        "page": 515
+      },
+      {
+        "number": 96,
+        "name": "Manufacturas diversas",
+        "page": 520
+      }
+    ]
+  },
+  {
+    "name": "SECCIÓN XXI: OBJETOS DE ARTE O COLECCIÓN Y ANTIGÜEDADES",
+    "start_page": 526,
+    "chapters": [
+      {
+        "number": 97,
+        "name": "Objetos de arte o colección y antigüedades",
+        "page": 527
+      },
+      {
+        "number": 98,
+        "name": "Usos especiales",
+        "page": 530
+      },
+      {
+        "number": 99,
+        "name": "Menaje de casa, Mercancías de tratamiento especial",
+        "page": 531
+      }
+    ]
+  }
+]
