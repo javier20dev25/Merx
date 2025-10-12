@@ -534,3 +534,19 @@ body {
   font-style: italic;
 }
 
+.contact-link {
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin: 0 0 15px 0;
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
