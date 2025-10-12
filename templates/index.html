@@ -13,11 +13,14 @@
   <!-- Contenedor Principal para toda la interfaz -->
   <div id="main-container" class="container">
     
-    <h1 class="site-title">Merx</h1>
+    <h1 id="logo" class="site-title">Merx</h1>
 
     <p id="info-text" class="info-text hidden">Pega aqui las partidas y notas de seccion o capitulo</p>
     
-    <textarea id="main-textarea" placeholder="Describe tu mercancía: qué es, para qué sirve, cómo funciona, de qué está constituida y su finalidad comercial." class="neumorphic-textarea"></textarea>
+    <div class="mercancia-tip">
+      <strong>Tip:</strong> Describe la mercancía empezando por: qué es, para qué sirve, cómo funciona, composición y finalidad comercial.
+    </div>
+    <textarea id="main-textarea" placeholder="Describe tu mercancía aquí..." class="neumorphic-textarea"></textarea>
     <div id="result-container" class="neumorphic-textarea hidden"></div>
     
     <div style="display:flex; gap:30px; align-items: center;">

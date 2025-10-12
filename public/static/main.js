@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionData.description = mainTextarea.value;
         if (!sessionData.description.trim()) return;
 
+        const logo = document.getElementById('logo');
+        logo.classList.add('loading-animation');
+
         transitionElements(mainTextarea, resultContainer);
         resultContainer.innerHTML = `<div class="loader"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div>`;
         rightButton.disabled = true;
@@ -60,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error en findSacLocation:', error);
         } finally {
             rightButton.disabled = false;
+            logo.classList.remove('loading-animation');
         }
     }
 
@@ -70,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function generateReport() {
         const notes = mainTextarea.value;
+        const logo = document.getElementById('logo');
 
         mainContainer.classList.add('fade-out');
         mainContainer.addEventListener('animationend', () => {
@@ -79,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const reportWrapper = document.getElementById('report-content-wrapper');
             reportWrapper.innerHTML = `<div class="loader"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div>`;
             reportView.classList.add('fade-in');
+            logo.classList.add('loading-animation'); // Iniciar animación aquí
         }, { once: true });
 
         try {
@@ -150,6 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error en generateReport:', error);
             showError('Ocurrió un error inesperado al generar el informe.');
+        } finally {
+            logo.classList.remove('loading-animation'); // Detener animación al final
         }
     }
 
