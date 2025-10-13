@@ -252,13 +252,17 @@ function reportToUI(report) {
         if (fundamentoLegal.applied_rules && fundamentoLegal.applied_rules.length > 0) {
             parts.push(`\n**Reglas Generales Aplicadas:**`);
             fundamentoLegal.applied_rules.forEach(rule => {
-                parts.push(`- ${rule.rule_id}: ${rule.descripcion}`);
+                if (rule && rule.rule_id && rule.descripcion) {
+                    parts.push(`- ${rule.rule_id}: ${rule.descripcion}`);
+                }
             });
         }
         if (fundamentoLegal.notes_applied && fundamentoLegal.notes_applied.length > 0) {
             parts.push(`\n**Notas de Sección/Capítulo Aplicadas:**`);
             fundamentoLegal.notes_applied.forEach(note => {
-                parts.push(`- ${note.note_id}: ${note.descripcion}`);
+                if (note && note.note_id && note.descripcion) {
+                    parts.push(`- ${note.note_id}: ${note.descripcion}`);
+                }
             });
         }
     }
@@ -399,37 +403,7 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicion
     }
 });
 
-app.post('/api/generate-report', async (req, res) => {
-  try {
-    const { description, location, notes } = req.body || {};
-    if (!description) return res.status(400).json({ ok: false, error: 'Falta campo description' });
-    
-    const finalReport = await generateReportFlow(description, location, notes);
-    const userView = classificationToUI(finalReport);
 
-    if (process.env.NODE_ENV === 'production') {
-      // En producción, devolvemos un objeto simple con el texto para la UI y el reporte completo
-      return res.status(200).json({ 
-        ok: true, 
-        ui_text: userView.ui_text, 
-        report: finalReport 
-      });
-    } else {
-      // En desarrollo, incluimos todo para depuración
-      return res.status(200).json({ 
-        ok: true, 
-        ui_text: userView.ui_text, 
-        ui: userView.ui_struct,
-        report: finalReport, 
-        debug_raw: finalReport 
-      });
-    }
-
-  } catch (err) {
-    console.error('Error en /api/generate-report:', err.stack || err);
-    return res.status(500).json({ ok: false, error: 'Error interno generando el informe.', message: err.message });
-  }
-});
 
 app.post('/api/generate-report', async (req, res) => {
   try {
