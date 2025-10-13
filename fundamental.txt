@@ -37,3 +37,18 @@ El proceso de depuración para estabilizar la aplicación `merx` en producción 
 *   La pestaña **"Logs"** en tu dashboard de Vercel es tu herramienta de diagnóstico más importante. Revísala siempre primero.
 
 ---
+
+### **Reglas Derivadas de Errores de Implementación (Octubre 2025)**
+
+**1. Sincronización HTML/JS es Crítica:**
+*   Al renombrar un `id` o `class` en un archivo HTML, es **obligatorio** buscar y actualizar todas sus referencias en los archivos JavaScript (`.js`) que dependen de él. Un desfase aquí romperá toda la interactividad de la página, a menudo de forma silenciosa (sin errores en consola).
+
+**2. Programación Defensiva con APIs (Especialmente IA):**
+*   Nunca confíes ciegamente en la estructura de datos de una API. El código del frontend **debe** tener lógica para validar la respuesta y manejar casos donde los campos esperados (`section`, `chapter`, etc.) no vengan o sean nulos. No asumir el formato de la respuesta previene que la UI muestre JSON crudo o se rompa.
+*   Para obtener datos consistentes (como nombres de secciones), es más robusto que la IA devuelva un **ID** y buscar el nombre en un archivo local (`.json`), en lugar de pedirle a la IA que devuelva un nombre formateado.
+
+**3. Una Función para Una Tarea:**
+*   No reutilices una función de formato (ej. `classificationToUI`) para una estructura de datos para la que no fue diseñada. Si los datos del "paso 1" y del "informe final" son diferentes, cada uno debe tener su propia función de formato (ej: `reportToUI`).
+
+**4. Cuidado con los Tipos de Datos:**
+*   Al comparar datos de distintas fuentes (ej: un número de un `.json` local y un valor de una IA que podría ser texto), evita la comparación estricta (`===`). Usa comparación flexible (`==`) o convierte explícitamente el tipo (`parseInt()`) para prevenir errores de tipo de dato que son difíciles de depurar.
