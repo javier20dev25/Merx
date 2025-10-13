@@ -1,29 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Elementos del DOM ---
     const infoText = document.getElementById('info-text');
     const mainTextarea = document.getElementById('main-textarea');
-    const resultCard = document.getElementById('result-card'); // FIX: Correct ID
+    const textareaContainer = document.querySelector('.textarea-container'); // Contenedor del textarea
+    const resultCard = document.getElementById('result-card');
     const leftButton = document.getElementById('left-button');
     const rightButton = document.getElementById('right-button');
     const mainContainer = document.getElementById('main-container');
     const reportView = document.getElementById('report-view');
     const resetButton = document.getElementById('reset-button');
-    const pasteButton = document.getElementById('paste-button'); // Nuevo botón
+    const pasteButton = document.getElementById('paste-button');
 
     const leftButtonContent = leftButton.querySelector('span');
     const rightButtonContent = rightButton.querySelector('span');
-    const pasteButtonContent = pasteButton.querySelector('span'); // Span del nuevo botón
+    const pasteButtonContent = pasteButton.querySelector('span');
 
+    // --- Iconos SVG ---
     const trashIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>`;
     const backIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>`;
-    const clipboardIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-paste"><path d="M10 2v4a2 2 0 0 1-2 2H4"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8"/><rect width="8" height="4" x="8" y="2" rx="1"/></svg>`; // Icono de portapapeles
-
-    // Inyectar icono de portapapeles
+    const clipboardIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-paste"><path d="M10 2v4a2 2 0 0 1-2 2H4"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8"/><rect width="8" height="4" x="8" y="2" rx="1"/></svg>`;
     pasteButtonContent.innerHTML = clipboardIcon;
 
+    // --- Estado de la App ---
     let currentState = -1;
     let subState = 0;
     let sessionData = { description: '', location: '' };
 
+    // --- Funciones de UI ---
     function animateTextChange(element, newText) {
         if (element.innerHTML === newText) return;
         element.classList.add('fade-out');
@@ -35,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function transitionElements(hideEl, showEl) {
-        if (!hideEl || !showEl) return; // Safety check
+        if (!hideEl || !showEl) return;
         hideEl.classList.add('fade-out');
         hideEl.addEventListener('animationend', () => {
             hideEl.classList.add('hidden');
@@ -45,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { once: true });
     }
 
+    // --- Lógica Principal ---
     async function findSacLocation() {
         sessionData.description = mainTextarea.value;
         if (!sessionData.description.trim()) return;
@@ -52,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const logo = document.getElementById('logo');
         logo.classList.add('loading-animation');
         
-        transitionElements(mainTextarea, resultCard);
-        resultCard.innerHTML = ''; // Limpiar contenedor
+        transitionElements(textareaContainer, resultCard); // FIX: Ocultar el contenedor del textarea
+        resultCard.innerHTML = '';
         rightButton.disabled = true;
 
         try {
@@ -82,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             resultCard.innerText = uiText;
-
             sessionData.location = uiText;
             animateTextChange(rightButtonContent, "Siguiente");
             subState = 1;
@@ -101,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reportWrapper.innerHTML = `<p class="report-final-text" style="color: #c0392b;">${message}</p>`;
     }
 
-async function generateReport() {
+    async function generateReport() {
         const notes = mainTextarea.value;
         const logo = document.getElementById('logo');
 
@@ -111,11 +114,9 @@ async function generateReport() {
             mainContainer.classList.remove('fade-out');
             
             const reportHeader = reportView.querySelector('.report-header');
-            const mainLogo = document.getElementById('logo');
-            if (reportHeader && mainLogo) {
-                reportHeader.innerHTML = '';
-                const clonedLogo = mainLogo.cloneNode(true);
-                reportHeader.appendChild(clonedLogo);
+            if (reportHeader) {
+                // FIX: Crear el logo directamente para evitar problemas de clonación
+                reportHeader.innerHTML = '<h1 class="site-title">Merx</h1>';
             }
 
             reportView.classList.remove('hidden');
@@ -129,7 +130,6 @@ async function generateReport() {
             const payload = { 
                 description: sessionData.description, 
                 notes: notes,
-                // Estos son campos nuevos para el informe completo, pueden estar vacíos
                 origen: 'No especificado', 
                 perfilImportador: 'General' 
             };
@@ -149,9 +149,8 @@ async function generateReport() {
 
             const report = data.report;
             const reportWrapper = document.getElementById('report-content-wrapper');
-            reportWrapper.innerHTML = ''; // Limpiar el loader
+            reportWrapper.innerHTML = '';
 
-            // Helper para crear las tarjetas
             const createCard = (title, content) => {
                 if (!content) return;
                 const card = document.createElement('div');
@@ -160,9 +159,8 @@ async function generateReport() {
                 reportWrapper.appendChild(card);
             };
 
-            // 1. Tarjeta de Clasificación
             if (report.classification?.clasificacionPropuesta) {
-                const { codigo, descripcion } = report.classification.clasificacionPropuesta;
+                const {codigo, descripcion} = report.classification.clasificacionPropuesta;
                 const { scoreFiabilidad, argumentoMerciologico } = report.classification;
                 const content = 
                     `<p><strong>Código Propuesto:</strong> ${codigo || 'N/A'}</p>` +
@@ -172,7 +170,6 @@ async function generateReport() {
                 createCard('1. Análisis de Clasificación Arancelaria', content);
             }
 
-            // 2. Tarjeta de Fundamento Legal
             if (report.legal && !report.legal.error) {
                 const { applied_rules, notes_applied, jurisprudencia } = report.legal.fundamentoLegal;
                 let content = '';
@@ -182,7 +179,6 @@ async function generateReport() {
                 createCard('2. Fundamento Legal y Jurisprudencia', content);
             }
 
-            // 3. Tarjeta de Análisis Regulatorio
             if (report.regulatory && !report.regulatory.error) {
                 const { institucionPrincipal, requisitos } = report.regulatory.analisisRegulatorio;
                 if (requisitos?.length > 0) {
@@ -191,7 +187,6 @@ async function generateReport() {
                 }
             }
 
-            // 4. Tarjeta de Riesgo de Mercancía
             if (report.risk && !report.risk.error) {
                 const { analisisRiesgoMercancia } = report.risk;
                 if (analisisRiesgoMercancia?.length > 0) {
@@ -200,7 +195,6 @@ async function generateReport() {
                 }
             }
 
-            // 5. Tarjeta de Optimización Arancelaria
             if (report.tariff && !report.tariff.error) {
                 const { regimenSugerido, cumpleOrigenPotencial, justificacionOrigen, comparativaArancelaria, recomendacionEstrategica } = report.tariff.analisisOptimizacion;
                 if (regimenSugerido) {
@@ -231,22 +225,22 @@ async function generateReport() {
             mainContainer.classList.remove('hidden');
             reportView.classList.add('hidden');
             infoText.classList.add('hidden');
+            textareaContainer.classList.remove('hidden'); // FIX: Mostrar contenedor
             mainTextarea.classList.remove('tall');
             mainTextarea.placeholder = "Describe tu mercancía aquí";
             mainTextarea.value = "";
-            resultCard.classList.add('hidden'); // FIX: Correct variable
-            mainTextarea.classList.remove('hidden');
+            resultCard.classList.add('hidden');
             animateTextChange(leftButtonContent, trashIcon);
             animateTextChange(rightButtonContent, "Buscar Ubicacion");
         } else if (state === 1) {
             mainContainer.classList.remove('hidden');
             reportView.classList.add('hidden');
             infoText.classList.remove('hidden');
+            textareaContainer.classList.remove('hidden'); // FIX: Mostrar contenedor
             mainTextarea.classList.add('tall');
             mainTextarea.value = '';
             mainTextarea.placeholder = "Añade notas para el informe...";
-            resultCard.classList.add('hidden'); // FIX: Correct variable
-            mainTextarea.classList.remove('hidden');
+            resultCard.classList.add('hidden');
             animateTextChange(leftButtonContent, backIcon);
             animateTextChange(rightButtonContent, "Generar informe");
         }
@@ -265,7 +259,7 @@ async function generateReport() {
         if (currentState === 0) {
             if (subState === 0) mainTextarea.value = '';
             else {
-                transitionElements(resultCard, mainTextarea); // FIX: Correct variable
+                transitionElements(resultCard, textareaContainer); // FIX: Usar el contenedor
                 animateTextChange(rightButtonContent, "Buscar Ubicacion");
                 subState = 0;
             }
@@ -292,7 +286,6 @@ async function generateReport() {
             }
         } catch (err) {
             console.error('Error al pegar desde el portapapeles:', err);
-            // Opcional: mostrar un pequeño error al usuario
         }
     });
 
