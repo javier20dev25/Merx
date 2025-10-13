@@ -64,8 +64,8 @@ async function loadContext(filePath) {
 }
 
 async function callGemini(prompt, apiKey) {
-    const modelName = 'gemini-1.5-flash-latest';
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+    const modelName = 'gemini-2.5-flash-lite'; // MODELO CORREGIDO Y FIJADO
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`; // API v1 CORREGIDA
     
     const response = await fetchWithTimeout(geminiUrl, {
         method: 'POST',
@@ -75,7 +75,7 @@ async function callGemini(prompt, apiKey) {
             generationConfig: {
                 temperature: 0.1,
                 maxOutputTokens: 8192,
-                response_mime_type: "application/json",
+                // response_mime_type: "application/json", // Eliminado para compatibilidad con v1
             }
         })
     });
