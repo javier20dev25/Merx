@@ -8,6 +8,7 @@ INSTRUCCIÓN: Para la siguiente descripción de mercancía, realiza un análisis
 2.  Si la mercancía es una mezcla, un producto compuesto, un juego o un artículo incompleto, activa el razonamiento de las RGI 2 y 3 que se te ha proporcionado en el contexto.
 3.  Determina el "Carácter Esencial" basándote primero en la FUNCIÓN/USO, y solo secundariamente en el PESO/VOLUMEN/VALOR.
 4.  Justifica tu razonamiento en el campo "argumentoMerciologico".
+5.  **REQUISITO OBLIGATORIO:** Dentro de tu argumento, debes citar textualmente la Nota Legal (de Sección o Capítulo) que consideres más relevante para la clasificación.
 
 DESCRIPCIÓN DE LA MERCANCÍA:
 """{DESCRIPTION}"""
@@ -18,6 +19,7 @@ NOTAS ADICIONALES DEL USUARIO:
 REGLAS DE SALIDA:
 1.  Devuelve ÚNICAMENTE un objeto JSON válido.
 2.  No inventes información. Basa tu argumento en el contexto y la descripción.
+3.  El campo `scoreFiabilidad` debe reflejar la complejidad del análisis (ej: 1.0 para RGI 1 simple, 0.8 para un análisis complejo de RGI 3b).
 
 SALIDA JSON:
 {
@@ -26,5 +28,5 @@ SALIDA JSON:
     "descripcion": "<descripción de la partida arancelaria>"
   },
   "scoreFiabilidad": <número de 0.0 a 1.0>,
-  "argumentoMerciologico": "<justificación técnica detallada basada en tu razonamiento y el contexto de las RGI>"
+  "argumentoMerciologico": "<justificación técnica detallada incluyendo la CITA TEXTUAL de la Nota Legal relevante>"
 }

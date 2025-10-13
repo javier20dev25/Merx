@@ -106,7 +106,11 @@ async function callClassification(apiKey, description, notes) {
 async function callLegalBasis(apiKey, codigo) {
     const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_base_legal.txt'), 'utf-8');
     const legalContext = `${await loadContext('jurisprudencia_tata_dga.txt')}\n\n${await loadContext('contexto_legal_sac.txt')}`;
-    const prompt = promptTemplate.replace('{LEGAL_CONTEXT}', legalContext).replace('{CODIGO}', codigo);
+    const notesTypeContext = await loadContext('tipos-de-notas.json');
+    const prompt = promptTemplate
+        .replace('{LEGAL_CONTEXT}', legalContext)
+        .replace('{NOTES_TYPE_CONTEXT}', notesTypeContext)
+        .replace('{CODIGO}', codigo);
     return callGemini(prompt, apiKey);
 }
 
@@ -166,8 +170,8 @@ function reportToUI(report) {
     const addSection = (title, content) => parts.push(`\n### ${title}\n${content}`);
 
     if (report.classification?.clasificacionPropuesta) {
-        const {codigo, descripcion} = report.classification.clasificacionPropuesta;
-        const {scoreFiabilidad, argumentoMerciologico} = report.classification;
+        const { codigo, descripcion } = report.classification.clasificacionPropuesta;
+        const { scoreFiabilidad, argumentoMerciologico } = report.classification;
         addSection('1. Análisis de Clasificación Arancelaria', 
             `**Código Propuesto:** ${codigo || 'N/A'}\n` +
             `**Descripción:** ${descripcion || 'N/A'}\n` +
@@ -177,16 +181,16 @@ function reportToUI(report) {
     }
 
     if (report.legal && !report.legal.error) {
-        const {applied_rules, notes_applied, jurisprudencia} = report.legal.fundamentoLegal;
+        const { applied_rules, notes_applied, jurisprudencia } = report.legal.fundamentoLegal;
         let content = '';
         if (applied_rules?.length > 0) content += '**Reglas Generales Aplicadas:**\n' + applied_rules.map(r => `- **${r.rule_id}:** ${r.descripcion}`).join('\n') + '\n';
-        if (notes_applied?.length > 0) content += '**Notas de Sección/Capítulo:**\n' + notes_applied.map(n => `- **${n.note_id}:** ${n.descripcion}`).join('\n') + '\n';
+        if (notes_applied?.length > 0) content += '**Notas de Sección/Capítulo:**\n' + notes_applied.map(n => `- **${n.note_id} (${n.tipo || 'N/A'}):** ${n.descripcion}`).join('\n') + '\n';
         if (jurisprudencia?.length > 0) content += '**Jurisprudencia Relevante (TATA):**\n' + jurisprudencia.map(j => `- **${j.case_id}:** ${j.summary}`).join('\n') + '\n';
         if(content) addSection('2. Fundamento Legal y Jurisprudencia', content);
     }
 
     if (report.regulatory && !report.regulatory.error) {
-        const {institucionPrincipal, requisitos} = report.regulatory.analisisRegulatorio;
+        const { institucionPrincipal, requisitos } = report.regulatory.analisisRegulatorio;
         if (requisitos?.length > 0) {
             let content = `**Institución Principal Sugerida:** ${institucionPrincipal || 'N/A'}\n**Requisitos y Permisos:**\n` + requisitos.map(r => `- **${r.nombre} (${r.institucion}):** ${r.detalle}`).join('\n');
             addSection('3. Análisis Regulatorio (Permisos y Barreras)', content);
@@ -194,7 +198,7 @@ function reportToUI(report) {
     }
 
     if (report.risk && !report.risk.error) {
-        const {analisisRiesgoMercancia} = report.risk;
+        const { analisisRiesgoMercancia } = report.risk;
         if (analisisRiesgoMercancia?.length > 0) {
             let content = analisisRiesgoMercancia.map(r => `**${r.riesgoIdentificado}:** ${r.justificacion}\n  *Recomendación:* ${r.recomendacion}`).join('\n\n');
             addSection('4. Análisis de Riesgo Inherente a la Mercancía', content);
@@ -202,16 +206,22 @@ function reportToUI(report) {
     }
 
     if (report.tariff && !report.tariff.error) {
-        const {regimenSugerido, cumpleOrigenPotencial, justificacionOrigen, comparativaArancelaria, recomendacionEstrategica} = report.tariff.analisisOptimizacion;
+        const { regimenSugerido, cumpleOrigenPotencial, justificacionOrigen, comparativaArancelaria, recomendacionEstrategica } = report.tariff.analisisOptimizacion;
         if (regimenSugerido) {
             let content = `**Régimen Sugerido:** ${regimenSugerido}\n` +
                           `**Cumple Origen Potencial:** ${cumpleOrigenPotencial}\n` +
                           `*Justificación:* ${justificacionOrigen}\n\n` +
-                          `**Comparativa:**\n- Arancel Normal (NMF): ${comparativaArancelaria.arancelNMF}\n- Arancel Preferencial: ${comparativaArancelaria.arancelPreferencial}\n`+ 
-                          `**Ahorro Potencial:** ${comparativaArancelaria.ahorroPotencial}\n\n` +
+                          `**Comparativa:**\n- Arancel Normal (NMF): ${comparativaArancelaria.arancelNMF}\n- Arancel Preferencial: ${comparativaArancelaria.arancelPreferencial}\n`+
+                          `**Ahorro Potencial:** ${comparativaArancelaria.ahorroPotencial}\n\n`+
                           `**Recomendación Estratégica:** ${recomendacionEstrategica}`;
             addSection('5. Análisis de Optimización Arancelaria', content);
         }
+    }
+
+    // Sección final de resumen
+    if (parts.length > 0) {
+        const summary = `El análisis sugiere la clasificación en el código ${report.classification?.clasificacionPropuesta?.codigo || '[no determinado]'}. Se identificaron ${report.regulatory?.analisisRegulatorio?.requisitos?.length || 0} requisitos regulatorios y ${report.risk?.analisisRiesgoMercancia?.length || 0} riesgos inherentes. Se recomienda ${report.tariff?.analisisOptimizacion?.recomendacionEstrategica || 'revisar la documentación para asegurar el cumplimiento'}.`;
+        addSection('### Dictamen Técnico Preliminar (No Vinculante)', summary);
     }
 
     return { ui_text: parts.join('\n') };
