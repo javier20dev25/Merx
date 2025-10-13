@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const infoText = document.getElementById('info-text');
     const mainTextarea = document.getElementById('main-textarea');
-    const resultContainer = document.getElementById('result-container');
+    const resultCard = document.getElementById('result-card'); // FIX: Correct ID
     const leftButton = document.getElementById('left-button');
     const rightButton = document.getElementById('right-button');
     const mainContainer = document.getElementById('main-container');
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function transitionElements(hideEl, showEl) {
+        if (!hideEl || !showEl) return; // Safety check
         hideEl.classList.add('fade-out');
         hideEl.addEventListener('animationend', () => {
             hideEl.classList.add('hidden');
@@ -44,44 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const logo = document.getElementById('logo');
         logo.classList.add('loading-animation');
-
-        transitionElements(mainTextarea, resultContainer);
-        resultContainer.innerHTML = `<p class="result-text"></p>`; // Iniciar con un párrafo vacío
-        const resultTextElement = resultContainer.querySelector('.result-text');
-        rightButton.disabled = true;
-
-        try {
-            const response = await fetch('/api/find-sac-chapter', { 
-                method: 'POST', 
-                headers: { 'Content-Type': 'application/json' }, 
-                body: JSON.stringify({ description: sessionData.description }) 
-            });
-
-            if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
-            
-            // Leer la respuesta como un stream
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-            let fullLocation = '';
-
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                const chunk = decoder.decode(value, { stream: true });
-                fullLocation += chunk;
-                // Reemplazar saltos de línea para una mejor visualización en HTML
-                resultTextElement.innerHTML = fullLocation.replace(/\n/g, '<br>');
-            }
-
-async function findSacLocation() {
-        sessionData.description = mainTextarea.value;
-        if (!sessionData.description.trim()) return;
-
-        const logo = document.getElementById('logo');
-        logo.classList.add('loading-animation');
         
-        const resultCard = document.getElementById('result-card');
-        // El ID del textarea de resultados ahora es result-card, no resultContainer
         transitionElements(mainTextarea, resultCard);
         resultCard.innerHTML = ''; // Limpiar contenedor
         rightButton.disabled = true;
@@ -90,7 +54,7 @@ async function findSacLocation() {
             const response = await fetch('/api/find-sac-chapter', { 
                 method: 'POST', 
                 headers: { 'Content-Type': 'application/json' }, 
-                body: JSON.stringify({ description: sessionData.description }) 
+                body: JSON.stringify({ description: sessionData.description })
             });
 
             if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
@@ -98,12 +62,10 @@ async function findSacLocation() {
             const data = await response.json();
 
             let uiText;
-            // Lógica de fallback robusta
             if (data.section || data.chapter) {
                 const section = data.section || '—';
                 const chapter = data.chapter || '—';
                 const rationale = data.rationale || '';
-                // Usar saltos de línea para un formato vertical
                 uiText = `Sección: ${section}\nCapítulo: ${chapter}${rationale ? '\n\nMotivo: ' + rationale : ''}`;
             } else if (data.raw_text) {
                 uiText = data.raw_text;
@@ -111,23 +73,14 @@ async function findSacLocation() {
                 uiText = 'No se encontró clasificación confiable.';
             }
 
-            // Usar innerText para seguridad y para que los \n se interpreten gracias a 'white-space: pre-wrap'
             resultCard.innerText = uiText;
 
-            sessionData.location = uiText; // Guardar el resultado para el siguiente paso
+            sessionData.location = uiText;
             animateTextChange(rightButtonContent, "Siguiente");
             subState = 1;
 
         } catch (error) {
             resultCard.innerText = 'Error al procesar la respuesta del servidor.';
-            console.error('Error en findSacLocation:', error);
-        } finally {
-            rightButton.disabled = false;
-            logo.classList.remove('loading-animation');
-        }
-    }
-        } catch (error) {
-            resultTextElement.innerHTML = `<p class="result-text" style="color: #ffb8b8;">Error al buscar</p>`;
             console.error('Error en findSacLocation:', error);
         } finally {
             rightButton.disabled = false;
@@ -172,7 +125,6 @@ async function findSacLocation() {
             }
 
             const reportWrapper = document.getElementById('report-content-wrapper');
-            // **MODIFICADO: Usar ui_text directamente**
             reportWrapper.innerHTML = `<p class="report-final-text">${data.ui_text.replace(/ — /g, '<br><br>')}</p>`;
 
         } catch (error) {
@@ -193,7 +145,7 @@ async function findSacLocation() {
             mainTextarea.classList.remove('tall');
             mainTextarea.placeholder = "Describe tu mercancía aquí";
             mainTextarea.value = "";
-            resultContainer.classList.add('hidden');
+            resultCard.classList.add('hidden'); // FIX: Correct variable
             mainTextarea.classList.remove('hidden');
             animateTextChange(leftButtonContent, trashIcon);
             animateTextChange(rightButtonContent, "Buscar Ubicacion");
@@ -204,7 +156,7 @@ async function findSacLocation() {
             mainTextarea.classList.add('tall');
             mainTextarea.value = '';
             mainTextarea.placeholder = "Añade notas para el informe...";
-            resultContainer.classList.add('hidden');
+            resultCard.classList.add('hidden'); // FIX: Correct variable
             mainTextarea.classList.remove('hidden');
             animateTextChange(leftButtonContent, backIcon);
             animateTextChange(rightButtonContent, "Generar informe");
@@ -224,7 +176,7 @@ async function findSacLocation() {
         if (currentState === 0) {
             if (subState === 0) mainTextarea.value = '';
             else {
-                transitionElements(resultContainer, mainTextarea);
+                transitionElements(resultCard, mainTextarea); // FIX: Correct variable
                 animateTextChange(rightButtonContent, "Buscar Ubicacion");
                 subState = 0;
             }

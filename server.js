@@ -378,7 +378,7 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicion
         let foundChapter = null;
 
         for (const section of sectionsData) {
-            const chapter = section.chapters.find(c => c.number === chapterNumber);
+            const chapter = section.chapters.find(c => c.number == chapterNumber);
             if (chapter) {
                 foundSection = section;
                 foundChapter = chapter;
