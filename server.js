@@ -279,11 +279,10 @@ app.post('/api/generate-report', async (req, res) => {
         if (!description) return res.status(400).json({ error: 'La descripción es obligatoria.' });
 
         const finalReport = await generateReportFlow(description, notes, origen || 'No especificado', perfilImportador || 'General');
-        const userView = reportToUI(finalReport);
 
+        // Enviar el objeto de informe completo y estructurado
         res.status(200).json({ 
             ok: true, 
-            ui_text: userView.ui_text, 
             report: finalReport
         });
     } catch (error) {

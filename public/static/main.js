@@ -7,12 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContainer = document.getElementById('main-container');
     const reportView = document.getElementById('report-view');
     const resetButton = document.getElementById('reset-button');
+    const pasteButton = document.getElementById('paste-button'); // Nuevo botón
 
     const leftButtonContent = leftButton.querySelector('span');
     const rightButtonContent = rightButton.querySelector('span');
+    const pasteButtonContent = pasteButton.querySelector('span'); // Span del nuevo botón
 
     const trashIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>`;
     const backIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>`;
+    const clipboardIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-paste"><path d="M10 2v4a2 2 0 0 1-2 2H4"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8"/><rect width="8" height="4" x="8" y="2" rx="1"/></svg>`; // Icono de portapapeles
+
+    // Inyectar icono de portapapeles
+    pasteButtonContent.innerHTML = clipboardIcon;
 
     let currentState = -1;
     let subState = 0;
@@ -95,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reportWrapper.innerHTML = `<p class="report-final-text" style="color: #c0392b;">${message}</p>`;
     }
 
-    async function generateReport() {
+async function generateReport() {
         const notes = mainTextarea.value;
         const logo = document.getElementById('logo');
 
@@ -103,6 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContainer.addEventListener('animationend', () => {
             mainContainer.classList.add('hidden');
             mainContainer.classList.remove('fade-out');
+            
+            const reportHeader = reportView.querySelector('.report-header');
+            const mainLogo = document.getElementById('logo');
+            if (reportHeader && mainLogo) {
+                reportHeader.innerHTML = '';
+                const clonedLogo = mainLogo.cloneNode(true);
+                reportHeader.appendChild(clonedLogo);
+            }
+
             reportView.classList.remove('hidden');
             const reportWrapper = document.getElementById('report-content-wrapper');
             reportWrapper.innerHTML = `<div class="loader"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div>`;
@@ -111,27 +126,99 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { once: true });
 
         try {
-            const payload = { description: sessionData.description, location: sessionData.location, notes: notes };
+            const payload = { 
+                description: sessionData.description, 
+                notes: notes,
+                // Estos son campos nuevos para el informe completo, pueden estar vacíos
+                origen: 'No especificado', 
+                perfilImportador: 'General' 
+            };
             const resp = await fetch('/api/generate-report', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             
             if (!resp.ok) {
-                throw new Error(`Error del servidor: ${resp.statusText}`);
+                const errData = await resp.json();
+                throw new Error(errData.message || `Error del servidor: ${resp.statusText}`);
             }
 
             const data = await resp.json();
 
-            if (!data || !data.ui_text) {
-                console.error('Respuesta inválida del backend:', data);
-                showError('El servidor no devolvió un texto de UI válido.');
+            if (!data.ok || !data.report) {
+                showError('El servidor devolvió una respuesta inválida o incompleta.');
                 return;
             }
 
+            const report = data.report;
             const reportWrapper = document.getElementById('report-content-wrapper');
-            reportWrapper.innerHTML = `<p class="report-final-text">${data.ui_text.replace(/ — /g, '<br><br>')}</p>`;
+            reportWrapper.innerHTML = ''; // Limpiar el loader
+
+            // Helper para crear las tarjetas
+            const createCard = (title, content) => {
+                if (!content) return;
+                const card = document.createElement('div');
+                card.className = 'report-section-card';
+                card.innerHTML = `<h3>${title}</h3><div class="card-content">${content}</div>`;
+                reportWrapper.appendChild(card);
+            };
+
+            // 1. Tarjeta de Clasificación
+            if (report.classification?.clasificacionPropuesta) {
+                const { codigo, descripcion } = report.classification.clasificacionPropuesta;
+                const { scoreFiabilidad, argumentoMerciologico } = report.classification;
+                const content = 
+                    `<p><strong>Código Propuesto:</strong> ${codigo || 'N/A'}</p>` +
+                    `<p><strong>Descripción:</strong> ${descripcion || 'N/A'}</p>` +
+                    `<p><strong>Fiabilidad:</strong> ${scoreFiabilidad ? Math.round(scoreFiabilidad * 100) + '%' : 'N/A'}</p>` +
+                    `<p><strong>Argumento Merciológico:</strong><br>${argumentoMerciologico?.replace(/\n/g, '<br>') || 'N/A'}</p>`;
+                createCard('1. Análisis de Clasificación Arancelaria', content);
+            }
+
+            // 2. Tarjeta de Fundamento Legal
+            if (report.legal && !report.legal.error) {
+                const { applied_rules, notes_applied, jurisprudencia } = report.legal.fundamentoLegal;
+                let content = '';
+                if (applied_rules?.length > 0) content += '<h4>Reglas Generales Aplicadas:</h4><ul>' + applied_rules.map(r => `<li><strong>${r.rule_id}:</strong> ${r.descripcion}</li>`).join('') + '</ul>';
+                if (notes_applied?.length > 0) content += '<h4>Notas de Sección/Capítulo:</h4><ul>' + notes_applied.map(n => `<li><strong>${n.note_id} (${n.tipo || 'N/A'}):</strong> ${n.descripcion}</li>`).join('') + '</ul>';
+                if (jurisprudencia?.length > 0) content += '<h4>Jurisprudencia Relevante (TATA):</h4><ul>' + jurisprudencia.map(j => `<li><strong>${j.case_id}:</strong> ${j.summary}</li>`).join('') + '</ul>';
+                createCard('2. Fundamento Legal y Jurisprudencia', content);
+            }
+
+            // 3. Tarjeta de Análisis Regulatorio
+            if (report.regulatory && !report.regulatory.error) {
+                const { institucionPrincipal, requisitos } = report.regulatory.analisisRegulatorio;
+                if (requisitos?.length > 0) {
+                    let content = `<p><strong>Institución Principal Sugerida:</strong> ${institucionPrincipal || 'N/A'}</p><h4>Requisitos y Permisos:</h4><ul>` + requisitos.map(r => `<li><strong>${r.nombre} (${r.institucion}):</strong> ${r.detalle}</li>`).join('') + '</ul>';
+                    createCard('3. Análisis Regulatorio (Permisos y Barreras)', content);
+                }
+            }
+
+            // 4. Tarjeta de Riesgo de Mercancía
+            if (report.risk && !report.risk.error) {
+                const { analisisRiesgoMercancia } = report.risk;
+                if (analisisRiesgoMercancia?.length > 0) {
+                    let content = analisisRiesgoMercancia.map(r => `<p><strong>${r.riesgoIdentificado}:</strong> ${r.justificacion}<br><em>Recomendación: ${r.recomendacion}</em></p>`).join('');
+                    createCard('4. Análisis de Riesgo Inherente a la Mercancía', content);
+                }
+            }
+
+            // 5. Tarjeta de Optimización Arancelaria
+            if (report.tariff && !report.tariff.error) {
+                const { regimenSugerido, cumpleOrigenPotencial, justificacionOrigen, comparativaArancelaria, recomendacionEstrategica } = report.tariff.analisisOptimizacion;
+                if (regimenSugerido) {
+                    let content = 
+                        `<p><strong>Régimen Sugerido:</strong> ${regimenSugerido}</p>` +
+                        `<p><strong>Cumple Origen Potencial:</strong> ${cumpleOrigenPotencial}</p>` +
+                        `<p><em>Justificación:</em> ${justificacionOrigen}</p>` +
+                        `<h4>Comparativa:</h4>` +
+                        `<ul><li>Arancel Normal (NMF): ${comparativaArancelaria.arancelNMF}</li><li>Arancel Preferencial: ${comparativaArancelaria.arancelPreferencial}</li></ul>` +
+                        `<p><strong>Ahorro Potencial:</strong> ${comparativaArancelaria.ahorroPotencial}</p>` +
+                        `<p><strong>Recomendación Estratégica:</strong> ${recomendacionEstrategica}</p>`;
+                    createCard('5. Análisis de Optimización Arancelaria', content);
+                }
+            }
 
         } catch (error) {
             console.error('Error en generateReport:', error);
-            showError('Ocurrió un error inesperado al generar el informe.');
+            showError(`Ocurrió un error inesperado: ${error.message}`);
         } finally {
             logo.classList.remove('loading-animation');
         }
@@ -194,6 +281,19 @@ document.addEventListener('DOMContentLoaded', () => {
             reportView.classList.remove('fade-out');
             updateUI(0);
         }, { once: true });
+    });
+
+    pasteButton.addEventListener('click', async () => {
+        try {
+            const text = await navigator.clipboard.readText();
+            if (text) {
+                mainTextarea.value = text;
+                mainTextarea.focus();
+            }
+        } catch (err) {
+            console.error('Error al pegar desde el portapapeles:', err);
+            // Opcional: mostrar un pequeño error al usuario
+        }
     });
 
     updateUI(0);

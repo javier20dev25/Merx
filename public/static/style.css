@@ -214,7 +214,78 @@ body {
 
 /* 'Ver más' detalles */
 .result-details { margin-top: 12px; text-align: left; color: rgba(255,255,255,0.95); }
-.result-details strong { color: #fff; }
+.report-details strong { color: #fff; }
+
+/* --- Estilos para las Tarjetas del Informe --- */
+
+.report-section-card {
+  background: #4a90e2; /* Un azul agradable */
+  color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  /* Efecto Neumórfico Azul */
+  box-shadow: 8px 8px 16px #3a73b5, 
+              -8px -8px 16px #5aaeff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.report-section-card h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 10px;
+}
+
+.report-section-card .card-content p {
+  margin: 0 0 10px 0;
+  line-height: 1.6;
+}
+
+.report-section-card .card-content ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.report-section-card .card-content li {
+  margin-bottom: 8px;
+}
+
+.report-section-card h4 {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 1em;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* --- Estilos para la Vista de Informe --- */
+
+.report-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.report-header .site-title {
+  font-size: 2.5rem; /* Un poco más pequeño en esta vista */
+  margin: 0;
+}
+
+.report-footer {
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+  background: rgba(240, 240, 243, 0.7); /* Fondo semitransparente */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  justify-content: center;
+}
 
 #report-content-wrapper {
   width: 100%;
@@ -576,3 +647,37 @@ body {
   background-color: rgba(0,0,0,0.05);
 }
 
+/* --- Estilos para Contenedor de Textarea y Botón de Pegar --- */
+
+.textarea-container {
+  position: relative;
+  width: 340px; /* Ancho para acomodar el textarea y padding */
+  max-width: 90vw;
+}
+
+#paste-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px; /* Tamaño pequeño */
+  height: 40px;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: none; /* Sin sombra para un look más sutil */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0.6;
+  transition: opacity 0.2s ease-in-out, background 0.2s ease-in-out;
+}
+
+#paste-button:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#paste-button svg {
+  width: 20px; /* Tamaño del ícono */
+  height: 20px;
+  stroke: var(--text-color);
+}

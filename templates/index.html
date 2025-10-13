@@ -20,7 +20,12 @@
     <div class="mercancia-tip">
       <strong>Tip:</strong> Describe la mercancía empezando por: qué es, para qué sirve, cómo funciona, composición y finalidad comercial.
     </div>
-    <textarea id="main-textarea" placeholder="Describe tu mercancía aquí..." class="neumorphic-textarea"></textarea>
+    <div class="textarea-container">
+      <textarea id="main-textarea" placeholder="Describe tu mercancía aquí..." class="neumorphic-textarea"></textarea>
+      <button id="paste-button" class="glass-btn circle-btn" aria-label="Pegar desde portapapeles">
+        <span></span>
+      </button>
+    </div>
     <div id="result-card" class="result-card hidden"></div>
     
     <div style="display:flex; gap:30px; align-items: center;">
@@ -60,12 +65,15 @@
 
   <!-- Contenedor para el paso final (Informe) -->
   <div id="report-view" class="container hidden">
+    <div class="report-header"></div>
     <div id="report-content-wrapper">
       <!-- La animación de carga o el informe se insertarán aquí -->
     </div>
-    <button id="reset-button" class="glass-btn pill-btn purple-glow">
-      <span>← Volver al inicio</span>
-    </button>
+    <div class="report-footer">
+      <button id="reset-button" class="glass-btn pill-btn purple-glow">
+        <span>← Volver al inicio</span>
+      </button>
+    </div>
   </div>
 
   <!-- Enlace al script de JavaScript -->
