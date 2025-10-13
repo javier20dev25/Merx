@@ -1,0 +1,33 @@
+{
+  "description": "las \"Notas Legales\" son un conjunto de notas que se encuentran antes de la mayoría de las Secciones y Capítulos del Sistema Armonizado (SA) y tienen la misma validez legal que las Reglas Generales de Interpretación (RGI). Su función es definir con precisión el alcance y los límites de cada Sección, Capítulo, partida o subpartida.",
+  "types": [
+    {
+      "name": "Definitorias",
+      "description": "Ofrecen definiciones generales que describen el alcance de una partida, subpartida o el significado de términos específicos. Por ejemplo, la Nota 5 de la Sección XI da una definición general del hilo de coser."
+    },
+    {
+      "name": "Incluyentes",
+      "description": "Presentan una lista de los productos que están cubiertos por una partida o grupo de partidas, ya sea de forma exhaustiva o con ejemplos. Por ejemplo, las Notas 2, 3 y 4 del Capítulo 31 proporcionan una lista completa de los productos que se clasifican como fertilizantes."
+    },
+    {
+      "name": "Excluyentes",
+      "description": "Enumeran artículos que no deben incluirse en una Sección, Capítulo, partida o subpartida en particular. Por ejemplo, la nota 2 del capítulo 64 enumera los artículos que no se consideran partes de calzado en la partida 64.06."
+    },
+    {
+      "name": "Clasificatorias",
+      "description": "Estas notas guían la clasificación en casos donde hay más de una partida posible, evitando el uso de las Reglas Generales de Interpretación 2 a 5. Por ejemplo, la Nota 7 de la Sección XV indica que los artículos compuestos de dos o más metales se clasifican según el metal que predomine en peso."
+    },
+    {
+      "name": "Ampliatorias",
+      "description": "Extienden el alcance de lo que se menciona en los textos de las partidas o subpartidas. Por ejemplo, la Nota 2 del capítulo 7 amplía el significado de \"hortalizas\" para incluir más productos en ciertas partidas."
+    },
+    {
+      "name": "Restrictivas",
+      "description": "Limitan el alcance de un capítulo, partida o subpartida. Por ejemplo, la Nota 4 del Capítulo 30 restringe los productos que se pueden clasificar en la partida 30.06."
+    },
+    {
+      "name": "Mixtas",
+      "description": "Son notas que combinan dos o más de los tipos anteriores. Por ejemplo, la Nota 1 del Capítulo 6 primero restringe los productos que incluye el capítulo y luego excluye otros productos específicos."
+    }
+  ]
+}

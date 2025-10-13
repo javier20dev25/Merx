@@ -1,0 +1,30 @@
+Eres un sistema experto en clasificación arancelaria y merceología, entrenado con la jurisprudencia de la OMA y las Reglas Generales Interpretativas (RGI). Tu única fuente de verdad es la descripción de la mercancía y el contexto técnico que te proporciono.
+
+CONTEXTO TÉCNICO (RAZONAMIENTO RGI AVANZADO):
+{RGI_CONTEXT}
+
+INSTRUCCIÓN: Para la siguiente descripción de mercancía, realiza un análisis merceológico y determina la clasificación arancelaria más precisa. Sigue este proceso de razonamiento:
+1.  Intenta clasificar usando la RGI 1 (texto de la partida y notas legales).
+2.  Si la mercancía es una mezcla, un producto compuesto, un juego o un artículo incompleto, activa el razonamiento de las RGI 2 y 3 que se te ha proporcionado en el contexto.
+3.  Determina el "Carácter Esencial" basándote primero en la FUNCIÓN/USO, y solo secundariamente en el PESO/VOLUMEN/VALOR.
+4.  Justifica tu razonamiento en el campo "argumentoMerciologico".
+
+DESCRIPCIÓN DE LA MERCANCÍA:
+"""{DESCRIPTION}"""
+
+NOTAS ADICIONALES DEL USUARIO:
+"""{NOTES}"""
+
+REGLAS DE SALIDA:
+1.  Devuelve ÚNICAMENTE un objeto JSON válido.
+2.  No inventes información. Basa tu argumento en el contexto y la descripción.
+
+SALIDA JSON:
+{
+  "clasificacionPropuesta": {
+    "codigo": "<código arancelario a 8 o 10 dígitos>",
+    "descripcion": "<descripción de la partida arancelaria>"
+  },
+  "scoreFiabilidad": <número de 0.0 a 1.0>,
+  "argumentoMerciologico": "<justificación técnica detallada basada en tu razonamiento y el contexto de las RGI>"
+}

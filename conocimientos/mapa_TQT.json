@@ -1,0 +1,13 @@
+{
+  "duda": ["jurisprudencia_tata_dga.txt"],
+  "conflicto": ["jurisprudencia_tata_dga.txt"],
+  "recurso": ["jurisprudencia_tata_dga.txt"],
+  "apelacion": ["jurisprudencia_tata_dga.txt"],
+  "tata": ["jurisprudencia_tata_dga.txt"],
+  "dga": ["jurisprudencia_tata_dga.txt"],
+  "riesgo": ["analisis_riesgo_tecnico_comercial.txt", "gestion_riesgos_aduaneros_ni.txt"],
+  "barrera": ["barreras_no_arancelarias_ni.txt"],
+  "preferencial": ["regimenes_preferenciales_ni.txt"],
+  "sac": ["contexto_legal_sac.txt"],
+  "rgi": ["razonamiento_rgi_avanzado.txt", "reglas-generales-interpretativas.json"]
+}

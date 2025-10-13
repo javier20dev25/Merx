@@ -4,8 +4,8 @@ const fs = require('fs/promises');
 const fsSync = require('fs');
 const fetch = require('node-fetch');
 
-// --- Helper para Timeouts ---
-async function fetchWithTimeout(url, options = {}, timeout = 9000) { // Reducido para Vercel
+// --- Helpers de Utilidad ---
+async function fetchWithTimeout(url, options = {}, timeout = 18000) { // Aumentado para prompts complejos
   const controller = new AbortController();
   options.signal = controller.signal;
   const timeoutId = setTimeout(() => controller.abort(), timeout);
@@ -22,11 +22,10 @@ async function fetchWithTimeout(url, options = {}, timeout = 9000) { // Reducido
   }
 }
 
-// Helpers para limpiar y parsear JSON devuelto por el modelo
 function cleanModelJsonString(raw) {
   if (!raw || typeof raw !== 'string') return raw;
   let s = raw.replace(/^\uFEFF/, '').trim();
-  s = s.replace(/^```(?:[a-zA-Z0-9_-]+\s*)?\n?/, '');
+  s = s.replace(/^```(?:json)?\n?/, '');
   s = s.replace(/\n?```$/, '');
   return s.trim();
 }
@@ -36,267 +35,195 @@ function tryParseModelJson(raw) {
   try {
     return JSON.parse(cleaned);
   } catch (e) {
-    const first = cleaned.indexOf('{');
-    const last = cleaned.lastIndexOf('}');
-    if (first !== -1 && last !== -1 && last > first) {
-      const candidate = cleaned.slice(first, last + 1);
-      try { return JSON.parse(candidate); } catch (e2) { /* seguirá abajo */ }
-    }
-    throw new Error('No se pudo parsear JSON del modelo');
+    console.error("Fallo al parsear JSON, intentando limpiar:", cleaned);
+    throw new Error('No se pudo parsear JSON del modelo: ' + e.message);
   }
 }
 
-// --- Helpers de Modelo y API Key (Adaptado para Vercel) ---
 async function getApiKey() {
-  // **MODIFICADO PARA VERCEL:** Lee la API key desde las variables de entorno.
   const apiKey = process.env.GEMINI_API_KEY;
-  if (apiKey) {
-    console.log('GEMINI_API_KEY present in environment.');
-    return apiKey;
-  }
-  // Fallback para entorno local (si `credencialgemini` existe)
-  console.log('GEMINI_API_KEY not in env, trying local file fallback.');
+  if (apiKey) return apiKey;
   const keyPath = path.join(__dirname, 'credencialgemini');
   if (fsSync.existsSync(keyPath)) {
     const txt = await fs.readFile(keyPath, 'utf-8');
     const m = txt.match(/AIza[A-Za-z0-9_-]{35}/);
     if (m) return m[0];
   }
-  throw new Error('API Key not found in environment variables or local credencialgemini file.');
+  throw new Error('API Key de Gemini no encontrada.');
 }
 
-async function listModels(apiKey) {
-  const url = `https://generativelanguage.googleapis.com/v1/models?key=${apiKey}`;
-  const r = await fetchWithTimeout(url, {}, 8000);
-  if (!r.ok) {
-    const body = await r.text();
-    throw new Error(`ListModels failed: ${r.status} ${body}`);
-  }
-  const data = await r.json();
-  return data.models || [];
-}
+// --- NUEVA ARQUITECTURA DE LLAMADAS A LA IA ---
 
-async function chooseModel(apiKey) {
-  // **MODIFICADO:** Se fuerza el uso del modelo "gemini-2.5-flash-lite" según el requisito.
-  const modelName = "gemini-2.5-flash-lite";
-  console.log(`[INFO] Using mandatory model as required: ${modelName}`);
-  return modelName;
-}
-
-// --- Flujo de Generación de Reporte ---
-// (Las funciones callClassification, callLegalBasis, y generateReportFlow permanecen igual)
-async function callClassification(apiKey, modelName, description, notes) {
-  const prompt = `
-Eres un sistema experto en clasificación arancelaria. Tu única fuente de verdad es la descripción de la mercancía. No uses conocimiento externo.
-INSTRUCCIÓN: Para la descripción de mercancía, determina la clasificación más probable.
-Reglas:
-1. Devuelve ÚNICAMENTE un JSON válido.
-2. El campo "codigo" debe ser un código arancelario plausible.
-3. El "argumentoMerciologico" debe ser una justificación técnica concisa.
-
-Descripción: "${description}"
-Notas Adicionales: "${notes}"
-
-Salida: Sólo devuelve JSON siguiendo exactamente este esquema:
-{
-  "clasificacionPropuesta": { 
-    "codigo": "<código arancelario>", 
-    "descripcion": "<descripción de la partida>" 
-  },
-  "scoreFiabilidad": 0.0,
-  "argumentoMerciologico": "<justificación técnica>"
-}
-`;
-  const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`;
-  const resp = await fetchWithTimeout(geminiUrl, { 
-      method: 'POST', 
-      headers: { 'Content-Type': 'application/json' }, 
-      body: JSON.stringify({ 
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-              "temperature": 0.2,
-              "maxOutputTokens": 1024
-          }
-      })
-  });
-  if (!resp.ok) {
-    const body = await resp.text();
-    throw new Error(`Classification API error ${resp.status}: ${body}`);
-  }
-  const rawData = await resp.json();
-  const candidateText = rawData?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!candidateText) {
-    console.error('Respuesta inesperada del modelo en callClassification:', JSON.stringify(rawData).slice(0, 1000));
-    throw new Error('Modelo devolvió estructura inesperada');
-  }
-  try {
-    return tryParseModelJson(candidateText);
-  } catch (err) {
-    console.error('Error parseando JSON del modelo en callClassification:', err.message);
-    return { raw_text: candidateText }; // Fallback
-  }
-}
-
-async function callLegalBasis(apiKey, modelName, arancelCode) {
-    let contextText = '';
+async function loadContext(filePath) {
     try {
-        const legalPath = path.join(__dirname, 'conocimientos', 'contexto_legal_sac.txt');
-        if (fsSync.existsSync(legalPath)) {
-            contextText = (await fs.readFile(legalPath, 'utf8')).slice(0, 16000);
-        }
-    } catch (e) {
-        console.warn('No se pudo cargar contexto legal desde disco.');
+        return await fs.readFile(path.join(__dirname, 'conocimientos', filePath), 'utf-8');
+    } catch (error) {
+        console.warn(`Advertencia: No se pudo cargar el contexto: ${filePath}`);
+        return '';
     }
-  const prompt = `
-Eres un experto en legislación aduanera. TU ÚNICA FUENTE de verdad es el contexto legal provisto. No uses conocimiento externo.
-CONTEXTO:
-${contextText}
-
-INSTRUCCIÓN: Para el código arancelario "${arancelCode}", extrae únicamente del CONTEXTO las Reglas Generales Interpretativas y las Notas de Capítulo/Sección que justifican su clasificación.
-Reglas:
-1. Devuelve ÚNICAMENTE un JSON válido.
-2. No inventes reglas o notas que no estén en el CONTEXTO.
-3. Si no encuentras fundamento, devuelve arrays vacíos.
-
-Salida: Sólo devuelve JSON siguiendo exactamente este esquema:
-{
-  "fundamentoLegal": {
-    "applied_rules": [ { "rule_id": "<ID de la regla>", "descripcion": "<texto de la regla>" } ],
-    "notes_applied": [ { "note_id": "<ID de la nota>", "descripcion": "<texto de la nota>" } ]
-  }
-}
-`;
-  const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`;
-  const resp = await fetchWithTimeout(geminiUrl, { 
-      method: 'POST', 
-      headers: { 'Content-Type': 'application/json' }, 
-      body: JSON.stringify({ 
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-              "temperature": 0.0,
-              "maxOutputTokens": 2048
-          }
-      })
-  });
-  if (!resp.ok) {
-    const body = await resp.text();
-    throw new Error(`LegalBasis API error ${resp.status}: ${body}`);
-  }
-  const rawData = await resp.json();
-  const candidateText = rawData?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!candidateText) {
-    console.error('Respuesta inesperada del modelo en callLegalBasis:', JSON.stringify(rawData).slice(0, 1000));
-    throw new Error('Modelo devolvió estructura inesperada');
-  }
-  try {
-    return tryParseModelJson(candidateText);
-  } catch (err) {
-    console.error('Error parseando JSON del modelo en callLegalBasis:', err.message);
-    return { raw_text: candidateText }; // Fallback
-  }
 }
 
-async function generateReportFlow(description, location, notes) {
-  console.log('[DEBUG] Entering generateReportFlow.');
-  const apiKey = await getApiKey();
-  console.log(`[DEBUG] API Key retrieved.`);
-  const modelName = await chooseModel(apiKey);
-  console.log(`[DEBUG] Model chosen: ${modelName}`);
-  
-  console.log('[DEBUG] Calling classification model...');
-  const classResp = await callClassification(apiKey, modelName, description, notes);
-  console.log('[DEBUG] Classification response received.');
-
-  if (!classResp || !classResp.clasificacionPropuesta || !classResp.clasificacionPropuesta.codigo) {
-    console.error('[DEBUG] Invalid structure from classification call:', JSON.stringify(classResp));
-    throw new Error('La llamada de clasificación inicial no devolvió una estructura válida.');
-  }
-  const codigo = classResp.clasificacionPropuesta.codigo;
-  console.log(`[DEBUG] Classification successful. Code: ${codigo}`);
-  
-  let legalResp = {};
-  try {
-      console.log('[DEBUG] Calling legal basis model...');
-      legalResp = await callLegalBasis(apiKey, modelName, codigo);
-      console.log('[DEBUG] Legal basis response received.');
-  } catch (e) {
-      console.error(`[DEBUG] Failed to get legal basis, will return partial report. Error: ${e.message}`);
-  }
-  
-  const finalReport = { 
-      ...classResp, 
-      fundamentoLegal: (legalResp && legalResp.fundamentoLegal) || { applied_rules: [], notes_applied: [] }, 
-      conclusion: 'Informe generado en dos pasos con prompts mejorados.' 
-  };
-  console.log('[DEBUG] Final report constructed. Sending response.');
-  return finalReport;
-}
-
-// ----------------- Helpers UI -----------------
-function reportToUI(report) {
-    const { clasificacionPropuesta, fundamentoLegal, scoreFiabilidad, argumentoMerciologico } = report;
-
-    if (!clasificacionPropuesta || !clasificacionPropuesta.codigo) {
-        return { ui_text: "No se pudo generar un informe completo." };
-    }
-
-    const parts = [];
-    parts.push(`**Clasificación Propuesta:** ${clasificacionPropuesta.codigo}`);
-    parts.push(`**Descripción:** ${clasificacionPropuesta.descripcion}`);
-    if(scoreFiabilidad) {
-        parts.push(`**Fiabilidad:** ${Math.round(scoreFiabilidad * 100)}%`);
-    }
-    parts.push(`\n**Justificación Merciológica:**\n${argumentoMerciologico}`);
-
-    if (fundamentoLegal) {
-        if (fundamentoLegal.applied_rules && fundamentoLegal.applied_rules.length > 0) {
-            parts.push(`\n**Reglas Generales Aplicadas:**`);
-            fundamentoLegal.applied_rules.forEach(rule => {
-                if (rule && rule.rule_id && rule.descripcion) {
-                    parts.push(`- ${rule.rule_id}: ${rule.descripcion}`);
-                }
-            });
-        }
-        if (fundamentoLegal.notes_applied && fundamentoLegal.notes_applied.length > 0) {
-            parts.push(`\n**Notas de Sección/Capítulo Aplicadas:**`);
-            fundamentoLegal.notes_applied.forEach(note => {
-                if (note && note.note_id && note.descripcion) {
-                    parts.push(`- ${note.note_id}: ${note.descripcion}`);
-                }
-            });
-        }
-    }
+async function callGemini(prompt, apiKey) {
+    const modelName = 'gemini-1.5-flash-latest';
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
     
+    const response = await fetchWithTimeout(geminiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+                temperature: 0.1,
+                maxOutputTokens: 8192,
+                response_mime_type: "application/json",
+            }
+        })
+    });
+
+    if (!response.ok) {
+        const errorBody = await response.text();
+        throw new Error(`Error en la API de Gemini ${response.status}: ${errorBody}`);
+    }
+
+    const rawData = await response.json();
+    const candidateText = rawData?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!candidateText) {
+        console.error("Respuesta de Gemini sin contenido:", JSON.stringify(rawData));
+        throw new Error('La API de Gemini no devolvió contenido válido.');
+    }
+    return tryParseModelJson(candidateText);
+}
+
+// 1. Clasificación
+async function callClassification(apiKey, description, notes) {
+    const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_clasificacion.txt'), 'utf-8');
+    const rgiContext = await loadContext('razonamiento_rgi_avanzado.txt');
+    const prompt = promptTemplate.replace('{RGI_CONTEXT}', rgiContext).replace('{DESCRIPTION}', description).replace('{NOTES}', notes);
+    return callGemini(prompt, apiKey);
+}
+
+// 2. Base Legal
+async function callLegalBasis(apiKey, codigo) {
+    const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_base_legal.txt'), 'utf-8');
+    const legalContext = `${await loadContext('jurisprudencia_tata_dga.txt')}\n\n${await loadContext('contexto_legal_sac.txt')}`;
+    const prompt = promptTemplate.replace('{LEGAL_CONTEXT}', legalContext).replace('{CODIGO}', codigo);
+    return callGemini(prompt, apiKey);
+}
+
+// 3. Regulaciones
+async function callRegulatoryAnalysis(apiKey, description) {
+    const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_regulaciones.txt'), 'utf-8');
+    const regulatoryContext = await loadContext('analisis_riesgo_tecnico_comercial.txt');
+    const prompt = promptTemplate.replace('{REGULATORY_CONTEXT}', regulatoryContext).replace('{DESCRIPTION}', description);
+    return callGemini(prompt, apiKey);
+}
+
+// 4. Riesgo de Mercancía
+async function callCustomsRiskAnalysis(apiKey, description) {
+    const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_riesgo_mercancia.txt'), 'utf-8');
+    const riskContext = await loadContext('gestion_riesgos_aduaneros_ni.txt');
+    const prompt = promptTemplate.replace('{RISK_CONTEXT}', riskContext).replace('{DESCRIPTION}', description);
+    return callGemini(prompt, apiKey);
+}
+
+// 5. Optimización Arancelaria
+async function callTariffOptimization(apiKey, codigo, origen, perfilImportador) {
+    const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_optimizacion_arancelaria.txt'), 'utf-8');
+    const tariffContext = await loadContext('regimenes_preferenciales_ni.txt');
+    const prompt = promptTemplate.replace('{TARIFF_CONTEXT}', tariffContext).replace('{CODIGO}', codigo).replace('{ORIGEN}', origen).replace('{PERFIL_IMPORTADOR}', perfilImportador);
+    return callGemini(prompt, apiKey);
+}
+
+// --- Orquestador y Formateador ---
+async function generateReportFlow(description, notes, origen, perfilImportador) {
+    const apiKey = await getApiKey();
+    const fullReport = {};
+
+    console.log("Iniciando Paso 1: Clasificación...");
+    fullReport.classification = await callClassification(apiKey, description, notes);
+    const codigo = fullReport.classification?.clasificacionPropuesta?.codigo;
+    if (!codigo) throw new Error('Paso 1 fallido: No se pudo obtener el código arancelario inicial.');
+
+    console.log(`Paso 1 completado. Código: ${codigo}. Iniciando Pasos 2-5 en paralelo...`);
+    const [legal, regulatory, risk, tariff] = await Promise.all([
+        callLegalBasis(apiKey, codigo).catch(e => ({error: e.message})),
+        callRegulatoryAnalysis(apiKey, description).catch(e => ({error: e.message})),
+        callCustomsRiskAnalysis(apiKey, description).catch(e => ({error: e.message})),
+        callTariffOptimization(apiKey, codigo, origen, perfilImportador).catch(e => ({error: e.message}))
+    ]);
+    console.log("Pasos 2-5 completados.");
+
+    fullReport.legal = legal;
+    fullReport.regulatory = regulatory;
+    fullReport.risk = risk;
+    fullReport.tariff = tariff;
+
+    return fullReport;
+}
+
+function reportToUI(report) {
+    const parts = [];
+    const addSection = (title, content) => parts.push(`\n### ${title}\n${content}`);
+
+    if (report.classification?.clasificacionPropuesta) {
+        const {codigo, descripcion} = report.classification.clasificacionPropuesta;
+        const {scoreFiabilidad, argumentoMerciologico} = report.classification;
+        addSection('1. Análisis de Clasificación Arancelaria', 
+            `**Código Propuesto:** ${codigo || 'N/A'}\n` +
+            `**Descripción:** ${descripcion || 'N/A'}\n` +
+            `**Fiabilidad:** ${scoreFiabilidad ? Math.round(scoreFiabilidad * 100) + '%' : 'N/A'}\n` +
+            `**Argumento Merciológico:**\n${argumentoMerciologico || 'N/A'}`
+        );
+    }
+
+    if (report.legal && !report.legal.error) {
+        const {applied_rules, notes_applied, jurisprudencia} = report.legal.fundamentoLegal;
+        let content = '';
+        if (applied_rules?.length > 0) content += '**Reglas Generales Aplicadas:**\n' + applied_rules.map(r => `- **${r.rule_id}:** ${r.descripcion}`).join('\n') + '\n';
+        if (notes_applied?.length > 0) content += '**Notas de Sección/Capítulo:**\n' + notes_applied.map(n => `- **${n.note_id}:** ${n.descripcion}`).join('\n') + '\n';
+        if (jurisprudencia?.length > 0) content += '**Jurisprudencia Relevante (TATA):**\n' + jurisprudencia.map(j => `- **${j.case_id}:** ${j.summary}`).join('\n') + '\n';
+        if(content) addSection('2. Fundamento Legal y Jurisprudencia', content);
+    }
+
+    if (report.regulatory && !report.regulatory.error) {
+        const {institucionPrincipal, requisitos} = report.regulatory.analisisRegulatorio;
+        if (requisitos?.length > 0) {
+            let content = `**Institución Principal Sugerida:** ${institucionPrincipal || 'N/A'}\n**Requisitos y Permisos:**\n` + requisitos.map(r => `- **${r.nombre} (${r.institucion}):** ${r.detalle}`).join('\n');
+            addSection('3. Análisis Regulatorio (Permisos y Barreras)', content);
+        }
+    }
+
+    if (report.risk && !report.risk.error) {
+        const {analisisRiesgoMercancia} = report.risk;
+        if (analisisRiesgoMercancia?.length > 0) {
+            let content = analisisRiesgoMercancia.map(r => `**${r.riesgoIdentificado}:** ${r.justificacion}\n  *Recomendación:* ${r.recomendacion}`).join('\n\n');
+            addSection('4. Análisis de Riesgo Inherente a la Mercancía', content);
+        }
+    }
+
+    if (report.tariff && !report.tariff.error) {
+        const {regimenSugerido, cumpleOrigenPotencial, justificacionOrigen, comparativaArancelaria, recomendacionEstrategica} = report.tariff.analisisOptimizacion;
+        if (regimenSugerido) {
+            let content = `**Régimen Sugerido:** ${regimenSugerido}\n` +
+                          `**Cumple Origen Potencial:** ${cumpleOrigenPotencial}\n` +
+                          `*Justificación:* ${justificacionOrigen}\n\n` +
+                          `**Comparativa:**\n- Arancel Normal (NMF): ${comparativaArancelaria.arancelNMF}\n- Arancel Preferencial: ${comparativaArancelaria.arancelPreferencial}\n`+ 
+                          `**Ahorro Potencial:** ${comparativaArancelaria.ahorroPotencial}\n\n` +
+                          `**Recomendación Estratégica:** ${recomendacionEstrategica}`;
+            addSection('5. Análisis de Optimización Arancelaria', content);
+        }
+    }
+
     return { ui_text: parts.join('\n') };
 }
 
-
-// --- Servidor Express ---
+// --- Servidor Express y Endpoints ---
 const app = express();
-const PORT = process.env.PORT || 5000;
-
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'index.html'));
-});
-
-app.get('/api/debug-env', (req, res) => {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (apiKey) {
-    res.status(200).json({
-      message: 'GEMINI_API_KEY is present.',
-      keyExists: true,
-      keyLength: apiKey.length,
-      firstChars: apiKey.substring(0, 4)
-    });
-  } else {
-    res.status(404).json({
-      message: 'GEMINI_API_KEY is NOT found in process.env.',
-      keyExists: false
-    });
-  }
 });
 
 app.post('/api/find-sac-chapter', async (req, res) => {
@@ -305,125 +232,54 @@ app.post('/api/find-sac-chapter', async (req, res) => {
         if (!description) return res.status(400).json({ error: 'La descripción no puede estar vacía.' });
 
         const apiKey = await getApiKey();
-        const modelName = await chooseModel(apiKey);
+        const indiceText = await loadContext('secciones-capitulos.json');
+        const promptTemplate = `Eres un asistente experto en clasificación arancelaria. Tu única fuente de verdad es el siguiente índice del Sistema Arancelario. Determina el número de capítulo más probable para la mercancía descrita.\n\nINDICE:\n${indiceText}\n\nDESCRIPCIÓN: "${description}"\n\nSALIDA JSON: { "chapter_number": <número>, "rationale": "<justificación breve>" }`;
         
-        const sacContextPath = path.join(__dirname, 'conocimientos', 'secciones-capitulos.json');
-        if (!fsSync.existsSync(sacContextPath)) {
-            return res.status(500).json({ error: 'Archivo de contexto "secciones-capitulos.json" no encontrado.' });
-        }
-        const indiceText = await fs.readFile(sacContextPath, 'utf-8');
-
-        const prompt = `
-Eres un asistente experto en clasificación arancelaria (merciología). TU ÚNICA FUENTE de verdad para ubicar mercancías en el SAC será el índice que te entregue el usuario en este mismo request. No uses conocimiento externo. Basate estrictamente en el texto del índice.
-
-INDICE:
-${indiceText}
-
-INSTRUCCIÓN: Dada la siguiente descripción de mercancía, determina el número de capítulo del SAC.
-Reglas:
-1. Devuelve ÚNICAMENTE un JSON válido.
-2. No inventes números o nombres que no estén en el INDICE.
-3. El campo 'chapter_number' debe ser un número entero.
-
-Descripción: "${description}"
-
-Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicional):
-{
-  "chapter_number": <Número entero del capítulo>,
-  "rationale": "<Breve justificación técnica de por qué pertenece a ese capítulo>"
-}
-`;
-
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`;
-        
-        const geminiResponse = await fetchWithTimeout(geminiUrl, { 
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                contents: [{ parts: [{ text: prompt }] }],
-                generationConfig: {
-                    "temperature": 0.1,
-                    "maxOutputTokens": 256
-                }
-            })
-        });
-
-        if (!geminiResponse.ok) {
-            const errorBody = await geminiResponse.text();
-            throw new Error(`API Error: ${geminiResponse.status} ${errorBody}`);
-        }
-
-        const rawData = await geminiResponse.json();
-        const candidateText = rawData?.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (!candidateText) {
-          throw new Error('Modelo devolvió estructura inesperada');
-        }
-        
-        const aiResult = tryParseModelJson(candidateText);
+        const aiResult = await callGemini(promptTemplate, apiKey);
         const chapterNumber = aiResult.chapter_number;
-        const rationale = aiResult.rationale;
+        if (!chapterNumber) return res.status(404).json({ error: 'El modelo no pudo determinar un capítulo.' });
 
-        if (!chapterNumber) {
-            return res.status(404).json({ error: 'El modelo no pudo determinar un capítulo.', rationale });
-        }
-
-        // Lógica para buscar el nombre de la sección y capítulo usando el número
         const sectionsData = JSON.parse(indiceText);
-        let foundSection = null;
-        let foundChapter = null;
-
+        let foundSection = null, foundChapter = null;
         for (const section of sectionsData) {
             const chapter = section.chapters.find(c => c.number == chapterNumber);
             if (chapter) {
-                foundSection = section;
-                foundChapter = chapter;
-                break;
+                foundSection = section; foundChapter = chapter; break;
             }
         }
 
-        if (!foundSection || !foundChapter) {
-            return res.status(404).json({ error: `Capítulo ${chapterNumber} no encontrado en el índice.` });
-        }
+        if (!foundChapter) return res.status(404).json({ error: `Capítulo ${chapterNumber} no encontrado.` });
 
-        const cleanSectionName = foundSection.name.split(':')[0]; // Extrae "SECCIÓN II" del nombre completo
-
-        // Devolver el objeto JSON estructurado y limpio
-        return res.status(200).json({
-            section: cleanSectionName,
+        res.status(200).json({
+            section: foundSection.name.split(':')[0],
             chapter: foundChapter.name,
-            chapter_number: foundChapter.number, // Añadir número de capítulo
-            rationale: rationale
+            chapter_number: foundChapter.number,
+            rationale: aiResult.rationale
         });
 
     } catch (error) {
-        console.error('Handler exception in /api/find-sac-chapter:', error.stack || error);
-        if (!res.headersSent) {
-            res.status(500).json({ error: 'INTERNAL_SERVER_ERROR', message: error.message });
-        }
+        console.error('Error en /api/find-sac-chapter:', error.stack || error);
+        res.status(500).json({ error: 'Error interno en el servidor.', message: error.message });
     }
 });
 
-
-
 app.post('/api/generate-report', async (req, res) => {
-  try {
-    const { description, location, notes } = req.body || {};
-    if (!description) return res.status(400).json({ ok: false, error: 'Falta campo description' });
-    
-    const finalReport = await generateReportFlow(description, location, notes);
-    const userView = reportToUI(finalReport); // FIX: Use the correct formatter
+    try {
+        const { description, notes, origen, perfilImportador } = req.body;
+        if (!description) return res.status(400).json({ error: 'La descripción es obligatoria.' });
 
-    return res.status(200).json({ 
-      ok: true, 
-      ui_text: userView.ui_text, 
-      report: finalReport 
-    });
+        const finalReport = await generateReportFlow(description, notes, origen || 'No especificado', perfilImportador || 'General');
+        const userView = reportToUI(finalReport);
 
-  } catch (err) {
-    console.error('Error en /api/generate-report:', err.stack || err);
-    return res.status(500).json({ ok: false, error: 'Error interno generando el informe.', message: err.message });
-  }
+        res.status(200).json({ 
+            ok: true, 
+            ui_text: userView.ui_text, 
+            report: finalReport
+        });
+    } catch (error) {
+        console.error('Error fatal en /api/generate-report:', error.stack || error);
+        res.status(500).json({ ok: false, error: 'Error interno al generar el informe.', message: error.message });
+    }
 });
 
-// Exportar la app para Vercel
 module.exports = app;
