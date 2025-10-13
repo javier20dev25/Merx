@@ -233,46 +233,37 @@ async function generateReportFlow(description, location, notes) {
 }
 
 // ----------------- Helpers UI -----------------
-function classificationToUI(parsed) {
-  // Normaliza varias formas de respuesta esperadas
-  const candidate =
-    parsed?.candidates?.[0] ||
-    parsed?.clasificacionPropuesta ||
-    (parsed && typeof parsed === 'object' ? parsed : null);
+function reportToUI(report) {
+    const { clasificacionPropuesta, fundamentoLegal, scoreFiabilidad, argumentoMerciologico } = report;
 
-  if (!candidate) {
-    return {
-      ui_text: 'No se encontró una clasificación confiable para esta descripción.',
-      ui_struct: { section: null, chapter: null, heading: null, confidence: 0, rationale: null }
-    };
-  }
+    if (!clasificacionPropuesta || !clasificacionPropuesta.codigo) {
+        return { ui_text: "No se pudo generar un informe completo." };
+    }
 
-  // intentar leer campos comunes (adapta si tus keys son distintas)
-  const section = candidate.section || candidate.seccion || candidate.sectionName || null;
-  const chapter = candidate.chapter || candidate.capitulo || candidate.chapterName || null;
-  const heading = candidate.heading_or_partida || candidate.partida || candidate.codigo || candidate.descripcion || null;
-  let confidence = null;
-  if (typeof candidate.confidence === 'number') confidence = candidate.confidence;
-  else if (typeof candidate.scoreFiabilidad === 'number') confidence = Math.min(1, candidate.scoreFiabilidad / 10);
-  else if (typeof candidate.score === 'number') confidence = candidate.score;
-  const confidencePct = (typeof confidence === 'number') ? Math.round(confidence * 100) + '%' : 'n.d.';
-  const rationale = candidate.rationale || candidate.argumentoMerciologico || candidate.reason || '';
+    const parts = [];
+    parts.push(`**Clasificación Propuesta:** ${clasificacionPropuesta.codigo}`);
+    parts.push(`**Descripción:** ${clasificacionPropuesta.descripcion}`);
+    if(scoreFiabilidad) {
+        parts.push(`**Fiabilidad:** ${Math.round(scoreFiabilidad * 100)}%`);
+    }
+    parts.push(`\n**Justificación Merciológica:**\n${argumentoMerciologico}`);
 
-  // --- LÓGICA DE FORMATEO PARA UI ---
-  const cleanSection = section && section.includes(':') ? section.split(':')[1].trim() : section;
-  const cleanChapter = chapter && chapter.includes(':') ? chapter.split(':')[1].trim() : chapter;
-
-  // El ui_text ahora es para el reporte final, la UI principal usará ui_struct
-  const ui_text = [
-    `Sección: ${cleanSection}`,
-    `Capítulo: ${cleanChapter}`,
-    `Motivo: ${rationale}`
-  ].filter(Boolean).join('\n\n');
-
-  return {
-    ui_text,
-    ui_struct: { section: cleanSection, chapter: cleanChapter, heading, confidence, confidencePct, rationale }
-  };
+    if (fundamentoLegal) {
+        if (fundamentoLegal.applied_rules && fundamentoLegal.applied_rules.length > 0) {
+            parts.push(`\n**Reglas Generales Aplicadas:**`);
+            fundamentoLegal.applied_rules.forEach(rule => {
+                parts.push(`- ${rule.rule_id}: ${rule.descripcion}`);
+            });
+        }
+        if (fundamentoLegal.notes_applied && fundamentoLegal.notes_applied.length > 0) {
+            parts.push(`\n**Notas de Sección/Capítulo Aplicadas:**`);
+            fundamentoLegal.notes_applied.forEach(note => {
+                parts.push(`- ${note.note_id}: ${note.descripcion}`);
+            });
+        }
+    }
+    
+    return { ui_text: parts.join('\n') };
 }
 
 
@@ -396,6 +387,7 @@ Salida: Sólo devuelve JSON siguiendo exactamente este esquema (no texto adicion
         return res.status(200).json({
             section: cleanSectionName,
             chapter: foundChapter.name,
+            chapter_number: foundChapter.number, // Añadir número de capítulo
             rationale: rationale
         });
 
@@ -432,6 +424,26 @@ app.post('/api/generate-report', async (req, res) => {
         debug_raw: finalReport 
       });
     }
+
+  } catch (err) {
+    console.error('Error en /api/generate-report:', err.stack || err);
+    return res.status(500).json({ ok: false, error: 'Error interno generando el informe.', message: err.message });
+  }
+});
+
+app.post('/api/generate-report', async (req, res) => {
+  try {
+    const { description, location, notes } = req.body || {};
+    if (!description) return res.status(400).json({ ok: false, error: 'Falta campo description' });
+    
+    const finalReport = await generateReportFlow(description, location, notes);
+    const userView = reportToUI(finalReport); // FIX: Use the correct formatter
+
+    return res.status(200).json({ 
+      ok: true, 
+      ui_text: userView.ui_text, 
+      report: finalReport 
+    });
 
   } catch (err) {
     console.error('Error en /api/generate-report:', err.stack || err);

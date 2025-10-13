@@ -65,8 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.section || data.chapter) {
                 const section = data.section || '—';
                 const chapter = data.chapter || '—';
+                const chapter_number = data.chapter_number;
                 const rationale = data.rationale || '';
-                uiText = `Sección: ${section}\nCapítulo: ${chapter}${rationale ? '\n\nMotivo: ' + rationale : ''}`;
+                const chapterText = chapter_number ? `Capítulo ${chapter_number}: ${chapter}` : `Capítulo: ${chapter}`;
+                uiText = `Sección: ${section}\n${chapterText}${rationale ? '\n\nMotivo: ' + rationale : ''}`;
             } else if (data.raw_text) {
                 uiText = data.raw_text;
             } else {
