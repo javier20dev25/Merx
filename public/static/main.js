@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const reportView = document.getElementById('report-view');
     const resetButton = document.getElementById('reset-button');
     const pasteButton = document.getElementById('paste-button');
+    const saveReportButton = document.getElementById('save-report-button');
+    const savedMerchandiseButton = document.getElementById('saved-merchandise-button');
 
     const leftButtonContent = leftButton.querySelector('span');
     const rightButtonContent = rightButton.querySelector('span');
@@ -25,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentState = -1;
     let subState = 0;
     let sessionData = { description: '', location: '' };
+    let currentReportData = null; // Para guardar el informe actual
 
     // --- Funciones de UI ---
     function animateTextChange(element, newText) {
@@ -106,6 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function generateReport() {
         const notes = mainTextarea.value;
+        currentReportData = null; // Resetea el informe actual
+        saveReportButton.disabled = true;
+        saveReportButton.querySelector('span').textContent = 'Guardar Mercancía';
+
         const logo = document.getElementById('logo');
 
         mainContainer.classList.add('fade-out');
@@ -115,8 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const reportHeader = reportView.querySelector('.report-header');
             if (reportHeader) {
-                // FIX: Crear el logo directamente para evitar problemas de clonación
-                reportHeader.innerHTML = '<h1 class="site-title">Merx</h1>';
+                reportHeader.innerHTML = ''; // Header intencionalmente vacío
             }
 
             reportView.classList.remove('hidden');
@@ -146,6 +152,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 showError('El servidor devolvió una respuesta inválida o incompleta.');
                 return;
             }
+
+            currentReportData = data.report; // <-- Guarda los datos del informe
+            saveReportButton.disabled = false; // <-- Habilita el botón de guardar
 
             const report = data.report;
             const reportWrapper = document.getElementById('report-content-wrapper');
@@ -286,6 +295,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (err) {
             console.error('Error al pegar desde el portapapeles:', err);
+        }
+    });
+
+    saveReportButton.addEventListener('click', () => {
+        if (!currentReportData) return;
+
+        let savedItems = JSON.parse(localStorage.getItem('savedMerchandise')) || [];
+        
+        const dataToSave = {
+            id: Date.now(),
+            description: sessionData.description, // Guardar descripción inicial
+            report: currentReportData
+        };
+
+        savedItems.push(dataToSave);
+        localStorage.setItem('savedMerchandise', JSON.stringify(savedItems));
+
+        saveReportButton.disabled = true;
+        saveReportButton.querySelector('span').textContent = 'Guardado ✓';
+    });
+
+    savedMerchandiseButton.addEventListener('click', () => {
+        const savedItems = JSON.parse(localStorage.getItem('savedMerchandise')) || [];
+        if (savedItems.length === 0) {
+            alert('No tienes mercancías guardadas.');
+        } else {
+            const descriptions = savedItems.map(item => `- ${item.description}`).join('\n');
+            alert(`Tienes ${savedItems.length} mercancía(s) guardada(s):\n\n${descriptions}`);
         }
     });
 
