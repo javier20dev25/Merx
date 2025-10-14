@@ -1,0 +1,869 @@
+SECCIÓN I: ANIMALES VIVOS Y PRODUCTOS DEL REINO ANIMAL
+Nota de la Sección
+ * Resumen: Esta nota tiene dos puntos clave:
+   * Cualquier referencia a un género o especie de animal incluye también a sus crías.
+   * El término "secos" o "desecados" abarca también a los productos deshidratados, evaporados o liofilizados.
+ * Nota de Relevancia Merceológica: Amplía el alcance de las partidas, asegurando que los animales jóvenes se clasifiquen con los adultos de su especie y que diversas formas de deshidratación se consideren equivalentes a "seco" para fines de clasificación, unificando el criterio para productos conservados.
+CAPÍTULO 1: ANIMALES VIVOS
+ * Nota del Capítulo:
+   * Resumen: Excluye de este capítulo a los peces, crustáceos y moluscos (que se clasifican en el Capítulo 3), los cultivos de microorganismos (partida 30.02) y los animales para circos o zoológicos ambulantes (partida 95.08).
+   * Nota de Relevancia Merceológica: Es una nota de exclusión fundamental que delimita el alcance del capítulo, enviando productos específicos a otros capítulos más apropiados y evitando errores de clasificación.
+ * Notas Complementarias Centroamericanas:
+   * Resumen:
+     * Define que los "reproductores de raza pura" solo son aquellos animales reconocidos como tales por las autoridades competentes y amparados por un certificado oficial del país exportador.
+     * Aclara que la partida 0106.41.00.00 incluye a las abejas, incluso si vienen en colmenas u otros recipientes.
+   * Nota de Relevancia Merceológica: Estas notas introducen un requisito documental para clasificar animales como "de raza pura" (que a menudo tienen un arancel diferente) y especifican la clasificación de un producto particular (abejas con colmenas), lo que aporta certeza al clasificador.
+CAPÍTULO 2: CARNE Y DESPOJOS COMESTIBLES
+ * Nota del Capítulo:
+   * Resumen: Excluye del capítulo los productos no aptos para consumo humano, los insectos comestibles sin vida (partida 04.10), las tripas, vejigas y estómagos (partida 05.04), la sangre animal (partidas 05.11 o 30.02) y las grasas animales (excepto las de la partida 02.09, que se clasifican en el Capítulo 15).
+   * Nota de Relevancia Merceológica: Delimita estrictamente el capítulo a la carne y despojos comestibles, separándolos de productos similares que, por su naturaleza o destino, se clasifican en otros capítulos (por ejemplo, productos no comestibles o grasas).
+ * Notas Complementarias Centroamericanas:
+   * Resumen: Definen con precisión cortes específicos de aves de la especie Gallus domesticus, como los "cuartos o cuarteles" (piernas y muslos), las combinaciones de trozos y la "media ave".
+   * Nota de Relevancia Merceológica: Son cruciales para la correcta subclasificación de la carne de pollo. Proporcionan descripciones físicas detalladas de cómo se presentan comercialmente ciertos cortes, guiando al clasificador a la subpartida correcta que a menudo conlleva diferentes tipos impositivos.
+CAPÍTULO 3: PESCADOS Y CRUSTÁCEOS, MOLUSCOS Y DEMÁS INVERTEBRADOS ACUÁTICOS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye a los mamíferos marinos vivos (Capítulo 1), su carne (Capítulo 2), los productos acuáticos no aptos para consumo humano (Capítulo 5), la harina y "pellets" no aptos para consumo humano (partida 23.01) y el caviar (partida 16.04).
+     * Define "pellets" como productos aglomerados por presión.
+     * Aclara que la harina, polvo y "pellets" aptos para consumo humano no se clasifican en las partidas 03.05 a 03.08, sino en la 03.09.
+   * Nota de Relevancia Merceológica: Estas notas son fundamentales para distinguir entre los productos de este capítulo y los de otros. La clave es el destino (apto o no para consumo humano) y el grado de procesamiento (la harina para consumo humano tiene su propia partida).
+ * Nota Complementaria Centroamericana:
+   * Resumen: Especifica que las partidas arancelarias que mencionan "sardinas" incluyen a todos los géneros y especies de sardinas.
+   * Nota de Relevancia Merceológica: Simplifica la clasificación al eliminar la necesidad de una distinción zoológica detallada entre diferentes tipos de sardinas, agrupándolas para fines arancelarios.
+CAPÍTULO 4: LECHE Y PRODUCTOS LÁCTEOS; HUEVOS DE AVE; MIEL NATURAL...
+ * Notas del Capítulo:
+   * Resumen:
+     * Define "leche" como entera o desnatada.
+     * Define "yogur" (04.03) permitiendo la adición de diversas sustancias siempre que no sustituyan los componentes de la leche y se mantenga el carácter esencial.
+     * Define "mantequilla" y "pastas lácteas para untar" (04.05) con base en su contenido de materia grasa.
+     * Establece los criterios para que productos de lactosuero se clasifiquen como "quesos" (04.06).
+     * Excluye productos como insectos no comestibles, lactosa de alta pureza, análogos de productos lácteos, albúminas y globulinas.
+     * Define "insectos" comestibles (04.10) y los distingue de los preparados de otras formas (Sección IV).
+   * Nota de Relevancia Merceológica: Son notas definitorias y de exclusión de gran importancia. La clasificación en este capítulo depende de criterios técnicos precisos (porcentaje de grasa, lactosa, etc.), por lo que estas notas son indispensables para diferenciar productos como la mantequilla de las pastas para untar, o un producto a base de suero de un queso.
+ * Nota Complementaria Centroamericana:
+   * Resumen: Establece que los huevos para incubación deben estar respaldados por documentos del país exportador que confirmen dicha condición.
+   * Nota de Relevancia Merceológica: Añade un requisito documental para acceder a la clasificación específica (y al tratamiento arancelario) de los huevos para incubación.
+ * Nota Legal Nacional:
+   * Resumen: Define la miel "orgánica" como aquella que cuenta con un certificado de un organismo certificador registrado.
+   * Nota de Relevancia Merceológica: Similar a la anterior, impone un requisito documental para poder clasificar un producto en una subpartida específica que depende de su método de producción ("orgánico").
+CAPÍTULO 5: LOS DEMÁS PRODUCTOS DE ORIGEN ANIMAL...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los productos comestibles (con excepciones), cueros y pieles (salvo excepciones), materias primas textiles y cabezas para cepillería.
+     * Define el "cabello en bruto".
+     * Define "marfil" de forma amplia para incluir dientes y cuernos de varios animales.
+     * Define "crin" y aclara el contenido de la partida 05.11.
+   * Nota de Relevancia Merceológica: Este es un capítulo residual. Sus notas son principalmente de exclusión, asegurando que solo se clasifiquen aquí los productos de origen animal que no tienen un lugar más específico en la nomenclatura. Las definiciones que aporta (marfil, crin) son clave para clasificar correctamente dichos productos.
+SECCIÓN II: PRODUCTOS DEL REINO VEGETAL
+Nota de la Sección
+ * Resumen:
+   * Define "pellets" como productos aglomerados por presión con un aglutinante no superior al 3% en peso.
+ * Nota de Relevancia Merceológica: Establece una definición técnica uniforme para el término "pellets" que se aplica a todos los capítulos de esta sección, evitando ambigüedades.
+Nota Complementaria Centroamericana
+ * Resumen:
+   * Aclara que la expresión "para siembra" se aplica solo a productos considerados aptos para tal fin por las autoridades competentes y amparados por un certificado del país de origen.
+ * Nota de Relevancia Merceológica: Introduce un requisito documental. Para que un producto reciba el tratamiento arancelario de "para siembra" (generalmente más favorable), no basta con la intención, sino que se requiere una certificación oficial.
+Nota Legal Nacional
+ * Resumen:
+   * Establece que la expresión "orgánico" u "orgánica" solo aplica a productos obtenidos mediante métodos de producción orgánica y que cuenten con un certificado emitido por una autoridad registrada en el país exportador.
+ * Nota de Relevancia Merceológica: Añade un requisito de certificación para clasificar productos en subpartidas específicas designadas como "orgánicas", lo cual es crucial para la correcta aplicación de aranceles diferenciados.
+CAPÍTULO 6: PLANTAS VIVAS Y PRODUCTOS DE LA FLORICULTURA
+ * Notas del Capítulo:
+   * Resumen:
+     * Limita el capítulo a productos para plantación u ornamentación (de viveristas, floristas, etc.), excluyendo explícitamente productos alimenticios como papas y cebollas del Capítulo 7.
+     * Asimila los ramos, cestas y artículos similares a las flores o follaje, sin tener en cuenta los accesorios.
+   * Nota de Relevancia Merceológica: Define el alcance del capítulo basado en el uso o destino del producto (ornamental/plantación), lo cual es un criterio funcional clave para distinguirlo de los productos vegetales alimenticios.
+ * Nota Complementaria Centroamericana:
+   * Resumen: Define el término "turiones" como los brotes que nacen de un tallo subterráneo (ej. espárragos).
+   * Nota de Relevancia Merceológica: Aporta una definición técnica precisa para un término específico utilizado en la partida 06.01, ayudando a su correcta interpretación.
+CAPÍTULO 7: HORTALIZAS, PLANTAS, RAÍCES Y TUBÉRCULOS ALIMENTICIOS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los productos forrajeros (partida 12.14).
+     * Amplía la definición de "hortalizas" para incluir hongos, trufas, aceitunas, maíz dulce, entre otros.
+     * Delimita el alcance de las hortalizas secas de la partida 07.12, excluyendo específicamente las legumbres secas desvainadas (07.13) y otros productos procesados.
+     * Excluye los frutos de los géneros Capsicum o Pimenta cuando están secos o pulverizados, enviándolos al Capítulo 9 como especias.
+     * Define las hortalizas "conservadas provisionalmente" (07.11) como aquellas tratadas solo para su transporte y que no son aptas para el consumo inmediato.
+   * Nota de Relevancia Merceológica: Son de vital importancia para definir los límites del capítulo. La nota 2 es de inclusión, mientras que las demás son de exclusión, estableciendo distinciones clave según el tipo de producto (forrajero, especia), el grado de preparación (seco, en harina) y el estado de conservación (provisional o para consumo).
+CAPÍTULO 8: FRUTAS Y FRUTOS COMESTIBLES; CORTEZAS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Limita el capítulo a los frutos y frutas comestibles.
+     * Clasifica las frutas refrigeradas junto con las frescas.
+     * Permite que las frutas secas estén parcialmente rehidratadas o tratadas para mejorar su conservación o aspecto, sin que ello modifique su clasificación.
+     * Define las frutas "conservadas provisionalmente" (08.12) como aquellas tratadas solo para su transporte y que no son aptas para consumo inmediato.
+   * Nota de Relevancia Merceológica: Establecen criterios sobre el estado y la preparación de los productos. Unifican el tratamiento para frutas frescas y refrigeradas (Nota 2) y permiten un grado menor de procesamiento en las frutas secas (Nota 3). La Nota 4 es crucial para diferenciar la conservación provisional de otros tipos de preparaciones.
+CAPÍTULO 9: CAFÉ, TÉ, YERBA MATE Y ESPECIAS
+ * Notas del Capítulo:
+   * Resumen:
+     * Establece las reglas para clasificar las mezclas de especias. Si son de la misma partida, se quedan en esa partida; si son de partidas diferentes, se clasifican en la partida 09.10. Si al añadir otras sustancias pierden su carácter esencial, se clasifican como condimentos compuestos en la partida 21.03.
+     * Excluye la pimienta de Cubeba y otros productos de la partida 12.11.
+   * Nota de Relevancia Merceológica: La Nota 1 es una regla de clasificación fundamental para las mezclas. Establece una jerarquía clara: primero, la partida específica; segundo, la partida residual de mezclas (09.10); y tercero, si se convierte en un producto diferente, se envía a otro capítulo (21.03). Esto es esencial para clasificar correctamente los sazonadores y mezclas de especias.
+CAPÍTULO 10: CEREALES
+ * Notas del Capítulo:
+   * Resumen:
+     * Aclara que el capítulo cubre los cereales solo si están en grano. Excluye los granos trabajados, con la importante excepción del arroz (descascarillado, blanqueado, etc.) que permanece en la partida 10.06 y la quinua a la que se le ha quitado la saponina (10.08).
+     * Excluye el maíz dulce, que se clasifica en el Capítulo 7.
+   * Nota de Relevancia Merceológica: La Nota 1 es clave, pues define el estado en que debe presentarse el producto (en grano). Las excepciones para el arroz y la quinua son muy relevantes, ya que permiten que estos productos, a pesar de haber sido sometidos a un proceso industrial, se sigan clasificando como cereales básicos en lugar de como productos procesados de otros capítulos.
+CAPÍTULO 11: PRODUCTOS DE LA MOLINERÍA; MALTA; ALMIDÓN...
+ * Notas del Capítulo:
+   * Resumen:
+     * Establece una lista de exclusiones, como la malta tostada como sucedáneo del café (09.01 o 21.01), preparaciones alimenticias (19.01, 19.04), hortalizas preparadas (Cap. 20), etc.
+     * Proporciona un cuadro técnico y detallado con criterios de contenido de almidón y cenizas, así como el porcentaje que pasa por tamices de mallas específicas, para clasificar los productos de la molienda en este capítulo. Si no cumplen estos criterios, se clasifican en la partida 23.02 como residuos.
+     * Define "grañones" y "sémola" en la partida 11.03 basándose en el porcentaje en peso que pasa por un tamiz de una abertura de malla determinada.
+   * Nota de Relevancia Merceológica: Estas son notas altamente técnicas y definitorias. La clasificación depende de parámetros físicos y químicos medibles (contenido de ceniza, tamaño de partícula). El cuadro de la Nota 2 es una herramienta indispensable para el clasificador, ya que establece la frontera entre los productos de la molinería para consumo humano (Cap. 11) y los residuos para alimentación animal (23.02).
+CAPÍTULO 12: SEMILLAS Y FRUTOS OLEAGINOSOS; SEMILLAS DIVERSAS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Aclara qué se considera "semillas oleaginosas" en la partida 12.07 (algodón, ricino, sésamo, etc.) y excluye productos como las aceitunas.
+     * Define el alcance de la harina de semillas oleaginosas (12.08), permitiendo que esté parcialmente desgrasada.
+     * Especifica qué se considera "semillas para siembra" en la partida 12.09 (remolacha, hortalizas, flores, etc.) y excluye las que tienen partidas más específicas, como las legumbres (Cap. 7), especias (Cap. 9) o cereales (Cap. 10).
+     * Enumera plantas incluidas en la partida 12.11 (ginseng, menta, etc.) y excluye productos farmacéuticos o de perfumería derivados de ellas.
+     * Aclara que el término "algas" de la partida 12.12 no incluye microorganismos muertos o cultivos de microorganismos.
+   * Nota de Relevancia Merceológica: Son notas principalmente de alcance y exclusión. Delimitan qué se considera semilla oleaginosa, semilla para siembra o planta medicinal dentro del capítulo, y dirigen productos más específicos (como cereales o especias) o más elaborados (como productos farmacéuticos) a sus capítulos correspondientes.
+CAPÍTULO 13: GOMAS, RESINAS Y DEMÁS JUGOS Y EXTRACTOS VEGETALES
+ * Nota del Capítulo:
+   * Resumen: Aclara que la partida 13.02 comprende extractos de regaliz, pelitre, lúpulo, áloe y el opio. Excluye una larga lista de productos que, aunque sean extractos, tienen una clasificación más específica debido a su composición o uso, como los artículos de confitería (17.04), extractos de café o té (21.01), bebidas alcohólicas (Cap. 22), aceites esenciales (Cap. 33) o el caucho natural (40.01).
+   * Nota de Relevancia Merceológica: Es una nota de exclusión fundamental que limita el alcance del capítulo a los jugos y extractos vegetales en su estado más básico. Cualquier producto que haya sido procesado para un uso específico (bebida, medicamento, perfumería) o que cumpla con las especificaciones de otro capítulo debe clasificarse fuera del Capítulo 13.
+CAPÍTULO 14: MATERIAS TRENZABLES Y DEMÁS PRODUCTOS DE ORIGEN VEGETAL...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye las materias y fibras vegetales utilizadas principalmente para textiles, que pertenecen a la Sección XI.
+     * Aclara que la partida 14.01 incluye el bambú, mimbre, caña, etc., incluso si están trabajados de forma simple, pero excluye las tablillas de madera (44.04).
+     * Excluye la lana de madera (44.05) y las cabezas para cepillería (96.03) de la partida 14.04.
+   * Nota de Relevancia Merceológica: Estas notas son esenciales para diferenciar las materias primas vegetales según su uso principal. La distinción más importante es entre las materias para cestería/espartería (Cap. 14) y las materias primas textiles (Sección XI).
+SECCIÓN III: GRASAS Y ACEITES ANIMALES, VEGETALES...
+Este documento no contiene una nota específica para la Sección III, pero sí para su único capítulo, el 15.
+CAPÍTULO 15: GRASAS Y ACEITES, ANIMALES, VEGETALES...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye el tocino y la grasa de cerdo o de ave (02.09), la manteca de cacao (18.04), preparaciones alimenticias con más de 15% de productos de la partida 04.05 (generalmente Cap. 21), chicharrones (23.01), y grasas procesadas para usos no alimenticios (pinturas, jabones, etc., de la Sección VI).
+     * Excluye de la partida 15.09 el aceite de oliva extraído con disolventes (lo envía a la 15.10).
+     * Aclara que las grasas y aceites simplemente desnaturalizados no se clasifican en la partida 15.18.
+     * Clasifica en la partida 15.22 los residuos del tratamiento de grasas, como las pastas de neutralización o la brea esteárica.
+   * Nota de Relevancia Merceológica: Estas notas son cruciales para definir el alcance del capítulo. Distinguen entre las grasas y aceites en bruto o simplemente refinados de este capítulo, y las preparaciones alimenticias elaboradas (Cap. 21) o los productos químicos derivados (Sección VI). También establecen criterios técnicos para diferenciar tipos de aceite, como el de oliva.
+SECCIÓN IV: PRODUCTOS DE LAS INDUSTRIAS ALIMENTARIAS; BEBIDAS...
+Nota de la Sección
+ * Resumen: Define "pellets" como productos aglomerados por presión con un aglutinante no superior al 3% en peso.
+ * Nota de Relevancia Merceológica: Proporciona una definición técnica estándar para el término "pellets" aplicable a toda la sección.
+Nota Complementaria Centroamericana
+ * Resumen: Define "lactantes" como niños de hasta 12 meses de edad y "niños de corta edad" como aquellos de más de 12 meses y hasta 36 meses.
+ * Nota de Relevancia Merceológica: Es una definición clave para clasificar correctamente las "preparaciones para la alimentación de lactantes o niños de corta edad", que a menudo tienen un tratamiento arancelario especial.
+Nota Legal Nacional
+ * Resumen: Establece que el término "orgánico" u "orgánica" solo aplica a productos con certificación de un organismo registrado en el país exportador.
+ * Nota de Relevancia Merceológica: Impone un requisito documental para la clasificación en subpartidas "orgánicas", lo cual es crucial para la correcta aplicación de aranceles.
+CAPÍTULO 16: PREPARACIONES DE CARNE, PESCADO...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye la carne, pescado, etc., preparados por los procedimientos de los Capítulos 2 y 3 (por ejemplo, simplemente salados, secos o ahumados). Este capítulo es para preparaciones más elaboradas.
+     * Establece una regla del 20%: las preparaciones alimenticias se clasifican aquí si contienen más del 20% en peso de carne, pescado, embutidos, etc. Si contiene más de un tipo, se clasifica por el que predomine en peso.
+   * Nota de Relevancia Merceológica: La Nota 2 es una regla cuantitativa fundamental. El porcentaje del 20% es el umbral que define si una preparación alimenticia mixta pertenece a este capítulo o a otros (como el 19 o 21).
+CAPÍTULO 17: AZÚCARES Y ARTÍCULOS DE CONFITERÍA
+ * Nota del Capítulo:
+   * Resumen: Excluye los artículos de confitería que contengan cacao (se clasifican en la partida 18.06), los azúcares químicamente puros (excepto sacarosa, lactosa, etc.) de la partida 29.40 y los medicamentos (Capítulo 30).
+   * Nota de Relevancia Merceológica: La principal función de esta nota es establecer la línea divisoria entre los dulces sin cacao (Capítulo 17) y los que sí lo contienen (Capítulo 18), una de las distinciones más comunes en la clasificación de alimentos.
+CAPÍTULO 18: CACAO Y SUS PREPARACIONES
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye preparaciones con más de 20% de carne, pescado, etc. (Capítulo 16) y una lista de otras preparaciones alimenticias (04.03, 19.01, 21.05, etc.).
+     * Aclara que la partida 18.06 (chocolate y demás preparaciones) incluye los artículos de confitería con cacao y otras preparaciones alimenticias que lo contengan.
+   * Nota de Relevancia Merceológica: Al igual que en el capítulo anterior, estas notas definen los límites del capítulo. La Nota 2 confirma que la partida 18.06 es la correcta para la mayoría de las preparaciones alimenticias que contienen cacao, lo que la convierte en una partida de referencia clave.
+CAPÍTULO 19: PREPARACIONES A BASE DE CEREALES, HARINA...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye preparaciones con más del 20% de carne, pescado, etc. (excepto los productos rellenos de la partida 19.02), alimentos para animales (23.09) y medicamentos (Cap. 30).
+     * Define qué se entiende por "harina" y "sémola" para los fines de la partida 19.01.
+     * Excluye de la partida 19.04 las preparaciones con un contenido de cacao superior al 6%.
+     * Define la expresión "preparados de otro modo" para la partida 19.04 como un tratamiento más avanzado que los previstos en los Capítulos 10 u 11.
+   * Nota de Relevancia Merceológica: Estas notas son cruciales. La Nota 1 (regla del 20%) y la Nota 3 (regla del 6% de cacao) establecen umbrales cuantitativos que determinan la clasificación. La Nota 4 ayuda a diferenciar entre los cereales simplemente trabajados (Cap. 11) y las preparaciones a base de cereales (Cap. 19), como los cereales para el desayuno.
+CAPÍTULO 20: PREPARACIONES DE HORTALIZAS, FRUTAS U OTROS FRUTOS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye las hortalizas y frutas simplemente conservadas por los procedimientos de los Capítulos 7, 8 u 11.
+     * Excluye las jaleas, pastas de fruta, etc., que se presenten como artículos de confitería (17.04) o de chocolate (18.06).
+     * Aclara que ciertas partidas (20.01, 20.04, 20.05) comprenden solo productos de los Capítulos 7, 11.05 o 11.06.
+     * Establece que el jugo de tomate con un extracto seco igual o superior al 7% se clasifica en la partida 20.02.
+     * Define la expresión "obtenidos por cocción".
+     * Define los jugos "sin fermentar y sin adición de alcohol" (grado alcohólico ≤ 0.5% vol.).
+   * Nota de Relevancia Merceológica: Estas notas distinguen entre la simple conservación (Caps. 7, 8) y la "preparación" (Cap. 20). Las notas 4 y 6 son especialmente importantes porque establecen criterios técnicos (contenido de extracto seco, grado alcohólico) que determinan la clasificación de productos clave como los jugos.
+CAPÍTULO 21: PREPARACIONES ALIMENTICIAS DIVERSAS
+ * Notas del Capítulo:
+   * Resumen:
+     * Enumera una larga lista de exclusiones, como las mezclas de hortalizas (07.12), sucedáneos del café con café (09.01), especias (Cap. 9), preparaciones con más de 20% de carne/pescado (Cap. 16), etc.
+     * Aclara que los extractos de sucedáneos del café se clasifican en la partida 21.01.
+     * Define las "preparaciones alimenticias compuestas homogeneizadas" (alimentos para bebés o dietéticos) de la partida 21.04.
+   * Nota de Relevancia Merceológica: Siendo este un capítulo para preparaciones alimenticias no expresadas en otra parte, sus notas de exclusión son la principal herramienta para el clasificador. La Nota 1 es una guía exhaustiva que ayuda a descartar otros capítulos antes de considerar el 21. La Nota 3 define un tipo de producto específico con un uso determinado (alimentación infantil/dietética).
+CAPÍTULO 22: BEBIDAS, LÍQUIDOS ALCOHÓLICOS Y VINAGRE
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los productos preparados para uso culinario impropios para el consumo como bebida (ej. 21.03), el agua de mar (25.01), el agua destilada (28.53), medicamentos (Cap. 30), etc.
+     * Establece que el grado alcohólico volumétrico se determina a 20 °C.
+     * Define "bebidas no alcohólicas" como aquellas con un grado alcohólico inferior o igual a 0.5% vol.
+   * Nota de Relevancia Merceológica: La Nota 3 es la más importante, ya que establece el umbral técnico (0.5% vol. de alcohol) que separa las bebidas no alcohólicas (22.02) de las alcohólicas (22.03 a 22.08). La Nota 2 estandariza el método de medición.
+CAPÍTULO 23: RESIDUOS Y DESPERDICIOS DE LAS INDUSTRIAS ALIMENTARIAS...
+ * Nota del Capítulo:
+   * Resumen: Aclara que la partida 23.09 incluye productos para la alimentación de animales que han perdido las características de la materia originaria, pero excluye los simples desperdicios vegetales de esos mismos tratamientos.
+   * Nota de Relevancia Merceológica: Esta nota es crucial para distinguir entre subproductos vegetales que conservan su carácter original (clasificados en otros capítulos) y los que, por su tratamiento, se han convertido en "alimentos preparados para animales" (23.09).
+CAPÍTULO 24: TABACO Y SUCEDÁNEOS DEL TABACO ELABORADOS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los cigarrillos medicinales (Capítulo 30).
+     * Establece que cualquier producto que pueda clasificarse en la partida 24.04 y en otra partida del capítulo, se clasificará en la 24.04.
+     * Define la "inhalación sin combustión".
+   * Nota de Relevancia Merceológica: La Nota 2 establece una regla de prioridad para la partida 24.04, que cubre los nuevos productos de tabaco o nicotina (como los de vapeo o tabaco calentado), asegurando que se clasifiquen allí y no en las partidas más tradicionales.
+SECCIÓN V: PRODUCTOS MINERALES
+Este documento no contiene una nota específica para la Sección V, pero sí para sus capítulos.
+CAPÍTULO 25: SAL; AZUFRE; TIERRAS Y PIEDRAS; YESOS, CALES Y CEMENTOS
+ * Notas del Capítulo:
+   * Resumen:
+     * Establece los tratamientos permitidos para los productos de este capítulo (lavado, triturado, molido, etc.), excluyendo procesos como la calcinación o la mezcla, salvo que la partida lo permita.
+     * Presenta una lista de exclusiones, como el azufre sublimado (28.02), medicamentos (Cap. 30), adoquines (68.01), piedras preciosas (Cap. 71), etc.
+     * Da prioridad a la partida 25.17 sobre cualquier otra del capítulo si un producto pudiera clasificarse en ambas.
+     * Amplía el contenido de la partida 25.30 para incluir una lista diversa de materias minerales no especificadas en otras partidas (vermiculita, tierras colorantes, etc.).
+   * Nota de Relevancia Merceológica: La Nota 1 es fundamental, ya que define el estado en que deben presentarse los productos (generalmente en bruto o con trabajos simples). Cualquier tratamiento que supere lo permitido puede cambiar la clasificación del producto a otro capítulo (ej. a manufacturas del Cap. 68). La Nota 3 establece una regla de prioridad interna del capítulo.
+CAPÍTULO 26: MINERALES METALÍFEROS, ESCORIAS Y CENIZAS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye una serie de productos como escorias para macadán (25.17), escorias de desfosforación como abono (Cap. 31), lana de escoria (68.06), desperdicios de metal precioso (Cap. 71), etc.
+     * Define el término "minerales" para las partidas 26.01 a 26.17 como aquellos utilizados en metalurgia para la extracción de metales.
+     * Define el alcance de la partida 26.20 para incluir escorias, cenizas y residuos utilizados para la extracción de metal o la fabricación de compuestos metálicos.
+   * Nota de Relevancia Merceológica: Estas notas son clave para distinguir los minerales en bruto de este capítulo de los metales ya procesados (Sección XV) o de los residuos que no tienen valor para la extracción de metal. La Nota 2, en particular, establece un criterio de uso (metalurgia) para la clasificación.
+CAPÍTULO 27: COMBUSTIBLES MINERALES, ACEITES MINERALES...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los productos orgánicos de constitución química definida (excepto metano y propano puros), medicamentos (Cap. 30) y ciertas mezclas de hidrocarburos no saturados (Cap. 33 o 38).
+     * Define "aceites de petróleo o de mineral bituminoso" (27.10) de forma amplia, incluyendo aceites análogos y aquellos donde los constituyentes no aromáticos predominan en peso.
+     * Define "desechos de aceites" (27.10) como aquellos que contienen principalmente aceites de petróleo o de mineral bituminoso.
+   * Nota de Relevancia Merceológica: La Nota 2 es de gran importancia, ya que amplía la definición de "aceites de petróleo", permitiendo clasificar en la partida 27.10 una gama más amplia de productos que comparten características similares, independientemente de su proceso de obtención.
+ * Notas Complementarias Centroamericanas:
+   * Resumen: Proporcionan definiciones técnicas muy detalladas para diferentes tipos de aceites y combustibles (éter de petróleo, gasolina, keroseno, diésel, etc.) basadas en normas técnicas específicas como ISO 3405 y ASTM D 86/D 93 (puntos de destilación, inflamación, etc.).
+   * Nota de Relevancia Merceológica: Son extremadamente relevantes para la subclasificación. La correcta clasificación de los productos petrolíferos depende de cumplir con los parámetros técnicos precisos definidos en estas notas. Permiten diferenciar, por ejemplo, entre distintos tipos de gasolinas o kerosenos.
+SECCIÓN VI: PRODUCTOS DE LAS INDUSTRIAS QUÍMICAS O DE LAS INDUSTRIAS CONEXAS
+Notas de la Sección
+ * Resumen:
+   * Establece una regla de prioridad: los productos que respondan a las partidas 28.44 (radiactivos) o 28.45 (isótopos), o a las partidas 28.43, 28.46 o 28.52 (compuestos específicos), se clasificarán en dichas partidas y no en otra de la Sección.
+   * Da prioridad a partidas específicas de productos acondicionados para la venta al por menor (ej., 30.04, 33.03, 38.08) sobre otras partidas de la Nomenclatura.
+   * Establece la regla para clasificar los "surtidos" o "juegos" cuyos componentes están destinados a mezclarse para formar un producto de las Secciones VI o VII.
+   * Da prioridad a la partida que menciona un producto por su nombre o función sobre la partida 38.27 si pudiera clasificarse en ambas.
+ * Nota de Relevancia Merceológica: Estas notas establecen el orden jerárquico para la clasificación dentro de la sección más compleja de la nomenclatura. La Nota 1 da prioridad a ciertas partidas sobre otras. La Nota 2 da prioridad al acondicionamiento para la venta al por menor sobre la composición química. La Nota 3 resuelve cómo clasificar "kits". Son reglas fundamentales para navegar por los capítulos de química.
+CAPÍTULO 28: PRODUCTOS QUÍMICOS INORGÁNICOS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Define el alcance del capítulo: se aplica a elementos y compuestos de constitución química definida, sus disoluciones, y a estos productos con aditivos necesarios para su conservación o transporte, o con colorantes para seguridad.
+     * Enumera los únicos compuestos de carbono que se clasifican en este capítulo (el resto son orgánicos del Capítulo 29).
+     * Lista exclusiones importantes, como productos de la Sección V, la mayoría de los compuestos órgano-inorgánicos, abonos del Cap. 31, etc.
+     * Clasifica los ácidos complejos en la partida 28.11.
+     * Limita las partidas 28.26 a 28.42 a sales y peroxosales, y establece que las sales dobles o complejas se clasifican en 28.42.
+     * Define el alcance de la partida 28.44 para los elementos radiactivos.
+     * Clasifica los cuprofósforos con más del 15% de fósforo en la partida 28.53.
+     * Distingue entre elementos dopados en bruto (Cap. 28) y los cortados en discos u obleas (38.18).
+   * Nota de Relevancia Merceológica: Son la base de la química arancelaria. La Nota 1 (constitución química definida) y la Nota 2 (lista de compuestos de carbono) son las reglas más importantes para separar los productos químicos inorgánicos (Cap. 28) de los orgánicos (Cap. 29) y de las mezclas (generalmente Cap. 38).
+CAPÍTULO 29: PRODUCTOS QUÍMICOS ORGÁNICOS
+ * Notas del Capítulo:
+   * Resumen:
+     * Define el alcance del capítulo: se aplica a compuestos orgánicos de constitución química definida (aislados o como mezclas de isómeros), y a productos específicos (29.36 a 29.41) aunque no sean de constitución química definida.
+     * Lista exclusiones importantes: glicerol en bruto (15.20), alcohol etílico (Cap. 22), metano y propano (27.11), etc.
+     * Regla de prioridad: si un producto puede clasificarse en dos o más partidas del capítulo, se clasifica en la última por orden de numeración.
+     * Define los derivados mixtos (sulfohalogenados, etc.) y las "funciones oxigenadas".
+     * Establece reglas complejas para la clasificación de ésteres y sales de compuestos orgánicos.
+     * Define los compuestos órgano-inorgánicos de las partidas 29.30 y 29.31.
+     * Aclara exclusiones para las partidas de compuestos heterocíclicos (29.32, 29.33, 29.34).
+     * Define el término "hormonas" para la partida 29.37.
+   * Nota de Relevancia Merceológica: Al igual que en el Cap. 28, estas notas son el fundamento de la clasificación de productos químicos. La Nota 1 (constitución química definida) es la regla principal. La Nota 3 (clasificar en la última partida) es una regla de oro para resolver dudas dentro del capítulo. Las Notas 5, 6 y 7 son muy técnicas y esenciales para clasificar correctamente derivados complejos como ésteres, sales y compuestos heterocíclicos.
+CAPÍTULO 30: PRODUCTOS FARMACÉUTICOS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye alimentos (incluso dietéticos), productos con nicotina para dejar de fumar (24.04), cosméticos (Cap. 33), jabones (34.01), etc., aunque tengan propiedades terapéuticas.
+     * Define "productos inmunológicos" para la partida 30.02.
+     * Define qué se considera "productos sin mezclar" y "productos mezclados" para las partidas 30.03 y 30.04.
+     * Enumera de forma limitativa los únicos productos que se clasifican en la partida 30.06 (suturas estériles, botiquines, anticonceptivos químicos, desechos farmacéuticos, etc.).
+   * Nota de Relevancia Merceológica: Este capítulo tiene una estructura muy particular. La Nota 4 es de suma importancia, ya que la partida 30.06 funciona como un "cajón de sastre" para artículos farmacéuticos específicos que no encajan en otro lugar. Las Notas 1 y 3 son cruciales para diferenciar un "medicamento" (Cap. 30) de un "complemento alimenticio" (Cap. 21) o un cosmético (Cap. 33), una distinción fundamental que depende del propósito principal del producto.
+CAPÍTULO 31: ABONOS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye la sangre animal (05.11) y la mayoría de los productos de constitución química definida.
+     * Limita la partida 31.02 (abonos nitrogenados) a una lista específica de productos (urea, nitrato de amonio, etc.) y sus mezclas.
+     * Limita la partida 31.03 (abonos fosfatados) a una lista específica de productos (superfosfatos, escorias, etc.) y sus mezclas.
+     * Limita la partida 31.04 (abonos potásicos) a una lista específica de sales de potasio y sus mezclas.
+     * Clasifica específicamente los fosfatos de amonio en la partida 31.05.
+     * Define "los demás abonos" de la partida 31.05 como productos que contienen al menos uno de los tres elementos fertilizantes principales (nitrógeno, fósforo, potasio).
+   * Nota de Relevancia Merceológica: El capítulo está estructurado de forma muy rígida. Las Notas 2, 3 y 4 son de carácter limitativo, lo que significa que solo los productos explícitamente mencionados en ellas (y sus mezclas) pueden clasificarse en esas partidas. Esto obliga al clasificador a verificar la composición química exacta del abono para determinar si pertenece a las partidas de abonos "simples" (31.02-31.04) o a la de abonos "compuestos" o "complejos" (31.05).
+CAPÍTULO 32: EXTRACTOS CURTIENTES O TINTÓREOS; PINTURAS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye productos de constitución química definida (con excepciones), tanatos (Cap. 29), mástiques de asfalto (27.15).
+     * Aclara la clasificación de mezclas para producir colorantes azoicos (32.04).
+     * Define que las partidas de materias colorantes (32.03-32.06) también incluyen "preparaciones" a base de estas, utilizadas para colorear o fabricar preparaciones colorantes.
+     * Establece la "regla del 50%": las disoluciones de plásticos (Cap. 39) en disolventes orgánicos volátiles se clasifican como barnices (32.08) si el disolvente supera el 50% del peso de la disolución.
+     * Define que "materias colorantes" no incluye productos usados como carga en pinturas.
+     * Define técnicamente las "hojas para el marcado a fuego" (32.12).
+   * Nota de Relevancia Merceológica: La Nota 4 es una regla cuantitativa muy importante que establece el límite entre una disolución de plástico (Cap. 39) y un barniz (32.08), basándose en la proporción del disolvente. La Nota 3 amplía el alcance de las partidas de pigmentos para incluir preparaciones, lo que simplifica la clasificación de colorantes no puros.
+CAPÍTULO 33: ACEITES ESENCIALES; PREPARACIONES DE PERFUMERÍA...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye oleorresinas naturales (Cap. 13), jabón (34.01) y esencias de trementina (38.05).
+     * Define "sustancias odoríferas" para la partida 33.02.
+     * Aclara que las partidas 33.03 a 33.07 se aplican a productos acondicionados para la venta al por menor para los usos descritos en ellas.
+     * Define el alcance de "preparaciones de perfumería, de tocador o de cosmética" (33.07) para incluir productos como bolsitas aromáticas, papeles perfumados, etc.
+   * Nota de Relevancia Merceológica: La Nota 3 es clave, ya que indica que el acondicionamiento para la venta al por menor es un factor determinante para la clasificación en este capítulo. Un producto químico que de otro modo iría al Capítulo 29 puede clasificarse aquí si está envasado para su uso final como cosmético.
+CAPÍTULO 34: JABÓN, AGENTES DE SUPERFICIE ORGÁNICOS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye preparaciones alimenticias (15.17), compuestos de constitución química definida y productos de tocador como champús o cremas de afeitar (Cap. 33).
+     * Define el término "jabón" para la partida 34.01 y establece que los que contienen abrasivos solo se clasifican ahí si están en barras o panes; de lo contrario, van a la partida 34.05.
+     * Proporciona una definición técnica de "agentes de superficie orgánicos" (34.02) basada en su comportamiento en el agua y su capacidad para reducir la tensión superficial.
+     * Hace referencia a la Nota 2 del Capítulo 27 para la definición de "aceites de petróleo".
+     * Define las "ceras artificiales y ceras preparadas" de la partida 34.04 y lista las exclusiones.
+   * Nota de Relevancia Merceológica: Las Notas 2 y 3 son muy importantes. La Nota 2 establece un criterio de forma (barras, panes) para clasificar jabones con abrasivos. La Nota 3 ofrece una definición funcional y técnica que es la base para identificar si una sustancia es un agente tensoactivo de la partida 34.02.
+CAPÍTULO 35: MATERIAS ALBUMINOIDEAS; PRODUCTOS A BASE DE ALMIDÓN...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye levaduras (21.02), fracciones de la sangre y medicamentos (Cap. 30), preparaciones enzimáticas para precurtido (32.02) o para lavado (34.01), y proteínas endurecidas (39.13).
+     * Define el término "dextrina" (35.05) con base en su contenido de azúcares reductores (≤10%). Si el contenido es superior, el producto se clasifica en la partida 17.02.
+   * Nota de Relevancia Merceológica: La Nota 2 establece un umbral químico preciso. El contenido de azúcares reductores es el criterio técnico que determina si un producto de la degradación del almidón se clasifica como dextrina (35.05) o como un tipo de azúcar (17.02).
+CAPÍTULO 36: PÓLVORA Y EXPLOSIVOS; ARTÍCULOS DE PIROTECNIA...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye productos de constitución química definida, salvo excepciones.
+     * Define de forma limitativa qué se considera "artículos de materias inflamables" para la partida 36.06 (combustibles sólidos o en pasta, combustibles líquidos en envases para recargar encendedores, antorchas de resina, etc.).
+   * Nota de Relevancia Merceológica: La Nota 2 es una nota definitoria de alcance. Limita la partida 36.06 a un conjunto específico de productos, evitando que otros artículos inflamables se clasifiquen erróneamente en ella.
+CAPÍTULO 37: PRODUCTOS FOTOGRÁFICOS O CINEMATOGRÁFICOS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los desperdicios y materiales de desecho.
+     * Define el término "fotográfico" como el procedimiento de formar imágenes visibles en superficies fotosensibles por la acción de la luz u otras radiaciones.
+   * Nota de Relevancia Merceológica: La Nota 2 es una definición amplia y moderna que abarca no solo la fotografía tradicional sino también procedimientos más nuevos que utilizan radiación para formar imágenes, asegurando que el capítulo se mantenga actualizado tecnológicamente.
+CAPÍTULO 38: PRODUCTOS DIVERSOS DE LAS INDUSTRIAS QUÍMICAS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye productos de constitución química definida (con excepciones notables como los insecticidas y herbicidas de la 38.08), mezclas alimenticias, medicamentos, etc.
+     * Define "material de referencia certificado" y le da prioridad de clasificación en la partida 38.22 sobre cualquier otra.
+     * Clasifica en la partida 38.24 una lista heterogénea de productos (cristales cultivados, aceites de fusel, correctores líquidos, etc.) y les da prioridad sobre otras partidas.
+     * Define "desechos municipales".
+     * Define "lodos de depuración" (38.25).
+     * Define "los demás desechos" (38.25), incluyendo desechos clínicos y de disolventes.
+     * Define "biodiésel" (38.26).
+   * Nota de Relevancia Merceológica: Este es el capítulo residual por excelencia de la industria química. Sus notas son mayormente de exclusión y de inclusión específica. Las Notas 2 y 3 son muy importantes porque crean "partidas de atracción" para ciertos productos (materiales de referencia, correctores líquidos) que, de otro modo, serían difíciles de clasificar.
+SECCIÓN VII: PLÁSTICO Y SUS MANUFACTURAS; CAUCHO Y SUS MANUFACTURAS
+Notas de la Sección
+ * Resumen:
+   * Establece la regla para clasificar los "surtidos" o "juegos" cuyos componentes están destinados a mezclarse para formar un producto de las Secciones VI o VII.
+   * Envía al Capítulo 49 los artículos de plástico y caucho con impresiones que no tengan un carácter accesorio.
+ * Nota de Relevancia Merceológica: La Nota 1 es una regla de clasificación para "kits" que es fundamental para productos como los adhesivos de dos componentes. La Nota 2 establece una frontera basada en la importancia de la impresión, distinguiendo un artículo funcional (Sección VII) de un producto impreso (Capítulo 49).
+CAPÍTULO 39: PLÁSTICO Y SUS MANUFACTURAS
+ * Notas del Capítulo:
+   * Resumen:
+     * Define "plástico" de forma muy amplia.
+     * Lista numerosas exclusiones (preparaciones lubricantes, ceras, artículos de talabartería, textiles, calzado, muebles, juguetes, etc.).
+     * Limita las partidas 39.01 a 39.11 a polímeros obtenidos por síntesis química.
+     * Define "copolímeros" y establece la regla de clasificación por la unidad comonomérica predominante en peso.
+     * Establece que los polímeros modificados químicamente se clasifican con el polímero original.
+     * Define qué se considera "formas primarias" (líquidos, pastas, polvos, gránulos, etc.).
+     * Aclara que los desechos de una sola materia termoplástica transformados en formas primarias vuelven a las partidas 39.01 a 39.14.
+     * Define "tubos" para la partida 39.17.
+     * Define "revestimientos de plástico para paredes o techos" para la partida 39.18.
+     * Define "placas, láminas, hojas y tiras" para las partidas 39.20 y 39.21.
+     * Enumera limitativamente los artículos de construcción que se clasifican en la partida 39.25.
+   * Nota de Relevancia Merceológica: Este capítulo se rige por notas muy estructuradas. Las Notas 1, 3, 4 y 5 son fundamentales, pues definen qué es un plástico, un polímero primario y un copolímero, y cómo clasificarlos según su composición química. La Nota 6 es crucial para distinguir entre materias primas (39.01-39.14) y semimanufacturas o manufacturas. La Nota 11 define el alcance de una partida clave para la construcción.
+CAPÍTULO 40: CAUCHO Y SUS MANUFACTURAS
+ * Notas del Capítulo:
+   * Resumen:
+     * Define "caucho" de forma amplia, incluyendo el natural, sintético, facticio y regenerado.
+     * Lista las exclusiones (textiles, calzado, tocados, etc.).
+     * Define "formas primarias" para el caucho.
+     * Establece los criterios técnicos (elasticidad, recuperación) para definir el "caucho sintético".
+     * Especifica qué aditivos excluyen al caucho de las partidas 40.01 y 40.02 (materias en bruto) y cuáles están permitidos en pequeñas cantidades.
+     * Define "desechos, desperdicios y recortes".
+     * Envía a la partida 40.08 los hilos de caucho de más de 5 mm.
+     * Define el alcance de las correas de la partida 40.10.
+     * Define "placas, hojas y tiras" para las partidas de caucho en bruto o semimanufacturado.
+   * Nota de Relevancia Merceológica: Las Notas 1 y 4 son las más importantes, ya que definen el producto base del capítulo. La Nota 4 es especialmente técnica y establece las propiedades físicas que debe cumplir un polímero para ser considerado "caucho sintético", distinguiéndolo de los plásticos del Capítulo 39. La Nota 5 es clave para diferenciar el caucho en bruto del caucho mezclado y listo para vulcanizar.
+SECCIÓN VIII: PIELES, CUEROS, PELETERÍA Y MANUFACTURAS...
+Este documento no contiene una nota específica para la Sección VIII, pero sí para sus capítulos.
+CAPÍTULO 41: PIELES (EXCEPTO LA PELETERÍA) Y CUEROS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye recortes en bruto, pieles de ave con plumas y pieles sin depilar de animales de pelo (que van al Cap. 43, Peletería). Sin embargo, hace una excepción importante, manteniendo en este capítulo las pieles sin depilar de bovino, equino, ovino (con excepciones), caprino (con excepciones), porcino, etc.
+     * Aclara que los cueros con un curtido reversible no se clasifican en las partidas 41.04 a 41.06 (cueros ya preparados) sino en las partidas de cueros en bruto (41.01 a 41.03). También define el término "crust".
+     * Define el "cuero regenerado" como las materias de la partida 41.15.
+   * Nota de Relevancia Merceológica: La Nota 1c es fundamental. Establece la distinción entre "cuero" (Cap. 41) y "peletería" (Cap. 43), que no se basa en si la piel tiene pelo o no, sino en el tipo de animal del que procede. La Nota 2 es importante para distinguir entre etapas del proceso de curtido.
+CAPÍTULO 42: MANUFACTURAS DE CUERO; ARTÍCULOS DE TALABARTERÍA...
+ * Notas del Capítulo:
+   * Resumen:
+     * Define "cuero natural" para los fines del capítulo.
+     * Lista las exclusiones, como suturas estériles, prendas con forro de peletería, calzado, sombreros, etc.
+     * Establece reglas para la partida 42.02, excluyendo bolsas de plástico de un solo uso y artículos de cestería. También aclara que la presencia de metales preciosos o joyas no cambia la clasificación si no confieren el carácter esencial.
+     * Define "prendas y complementos (accesorios), de vestir" para la partida 42.03, incluyendo guantes, cinturones, etc.
+   * Nota de Relevancia Merceológica: Este capítulo cubre manufacturas. Sus notas son cruciales para delimitar su alcance y evitar que se clasifiquen aquí artículos que tienen una partida más específica por su función (ej. calzado, muebles). La Nota 3B es una aplicación directa de la Regla General 3(b) sobre el carácter esencial.
+CAPÍTULO 43: PELETERÍA Y CONFECCIONES DE PELETERÍA...
+ * Notas del Capítulo:
+   * Resumen:
+     * Define "peletería" como las pieles de todos los animales curtidas o adobadas, sin depilar.
+     * Excluye pieles de ave, cueros sin depilar del Cap. 41, guantes mixtos de cuero y peletería, calzado, sombreros, juguetes.
+     * Define el alcance de la partida 43.03 (artículos de peletería ensamblada).
+     * Establece cuándo una prenda forrada con peletería se clasifica en este capítulo.
+     * Define "peletería facticia o artificial" y la distingue de las imitaciones obtenidas por tejido o punto.
+   * Nota de Relevancia Merceológica: La Nota 1, en conjunto con la Nota 1c del Capítulo 41, es la base para diferenciar entre cuero y peletería. Las Notas 4 y 5 son importantes para clasificar correctamente las prendas de vestir que combinan textiles o cuero con peletería (natural o artificial) y para distinguir la peletería facticia de los tejidos de pelo largo (Cap. 58 o 60).
+SECCIÓN IX: MADERA, CARBÓN VEGETAL Y MANUFACTURAS DE MADERA...
+Este documento no contiene una nota específica para la Sección IX, pero sí para sus capítulos.
+CAPÍTULO 44: MADERA, CARBÓN VEGETAL Y MANUFACTURAS DE MADERA
+ * Notas del Capítulo:
+   * Resumen:
+     * Contiene una extensa lista de exclusiones, principalmente manufacturas de madera que por su función se clasifican en otra parte (ej. artículos de viaje, muebles, juguetes, instrumentos musicales, etc.).
+     * Define "madera densificada".
+     * Asimila los artículos de tableros de partículas, de fibra, etc., a los artículos correspondientes de madera maciza.
+     * Permite que los productos de las partidas 44.10 a 44.12 estén trabajados (perfilados, curvados, etc.) siempre que eso no les dé el carácter de artículos de otras partidas.
+     * Excluye de la partida 44.17 las herramientas cuya parte operante sea de las materias del Capítulo 82.
+     * Establece que, salvo disposición en contrario, el término "madera" en el capítulo incluye también al bambú.
+   * Nota de Relevancia Merceológica: La Nota 1 es fundamental, ya que este capítulo cubre la madera y sus manufacturas básicas, pero excluye la gran mayoría de artículos terminados que tienen una función específica (muebles, herramientas, etc.). La Nota 3 es muy importante porque amplía el alcance de las partidas de manufacturas para incluir no solo las de madera maciza, sino también las hechas con aglomerados y tableros. La Nota 6 amplía el alcance material del capítulo para incluir el bambú.
+CAPÍTULO 45: CORCHO Y SUS MANUFACTURAS
+ * Nota del Capítulo:
+   * Resumen: Excluye el calzado (Cap. 64), los sombreros (Cap. 65) y los juguetes o artículos de deporte (Cap. 95).
+   * Nota de Relevancia Merceológica: Es una nota de exclusión simple que dirige los artículos confeccionados de corcho con una función específica a sus capítulos correspondientes, dejando en el Capítulo 45 el corcho como materia y sus manufacturas no especificadas en otra parte.
+CAPÍTULO 46: MANUFACTURAS DE ESPARTERÍA O CESTERÍA
+ * Notas del Capítulo:
+   * Resumen:
+     * Define "materia trenzable" (paja, mimbre, bambú, tiras de plástico, etc.) y la distingue de materias primas textiles.
+     * Excluye los revestimientos de paredes (48.14), cordeles (56.07), calzado (Cap. 64), sombreros (Cap. 65), vehículos (Cap. 87) y muebles (Cap. 94).
+     * Define los productos "paralelizados" de la partida 46.01.
+   * Nota de Relevancia Merceológica: La Nota 1 es esencial para entender el alcance del capítulo, ya que define la materia prima por su aptitud para ser trenzada. La Nota 2 es una lista de exclusiones clave, que evita que artículos como los muebles de mimbre o los sombreros de paja se clasifiquen aquí.
+SECCIÓN X: PASTA DE MADERA; PAPEL O CARTÓN...
+Este documento no contiene una nota específica para la Sección X, pero sí para sus capítulos.
+CAPÍTULO 47: PASTA DE MADERA...; PAPEL O CARTÓN PARA RECICLAR...
+ * Nota del Capítulo:
+   * Resumen: Proporciona una definición técnica y química para la "pasta química de madera para disolver" (partida 47.02), basada en el porcentaje de pasta insoluble en una disolución de hidróxido de sodio.
+   * Nota de Relevancia Merceológica: Es una nota definitoria muy técnica. La clasificación correcta en la partida 47.02 depende del cumplimiento de estos parámetros químicos específicos, lo que requiere un análisis de laboratorio para su comprobación.
+CAPÍTULO 48: PAPEL Y CARTÓN; MANUFACTURAS DE PASTA DE CELULOSA...
+ * Notas del Capítulo:
+   * Resumen:
+     * Aclara que "papel" incluye "cartón".
+     * Contiene una larga lista de exclusiones (productos farmacéuticos, papeles cosméticos, sensibilizados, artículos de viaje, etc.).
+     * Define qué tipos de acabados simples (alisado, satinado, etc.) no modifican la clasificación en las partidas 48.01 a 48.05.
+     * Define con criterios técnicos (composición de fibras, peso, rugosidad) el "papel prensa".
+     * Define con criterios técnicos (composición de fibras, cenizas, blancura, resistencia) el "papel y cartón de los tipos utilizados para escribir, imprimir...".
+     * Define el "papel y cartón Kraft" (contenido ≥ 80% de fibras al sulfato o a la sosa).
+     * Establece una regla de prioridad: si un papel puede clasificarse en varias partidas de 48.01 a 48.11, se clasifica en la última por orden de numeración.
+     * Establece las dimensiones mínimas (rollos de más de 36 cm de ancho u hojas de más de 36 cm x 15 cm) para que el papel se clasifique en las partidas 48.03 a 48.09.
+     * Define el "papel para decorar y revestimientos... de paredes".
+     * Excluye las hojas y tarjetas sueltas de la partida 48.20.
+     * Incluye en la partida 48.23 el papel perforado para mecanismos Jacquard.
+     * Envía al Capítulo 49 el papel cuya impresión no sea accesoria.
+   * Nota de Relevancia Merceológica: Este capítulo es altamente técnico. Las Notas 4, 5 y 6 son cruciales, ya que la clasificación de los tipos de papel más comunes depende de porcentajes de fibra, peso por metro cuadrado y otros parámetros físicos. La Nota 8 es fundamental para distinguir entre papel "en bruto" o en grandes formatos (48.01-48.11) y el papel ya cortado a formatos más pequeños o para usos específicos, que se clasifica más adelante. La Nota 7 es una regla de oro para resolver conflictos de clasificación dentro del capítulo.
+CAPÍTULO 49: PRODUCTOS EDITORIALES, DE LA PRENSA...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye negativos fotográficos (Cap. 37), mapas en relieve (90.23), naipes (Cap. 95) y obras de arte originales o antigüedades (Cap. 97).
+     * Define "impreso" de forma amplia, incluyendo reproducciones por fotocopia, mecanografiado, etc.
+     * Establece que los diarios y publicaciones periódicas se clasifican en la partida 49.01 si están encuadernados.
+     * Amplía el alcance de la partida 49.01 para incluir colecciones de grabados, láminas que acompañan a un libro y libros en fascículos.
+     * Excluye de la partida 49.01 las publicaciones principalmente publicitarias (folletos, catálogos), que se clasifican en la 49.11.
+     * Define los "álbumes o libros de estampas para niños" (49.03) como aquellos donde la ilustración es el atractivo principal.
+   * Nota de Relevancia Merceológica: Este capítulo se basa en la naturaleza y el propósito del producto impreso. La Nota 5 es muy importante, ya que establece la distinción fundamental entre el material editorial/informativo (ej. 49.01, 49.02) y el material puramente publicitario (49.11). La Nota 6 ayuda a clasificar los libros infantiles basándose en el predominio de la imagen sobre el texto.
+SECCIÓN XI: MATERIAS TEXTILES Y SUS MANUFACTURAS
+Notas de la Sección
+ * Resumen:
+   * Extensa lista de exclusiones (pelos para cepillería, amianto, calzado, muebles, juguetes, etc.).
+   * Regla de la materia predominante: los productos textiles con dos o más materias se clasifican según la que predomine en peso. Si ninguna predomina, se clasifican en la última partida posible.
+   * Define "cordeles, cuerdas y cordajes" con base en su título (grosor).
+   * Define "hilados acondicionados para la venta al por menor" con base en su peso y presentación (ovillos, bobinas, etc.).
+   * Define "hilo de coser".
+   * Define "hilados de alta tenacidad" con base en su resistencia.
+   * Define qué se considera un artículo "confeccionado" (cortado en forma, con dobladillo, cosido, etc.).
+   * Establece una jerarquía entre los capítulos: los artículos confeccionados no se clasifican en los Capítulos 50-55 y 60; los artículos de los Capítulos 56-59 tienen prioridad sobre los de los Capítulos 50-55 y 60.
+   * Asimila a los tejidos las napas de hilados paralelizados y superpuestos.
+   * Incluye en la Sección los productos elásticos que combinan textiles e hilos de caucho.
+   * Aclara que "impregnado" incluye "adherizado".
+   * Aclara que "poliamidas" incluye "aramidas".
+   * Define "hilados de elastómeros".
+   * Establece que las prendas de vestir de diferentes partidas se clasifican por separado, incluso si se presentan en surtidos.
+   * Aclara que los textiles con componentes electrónicos, químicos, etc., se clasifican en esta sección si conservan el carácter esencial de artículo textil.
+ * Nota de Relevancia Merceológica: Esta sección es una de las más complejas y sus notas son la guía indispensable para clasificar cualquier producto textil. La Nota 2 (materia predominante) es la regla fundamental para todos los textiles mezclados. Las Notas 3 a 7 definen técnicamente los productos (hilo de coser, alta tenacidad, etc.) y los estados de fabricación (acondicionado para la venta, confeccionado), que son distinciones cruciales que determinan la partida correcta. La Nota 8 establece el orden de prioridad entre los capítulos de la sección.
+CAPÍTULO 50: SEDA
+Este capítulo no tiene notas específicas en el documento proporcionado.
+CAPÍTULO 51: LANA Y PELO FINO U ORDINARIO; HILADOS Y TEJIDOS DE CRIN
+ * Nota del Capítulo:
+   * Resumen: Define "lana" (de ovinos), "pelo fino" (de alpaca, llama, cabra de Cachemira, conejo de Angora, etc.) y "pelo ordinario" (todos los demás, con excepciones).
+   * Nota de Relevancia Merceológica: Proporciona las definiciones zoológicas exactas para distinguir los tres tipos principales de fibras de este capítulo, lo cual es esencial para la correcta clasificación en las partidas correspondientes.
+CAPÍTULO 52: ALGODÓN
+ * Nota de Subpartida:
+   * Resumen: Define técnicamente los "tejidos de mezclilla" ("denim") para las subpartidas 5209.42 y 5211.42, basándose en el tipo de ligamento (sarga) y la combinación de colores de los hilos de urdimbre y trama.
+   * Nota de Relevancia Merceológica: Es una definición muy específica que permite identificar con precisión un tipo de tejido de gran importancia comercial y clasificarlo correctamente.
+CAPÍTULO 53: LAS DEMÁS FIBRAS TEXTILES VEGETALES...
+Este capítulo no tiene notas específicas en el documento proporcionado.
+CAPÍTULO 54: FILAMENTOS SINTÉTICOS O ARTIFICIALES...
+ * Notas del Capítulo:
+   * Resumen:
+     * Define "fibras sintéticas" (obtenidas por polimerización, como poliéster o poliamidas) y "fibras artificiales" (obtenidas a partir de polímeros naturales, como la celulosa para obtener rayón viscosa).
+     * Excluye los cables de filamentos sintéticos o artificiales, que pertenecen al Capítulo 55.
+   * Nota de Relevancia Merceológica: La Nota 1 es la base de la clasificación de todas las fibras químicas. Establece la distinción fundamental entre sintéticas (totalmente creadas por el hombre) y artificiales (origen natural pero procesadas químicamente), que es el primer criterio de clasificación en este capítulo y el siguiente.
+CAPÍTULO 55: FIBRAS SINTÉTICAS O ARTIFICIALES DISCONTINUAS
+ * Nota del Capítulo:
+   * Resumen: Define con criterios técnicos muy precisos (longitud, torsión, título, etc.) lo que se considera "cables de filamentos" para las partidas 55.01 y 55.02. Los cables que no cumplen estas condiciones se clasifican como fibras discontinuas en las partidas 55.03 o 55.04.
+   * Nota de Relevancia Merceológica: Es una nota definitoria técnica que establece la frontera entre los "cables" (una forma de filamento continuo) de las partidas 55.01 y 55.02, y las "fibras discontinuas" (fibras cortadas) que son la materia prima principal del resto del capítulo.
+CAPÍTULO 56: GUATA, FIELTRO Y TELA SIN TEJER...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye guata, fieltro, etc., cuando son un simple soporte para otras sustancias (cosméticos, detergentes).
+     * Define "fieltro" incluyendo el fieltro punzonado.
+     * Aclara la clasificación del fieltro y la tela sin tejer impregnados, recubiertos o estratificados con plástico o caucho, estableciendo reglas basadas en el contenido de materia textil y en si el recubrimiento es perceptible a simple vista.
+     * Aclara la clasificación de hilados recubiertos o enfundados de la partida 56.04.
+   * Nota de Relevancia Merceológica: La Nota 3 es la más relevante, ya que resuelve la compleja clasificación de los productos mixtos de textil y plástico/caucho. Establece criterios claros para decidir si el producto se clasifica como un textil especial (Cap. 56) o como una manufactura de plástico o caucho (Cap. 39 o 40).
+CAPÍTULO 57: ALFOMBRAS Y DEMÁS REVESTIMIENTOS PARA EL SUELO, DE MATERIA TEXTIL
+ * Notas del Capítulo:
+   * Resumen:
+     * Define "alfombras y demás revestimientos para el suelo, de materia textil" como aquellos en los que la superficie textil queda al exterior después de colocado.
+     * Excluye los productos de protección que se colocan debajo de las alfombras.
+   * Nota de Relevancia Merceológica: La Nota 1 define el alcance del capítulo, incluyendo artículos que, aunque se usen para otros fines, tengan las características de un revestimiento para el suelo (ej. un tapiz para pared).
+CAPÍTULO 58: TEJIDOS ESPECIALES; SUPERFICIES TEXTILES CON MECHÓN INSERTADO; ENCAJES...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los tejidos del Capítulo 59.
+     * Aclara que el terciopelo por trama sin cortar se clasifica en la partida 58.01.
+     * Define "tejido de gasa de vuelta".
+     * Excluye las redes de mallas anudadas de la partida 56.08.
+     * Define "cintas" para la partida 58.06 (tejidos de anchura ≤ 30 cm con orillos, tiras cortadas con falsos orillos, etc.).
+     * Define "bordados" para la partida 58.10, incluyendo la aplicación de lentejuelas, etc.
+     * Incluye en el capítulo los productos hechos con hilos de metal para prendas, tapicería, etc.
+   * Nota de Relevancia Merceológica: Este capítulo agrupa tejidos con una estructura o elaboración especial. La Nota 5 es muy importante porque define con precisión qué se considera una "cinta", distinguiéndola de un tejido normal cortado en tiras. Las Notas 3 y 6 aportan definiciones técnicas clave para la correcta clasificación en sus respectivas partidas.
+CAPÍTULO 59: TELAS IMPREGNADAS, RECUBIERTAS, REVESTIDAS O ESTRATIFICADAS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Define el término "tela" para los fines del capítulo, abarcando una amplia gama de productos textiles.
+     * Define las telas impregnadas, recubiertas, revestidas o estratificadas con plástico de la partida 59.03, estableciendo una serie de exclusiones clave (cuando el recubrimiento no es perceptible, cuando el producto no se puede enrollar sin agrietarse, cuando la tela está totalmente inmersa, etc.).
+     * Define "tejidos estratificados con plástico".
+     * Define "revestimientos de materia textil para paredes".
+     * Define "telas cauchutadas" de la partida 59.06, con criterios de peso y contenido de materia textil.
+     * Excluye de la partida 59.07 las telas cuya impregnación no es perceptible, las telas pintadas (con excepciones), etc.
+     * Excluye de la partida 59.10 ciertas correas de transmisión delgadas o de caucho.
+     * Define de forma limitativa los "productos y artículos textiles para usos técnicos" de la partida 59.11.
+   * Nota de Relevancia Merceológica: Las Notas 2 y 5 son cruciales, ya que establecen los criterios técnicos para clasificar los textiles tratados con plástico o caucho, respectivamente. Estas notas definen la frontera entre los productos que se consideran textiles recubiertos (Cap. 59) y los que se consideran manufacturas de plástico o caucho (Cap. 39 o 40). La Nota 8 es de suma importancia, ya que la partida 59.11 es una partida específica para una lista cerrada de artículos textiles de uso técnico.
+CAPÍTULO 60: TEJIDOS DE PUNTO
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los encajes de croché (58.04), etiquetas de punto (58.07) y los tejidos de punto impregnados o recubiertos del Capítulo 59 (con la excepción del terciopelo y la felpa de punto, que permanecen en 60.01).
+     * Incluye los tejidos de punto con hilos de metal.
+     * Define "de punto" como productos obtenidos por costura por cadeneta.
+   * Nota de Relevancia Merceológica: La Nota 1 establece las principales exclusiones del capítulo. La excepción para el terciopelo de punto es importante, ya que lo mantiene en el capítulo de tejidos de punto a pesar de estar potencialmente recubierto, dándole prioridad sobre el Capítulo 59.
+CAPÍTULO 61: PRENDAS Y COMPLEMENTOS (ACCESORIOS), DE VESTIR, DE PUNTO
+ * Notas del Capítulo:
+   * Resumen:
+     * Limita el capítulo a artículos de punto confeccionados.
+     * Excluye sostenes y fajas (62.12), ropa usada (63.09) y artículos de ortopedia (90.21).
+     * Define "trajes (ambos o ternos) y trajes sastre" y "conjuntos", estableciendo criterios sobre las piezas que los componen, la tela y las tallas.
+     * Define las características de las camisas y blusas de las partidas 61.05 y 61.06.
+     * Establece una exclusión para la partida 61.09 ("T-shirts" y camisetas).
+     * Define "prendas y complementos (accesorios), de vestir, para bebés" y da prioridad a la partida 61.11 sobre otras del capítulo.
+     * Define "monos (overoles) y conjuntos de esquí" para la partida 61.12.
+     * Da prioridad a la partida 61.13 (prendas de tejidos recubiertos) sobre otras del capítulo.
+     * Establece la regla de cierre (izquierda sobre derecha para hombres, derecha sobre izquierda para mujeres).
+     * Aclara que los artículos pueden confeccionarse con hilos de metal.
+   * Nota de Relevancia Merceológica: La Nota 3 es la más importante del capítulo, ya que sus definiciones de "traje" y "conjunto" son fundamentales para clasificar estas prendas, que tienen partidas específicas. El incumplimiento de cualquiera de los criterios (misma tela, número de piezas, etc.) obliga a clasificar las prendas por separado. Las Notas 6, 7 y 8 establecen reglas de prioridad interna.
+CAPÍTULO 62: PRENDAS Y COMPLEMENTOS (ACCESORIOS), DE VESTIR, EXCEPTO LOS DE PUNTO
+ * Notas del Capítulo:
+   * Resumen: Este capítulo contiene notas análogas a las del Capítulo 61, pero aplicadas a prendas de tejido plano (no de punto).
+     * Limita el capítulo a artículos confeccionados de tejido (no de punto).
+     * Excluye ropa usada (63.09) y artículos de ortopedia (90.21).
+     * Define "trajes (ambos o ternos) y trajes sastre" y "conjuntos" de tejido plano.
+     * Define las características de las camisas y blusas de las partidas 62.05 y 62.06.
+     * Define "prendas y complementos (accesorios), de vestir, para bebés" y da prioridad a la partida 62.09.
+     * Da prioridad a la partida 62.10 (prendas de tejidos recubiertos) sobre otras del capítulo.
+     * Define "monos (overoles) y conjuntos de esquí" para la partida 62.11.
+     * Asimila ciertos pañuelos de cuello a los pañuelos de bolsillo de la partida 62.13 basándose en su tamaño (≤ 60 cm de lado).
+     * Establece la regla de cierre (izquierda sobre derecha para hombres, etc.).
+     * Aclara que los artículos pueden confeccionarse con hilos de metal.
+   * Nota de Relevancia Merceológica: Al igual que en el capítulo 61, la Nota 3, con sus definiciones de "traje" y "conjunto", es la más crítica para la clasificación correcta de estas prendas. La Nota 8 proporciona un criterio dimensional claro para distinguir entre pañuelos de bolsillo y otros pañuelos.
+CAPÍTULO 63: LOS DEMÁS ARTÍCULOS TEXTILES CONFECCIONADOS; JUEGOS; PRENDERÍA Y TRAPOS
+ * Notas del Capítulo:
+   * Resumen:
+     * El Subcapítulo I (artículos confeccionados) solo se aplica a artículos confeccionados.
+     * El Subcapítulo I no comprende productos de los Capítulos 56 a 62 ni la prendería.
+     * Define de forma limitativa los artículos que se consideran "de prendería" (partida 63.09), estableciendo que deben tener señales apreciables de uso y presentarse a granel.
+   * Nota de Relevancia Merceológica: La Nota 3 es la más importante. Establece dos condiciones acumulativas (uso apreciable y presentación a granel) para que un artículo pueda clasificarse como "prendería", diferenciándolo de los artículos nuevos y de los simples trapos.
+SECCIÓN XII: CALZADO, SOMBREROS, PARAGUAS, ...
+Este documento no contiene una nota específica para la Sección XII, pero sí para sus capítulos.
+CAPÍTULO 64: CALZADO, POLAINAS Y ARTÍCULOS ANÁLOGOS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye artículos desechables sin suela aplicada, calzado de textil sin suela exterior, calzado usado (63.09), calzado de amianto (68.12), calzado ortopédico (90.21) y calzado de juguete o con patines fijos (Cap. 95).
+     * Aclara que ciertos accesorios como hebillas o cordones no se consideran "partes" del calzado para la partida 64.06.
+     * Define "caucho", "plástico" y "cuero natural" para los fines del capítulo.
+     * Establece las reglas para determinar la materia constitutiva de la "parte superior" y de la "suela", basándose en la materia que ocupa la mayor superficie exterior.
+   * Nota de Relevancia Merceológica: La Nota 4 es fundamental, ya que la clasificación del calzado depende en gran medida de la materia de la parte superior y de la suela. Esta nota establece un método objetivo (mayor superficie) para determinar dichas materias, resolviendo casos de calzado con materiales mixtos.
+CAPÍTULO 65: SOMBREROS, DEMÁS TOCADOS, Y SUS PARTES
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los tocados usados (63.09), de amianto (68.12) o que sean juguetes (Cap. 95).
+     * Aclara que la partida 65.02 no incluye los cascos confeccionados por costura, salvo los obtenidos cosiendo tiras en espiral.
+   * Nota de Relevancia Merceológica: Las notas son principalmente de exclusión, asegurando que los artículos con un propósito específico (juguete, protección industrial contra el amianto) se clasifiquen en sus capítulos correspondientes.
+CAPÍTULO 66: PARAGUAS, SOMBRILLAS, QUITASOLES, BASTONES...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los bastones-medida (90.17), bastones-estoque (Cap. 93) y paraguas de juguete (Cap. 95).
+     * Excluye de la partida 66.03 (partes) los accesorios textiles como fundas, borlas, etc., los cuales deben clasificarse por separado incluso si se presentan con el artículo principal.
+   * Nota de Relevancia Merceológica: La Nota 2 es importante porque obliga a clasificar por separado los accesorios textiles, aunque se presenten junto con el paraguas o bastón, evitando que se consideren parte del artículo principal.
+CAPÍTULO 67: PLUMAS Y PLUMÓN PREPARADOS...; FLORES ARTIFICIALES; MANUFACTURAS DE CABELLO
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye una variedad de artículos como telas de cabello, motivos florales de encaje, calzado, sombreros, juguetes, plumeros, etc.
+     * Limita el alcance de la partida 67.01 (artículos de plumas), excluyendo artículos donde las plumas son solo relleno (ej. edredones) o simples adornos.
+     * Excluye de la partida 67.02 (flores artificiales) las imitaciones de vidrio, cerámica, metal, etc., obtenidas en una sola pieza o unidas por métodos distintos al atado o encolado.
+   * Nota de Relevancia Merceológica: Las Notas 2 y 3 son clave para la clasificación. Distinguen entre un artículo "de plumas" y un artículo "con plumas" (Nota 2), y entre una flor artificial "confeccionada" (67.02) y una imitación de flor que es una manufactura de otra materia (ej. una flor de vidrio del Cap. 70).
+SECCIÓN XIII: MANUFACTURAS DE PIEDRA, YESO, CEMENTO...; PRODUCTOS CERÁMICOS; VIDRIO...
+Este documento no contiene una nota específica para la Sección XIII, pero sí para sus capítulos.
+CAPÍTULO 68: MANUFACTURAS DE PIEDRA, YESO FRAGUABLE, CEMENTO...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los productos en bruto del Capítulo 25, papel recubierto (Cap. 48), textiles recubiertos (Cap. 56 o 59), y una larga lista de artículos con funciones más específicas (joyería, herramientas, muebles, etc.).
+     * Amplía la definición de "piedras de talla o de construcción trabajadas" (68.02) para incluir todas las piedras naturales trabajadas de forma similar, no solo las de las partidas 25.15 y 25.16.
+   * Nota de Relevancia Merceológica: La Nota 1 es crucial para diferenciar las manufacturas de este capítulo de los productos en bruto del Capítulo 25 y de los artículos terminados con una función propia de otros capítulos. La Nota 2 amplía el alcance de la partida 68.02 para abarcar más tipos de piedra trabajada.
+CAPÍTULO 69: PRODUCTOS CERÁMICOS
+ * Notas del Capítulo:
+   * Resumen:
+     * Establece que el capítulo solo comprende productos cerámicos que han sido cocidos después de darles forma. Define los umbrales de temperatura y los procesos que constituyen un producto cerámico.
+     * Lista las exclusiones, como los cermets (81.13), herramientas (Cap. 82), aisladores eléctricos (85.46), dientes artificiales (90.21), juguetes (Cap. 95), etc.
+   * Nota de Relevancia Merceológica: La Nota 1 es la definición fundamental del capítulo. El criterio de "cocido después de dar forma" es lo que define a un producto como cerámico para fines arancelarios y lo distingue de manufacturas de materias minerales no cocidas (Cap. 68) o de vidrio (Cap. 70).
+CAPÍTULO 70: VIDRIO Y SUS MANUFACTURAS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye artículos como frita de vidrio (32.07), bisutería (Cap. 71), cables de fibra óptica (85.44), instrumentos de óptica (Cap. 90), luminarias (94.05), juguetes (Cap. 95), termos (96.17), etc.
+     * Aclara que cortar el vidrio en cualquier forma no afecta su clasificación, y define lo que es una "capa absorbente, reflectante o antirreflectante".
+     * Establece que los productos de la partida 70.06 (vidrio trabajado) permanecen allí aunque ya tengan carácter de manufacturas.
+     * Define técnicamente la "lana de vidrio" con base en su contenido de sílice.
+     * Considera al cuarzo y demás sílices fundidos como "vidrio".
+   * Nota de Relevancia Merceológica: La Nota 1 establece las fronteras con otros capítulos. La Nota 2 es importante porque permite que el vidrio cortado a medida siga clasificándose como vidrio en placas u hojas. La Nota 4 es una definición técnica clave para distinguir la lana de vidrio (70.19) de otras lanas minerales (68.06). La Nota 5 amplía el concepto de "vidrio".
+SECCIÓN XIV: PERLAS, PIEDRAS PRECIOSAS, METALES PRECIOSOS...
+Este documento no contiene una nota específica para la Sección XIV, pero sí para su único capítulo, el 71.
+CAPÍTULO 71: PERLAS FINAS, PIEDRAS PRECIOSAS, METALES PRECIOSOS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Establece que, con excepciones, cualquier artículo compuesto total o parcialmente de perlas, piedras preciosas o metales preciosos se incluye en este capítulo.
+     * Limita la regla anterior, aclarando que si el metal precioso es solo un accesorio de mínima importancia, el artículo no se clasifica aquí.
+     * Lista numerosas exclusiones (amalgamas, artículos de los capítulos 30, 32, 42, 43, etc.).
+     * Define "metal precioso" (plata, oro, platino y los metales del grupo del platino).
+     * Define "aleaciones de metal precioso" (con un contenido ≥ 2% de metal precioso) y establece cómo se clasifican (prioridad al platino, luego al oro, luego a la plata).
+     * Extiende la referencia a un metal precioso a sus aleaciones.
+     * Define "chapado de metal precioso (plaqué)".
+     * Da prioridad a la partida 71.12 (desperdicios) sobre otras de la nomenclatura.
+     * Define "artículos de joyería".
+     * Define "artículos de orfebrería".
+     * Define "bisutería" (partida 71.17) como artículos de adorno que no contengan perlas, piedras preciosas ni metales preciosos (salvo como accesorios mínimos).
+   * Nota de Relevancia Merceológica: Este capítulo tiene reglas de clasificación muy estrictas. Las Notas 4, 5 y 11 son la base para la clasificación: definen qué es un metal precioso, cuándo una aleación se considera de metal precioso, y qué constituye bisutería. La distinción entre joyería (71.13) y bisutería (71.17) depende enteramente de la materia constitutiva, por lo que estas definiciones son cruciales.
+SECCIÓN XV: METALES COMUNES Y MANUFACTURAS DE ESTOS METALES
+Notas de la Sección
+ * Resumen:
+   * Extensa lista de exclusiones (colores a base de polvo metálico, artículos del Cap. 71, máquinas del Cap. 84, etc.).
+   * Define "partes y accesorios de uso general" (tornillos, tuercas, muelles, bisagras, etc.) y establece que las referencias a "partes" en los capítulos 73 a 82 no los incluyen.
+   * Define "metales comunes".
+   * Define "cermet".
+   * Establece la regla para la clasificación de aleaciones de metales comunes (se clasifican con el metal que predomine en peso).
+   * Aclara que la referencia a un metal común incluye sus aleaciones.
+   * Establece la regla para la clasificación de artículos compuestos de varios metales comunes (se clasifican con el metal que predomine en peso).
+   * Define "desperdicios y desechos" y "polvo".
+   * Proporciona definiciones técnicas detalladas para "barras", "perfiles", "alambre", "chapas, hojas y tiras" y "tubos".
+ * Nota de Relevancia Merceológica: Estas notas son el marco legal de toda la sección. Las Notas 2, 5 y 7 son reglas de clasificación fundamentales: definen qué son las "partes de uso general" (que tienen su propia clasificación), cómo clasificar aleaciones y cómo clasificar manufacturas hechas de varios metales. La Nota 9 es vital, ya que la clasificación de productos metálicos básicos depende de su forma y dimensiones, y esta nota proporciona las definiciones precisas para distinguirlos.
+CAPÍTULO 72: FUNDICIÓN, HIERRO Y ACERO
+ * Notas del Capítulo:
+   * Resumen:
+     * Proporciona definiciones químicas y físicas muy precisas para los productos del capítulo: fundición en bruto, fundición especular, ferroaleaciones, acero, acero inoxidable, los demás aceros aleados, etc. También define las formas primarias y los productos semielaborados: productos intermedios, productos laminados planos, alambrón, barras, perfiles, alambre y barras huecas.
+     * Aclara que los metales férreos chapados siguen el régimen del metal que predomine en peso.
+     * Establece que los productos obtenidos por electrólisis, colada a presión o sinterizado se clasifican como los productos análogos laminados en caliente.
+ * Nota de Relevancia Merceológica: Este capítulo es la base de la siderurgia en la nomenclatura. La Nota 1 es extremadamente importante, ya que la clasificación depende enteramente de la composición química (ej. porcentaje de carbono para distinguir la fundición del acero) y de la forma física del producto (ej. la diferencia entre un producto intermedio, un laminado plano, una barra o un alambrón). Es imposible clasificar correctamente en este capítulo sin consultar estas definiciones.
+CAPÍTULO 73: MANUFACTURAS DE FUNDICIÓN, HIERRO O ACERO
+ * Notas del Capítulo:
+   * Resumen:
+     * Define "fundición" para este capítulo.
+     * Define "alambre" como productos cuya mayor dimensión de la sección transversal sea inferior o igual a 16 mm.
+ * Nota de Relevancia Merceológica: Al ser un capítulo de manufacturas, sus notas son más sencillas. La Nota 2 es útil al establecer un límite dimensional para el término "alambre", lo que ayuda a distinguirlo de las "barras" del capítulo 72.
+CAPÍTULO 74: COBRE Y SUS MANUFACTURAS
+ * Nota del Capítulo:
+   * Resumen: Define "cobre refinado", "aleaciones de cobre" y "aleaciones madre de cobre" con base en su composición química y porcentajes de otros elementos.
+ * Nota de Relevancia Merceológica: Es una nota definitoria esencial. La clasificación entre cobre refinado y aleaciones de cobre se basa en los límites porcentuales de pureza y de otros elementos establecidos en esta nota, lo que requiere un conocimiento de la composición del metal.
+CAPÍTULO 75: NÍQUEL Y SUS MANUFACTURAS
+ * Nota de Subpartida:
+   * Resumen: Define "níquel sin alear" y "aleaciones de níquel" basándose en el porcentaje en peso de níquel, cobalto y otros elementos. También define "alambre" para la subpartida 7508.10 de forma más restrictiva (sección transversal ≤ 6 mm).
+   * Nota de Relevancia Merceológica: De manera similar a los capítulos anteriores, establece los criterios químicos precisos para distinguir entre el metal sin alear y sus aleaciones, lo cual es fundamental para la correcta clasificación a nivel de subpartida.
+CAPÍTULO 76: ALUMINIO Y SUS MANUFACTURAS
+ * Nota de Subpartida:
+   * Resumen: Define "aluminio sin alear" (contenido ≥ 99%) y "aleaciones de aluminio" basándose en el contenido de otros elementos. También define "alambre" para la subpartida 7616.91 de forma más restrictiva (sección transversal ≤ 6 mm).
+   * Nota de Relevancia Merceológica: Fija los umbrales químicos que determinan si el producto se clasifica como aluminio puro o como una aleación, lo cual es el primer paso para su correcta clasificación en el capítulo.
+CAPÍTULO 78: PLOMO Y SUS MANUFACTURAS
+ * Nota de Subpartida:
+   * Resumen: Define "plomo refinado" como el metal con un contenido de plomo ≥ 99.9% y con contenidos de otros elementos por debajo de los límites especificados en una tabla.
+   * Nota de Relevancia Merceológica: Proporciona el criterio de pureza química para clasificar el plomo en bruto en la subpartida correspondiente al plomo refinado.
+CAPÍTULO 79: CINC Y SUS MANUFACTURAS
+ * Nota de Subpartida:
+   * Resumen: Define "cinc sin alear" (contenido ≥ 97.5%), "aleaciones de cinc" y "polvo de condensación, de cinc".
+   * Nota de Relevancia Merceológica: Establece los criterios de composición para diferenciar entre el cinc puro y sus aleaciones.
+CAPÍTULO 80: ESTAÑO Y SUS MANUFACTURAS
+ * Nota de Subpartida:
+   * Resumen: Define "estaño sin alear" (contenido ≥ 99%) y "aleaciones de estaño" con base en los contenidos de bismuto y cobre.
+   * Nota de Relevancia Merceológica: Proporciona los criterios de composición química para clasificar el estaño en bruto.
+CAPÍTULO 81: LOS DEMÁS METALES COMUNES; CERMETS; MANUFACTURAS...
+Este capítulo no tiene notas específicas en el documento proporcionado.
+CAPÍTULO 82: HERRAMIENTAS Y ÚTILES, ARTÍCULOS DE CUCHILLERÍA...
+ * Notas del Capítulo:
+   * Resumen:
+     * Limita el capítulo a artículos con una hoja o parte operante de metal común, carburo metálico, cermet, piedras preciosas con soporte o abrasivos con soporte.
+     * Establece que las partes se clasifican con los artículos, excepto las partes de uso general (Nota 2, Sección XV).
+     * Clasifica en la partida 82.15 los surtidos que contengan cuchillos (82.11) y otros artículos de cubertería (82.15).
+   * Nota de Relevancia Merceológica: La Nota 1 es la nota de alcance fundamental del capítulo: define qué se considera una "herramienta" para estos fines, basándose en la materia de su parte operante. La Nota 3 es una regla específica para la clasificación de surtidos de cubiertos.
+CAPÍTULO 83: MANUFACTURAS DIVERSAS DE METAL COMÚN
+ * Notas del Capítulo:
+   * Resumen:
+     * Aclara que las partes se clasifican con sus artículos, pero excluye las "partes de uso general" como tornillos, cadenas, etc., que tienen sus propias partidas.
+     * Define "ruedas" para la partida 83.02 con base en su diámetro (≤ 75 mm) o la anchura del bandaje.
+   * Nota de Relevancia Merceológica: Este es un capítulo residual para manufacturas de metal. La Nota 1 es importante porque evita que partes comunes (como un tornillo) se clasifiquen como parte de un artículo más complejo de este capítulo. La Nota 2 da un criterio dimensional para clasificar las ruedas.
+SECCIÓN XVI: MÁQUINAS Y APARATOS, MATERIAL ELÉCTRICO...
+Notas de la Sección
+ * Resumen:
+   * Amplia lista de exclusiones (artículos de caucho, cuero, textiles, muebles, juguetes, etc.).
+   * Establece la regla de clasificación de las partes de máquinas: a) las partes que sean un artículo de una partida de los Capítulos 84 u 85 se clasifican en su propia partida; b) si son identificables como destinadas a una máquina específica, se clasifican con esa máquina o en partidas específicas para partes (ej. 84.09, 84.31, 85.03); c) las demás partes se clasifican en partidas residuales (84.87, 85.48).
+   * Las máquinas con funciones múltiples se clasifican según su función principal.
+   * Las máquinas constituidas por elementos separados que realizan una función conjunta (unidades funcionales) se clasifican en la partida correspondiente a dicha función.
+   * Define "máquinas" para abarcar todos los aparatos y dispositivos de los Capítulos 84 y 85.
+   * Define "desperdicios y desechos eléctricos y electrónicos".
+ * Nota de Relevancia Merceológica: La Nota 2 es una de las reglas de clasificación más importantes de toda la nomenclatura. Establece una jerarquía clara y compleja para clasificar las partes de máquinas, que es fundamental para el comercio de repuestos. Las Notas 3 y 4 definen cómo tratar las máquinas multifuncionales y las "unidades funcionales", resolviendo muchos casos de clasificación complejos.
+CAPÍTULO 84: REACTORES NUCLEARES, CALDERAS, MÁQUINAS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye artículos de otros capítulos (muelas, cerámica, vidrio, etc.).
+     * Establece una regla de prioridad: las máquinas de las partidas 84.01 a 84.24 tienen prioridad sobre las de 84.25 a 84.80.
+     * Da prioridad a la partida 84.56 sobre otras partidas de máquinas herramienta.
+     * Define "centros de mecanizado", "máquinas de puesto fijo" y "máquinas de puestos múltiples" para la partida 84.57.
+     * Define "línea de hendido" y "línea de corte longitudinal" para la partida 84.62.
+     * Define "máquinas automáticas para tratamiento o procesamiento de datos" (computadoras) y establece qué unidades forman parte de un sistema (84.71).
+     * Define "bolas de acero calibradas" para la partida 84.82.
+     * Establece que las máquinas de uso múltiple sin una función principal se clasifican en la partida 84.79.
+     * Define la expresión "de bolsillo" para la partida 84.70.
+     * Define "fabricación aditiva" (impresión 3D) para la partida 84.85.
+     * Define el alcance de la partida 84.86 para máquinas utilizadas en la fabricación de semiconductores y pantallas planas, dándole prioridad sobre otras partidas.
+ * Nota de Relevancia Merceológica: Este capítulo está lleno de notas técnicas cruciales. La Nota 2 establece una jerarquía interna vital. Las Notas 4, 6 y 11 son definitorias y prioritarias para tecnologías clave (máquinas herramienta CNC, computadoras, fabricación de semiconductores), asegurando que estos complejos aparatos se clasifiquen en sus partidas específicas. La Nota 8 confirma el carácter residual de la partida 84.79 para máquinas con función propia no especificadas en otro lugar.
+CAPÍTULO 85: MÁQUINAS, APARATOS Y MATERIAL ELÉCTRICO...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye artículos calentados eléctricamente que se llevan sobre la persona, artículos de vidrio (70.11), máquinas de la 84.86, etc.
+     * Establece una regla de prioridad para las partidas 85.11, 85.12, 85.40, 85.41 y 85.42.
+     * Amplía la definición de "acumuladores eléctricos" (85.07).
+     * Define el alcance de los aparatos electromecánicos de uso doméstico de la partida 85.09.
+     * Define "teléfonos inteligentes" para la partida 85.17.
+     * Define "dispositivos de almacenamiento permanente de datos a base de semiconductores" y "tarjetas inteligentes" para la partida 85.23.
+     * Define "módulos de visualización de pantalla plana" y le da prioridad de clasificación en la partida 85.24.
+     * Define "circuitos impresos" (85.34).
+     * Define "conectores de fibras ópticas" (85.36).
+     * Excluye los mandos a distancia infrarrojos de la partida 85.37.
+     * Define "fuentes luminosas de diodos emisores de luz (LED)" para la partida 85.39.
+     * Proporciona definiciones muy técnicas y detalladas para "dispositivos semiconductores" (incluyendo diodos LED) y "circuitos electrónicos integrados" (monolíticos, híbridos, multichip, MCO) para las partidas 85.41 y 85.42, dándoles prioridad sobre cualquier otra partida.
+ * Nota de Relevancia Merceológica: Al igual que el 84, este capítulo depende de sus notas. La Nota 12 es la más importante, ya que define con precisión los componentes electrónicos fundamentales (diodos, transistores, circuitos integrados), que son la base de toda la tecnología moderna, y les otorga prioridad de clasificación. Las Notas 5, 6, 7 y 11 son también cruciales para clasificar correctamente productos de alta tecnología como smartphones, tarjetas de memoria, pantallas planas y tecnología LED.
+SECCIÓN XVII: MATERIAL DE TRANSPORTE
+Notas de la Sección
+ * Resumen:
+   * Excluye juguetes de la partida 95.03 o 95.08.
+   * Excluye "partes y accesorios de uso general" (tornillos, muelles, etc.).
+   * Establece que las partes y accesorios se clasifican en la partida que corresponda a su uso principal.
+   * Establece reglas para vehículos de uso mixto (carretera/ferrocarril), anfibios y aeronaves/vehículos terrestres.
+   * Establece cómo clasificar los vehículos de cojín de aire (se asimilan al vehículo con el que guarden mayor analogía).
+ * Nota de Relevancia Merceológica: La Nota 3 es la regla principal para las partes en esta sección: el criterio es el "uso principal". A diferencia de la Sección XVI, donde las partes con partida propia se clasifican por separado, aquí tienden a agruparse con el vehículo al que están destinadas. La Nota 5 es clave para la clasificación de tecnologías especiales como los aerodeslizadores.
+CAPÍTULO 86: VEHÍCULOS Y MATERIAL PARA VÍAS FÉRREAS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye traviesas de madera u hormigón, elementos de vía de acero (73.02) y aparatos de señalización eléctrica (85.30).
+     * Enumera de forma no exhaustiva las partes que se clasifican en la partida 86.07 (ejes, ruedas, frenos, etc.).
+     * Enumera los artículos que se clasifican en la partida 86.08 (material fijo de vías, aparatos mecánicos de señalización, etc.).
+ * Nota de Relevancia Merceológica: Estas notas dirigen al clasificador a las partidas correctas para las partes y los componentes del material ferroviario. Las Notas 2 y 3 actúan como notas explicativas de alcance para las partidas 86.07 y 86.08, respectivamente.
+CAPÍTULO 87: VEHÍCULOS AUTOMÓVILES, TRACTORES, VELOCÍPEDOS...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye los vehículos diseñados para circular solo sobre carriles.
+     * Define "tractores".
+     * Clasifica los chasis con cabina en las partidas 87.02 a 87.04, no en 87.06.
+     * Aclara que todas las bicicletas para niños se clasifican en 87.12, mientras que los demás velocípedos infantiles son juguetes (95.03).
+ * Notas Legales Nacionales:
+   * Resumen:
+     * Define "vehículo híbrido-eléctrico".
+     * Define "cabina simple" para los vehículos de la partida 87.04.
+ * Nota de Relevancia Merceológica: La Nota 2 define el alcance de la partida 87.01. La Nota 4 es crucial para distinguir entre una bicicleta infantil (87.12) y un vehículo de juguete (95.03). Las notas nacionales son muy importantes para el contexto de Nicaragua, ya que proporcionan definiciones específicas para vehículos híbridos y camionetas de cabina simple, que pueden tener tratamientos arancelarios diferentes.
+CAPÍTULO 88: AERONAVES, VEHÍCULOS ESPACIALES, Y SUS PARTES
+ * Nota del Capítulo:
+   * Resumen: Define "aeronave no tripulada" (drones) y las distingue de los juguetes voladores (95.03).
+ * Nota de Subpartida:
+   * Resumen: Define "peso en vacío" para la partida 88.02 y "peso máximo de despegue" para la partida 88.06.
+ * Nota de Relevancia Merceológica: La Nota 1 del capítulo es de suma actualidad e importancia. Establece la clasificación de los drones en la partida 88.06 y traza la línea divisoria con los juguetes, basándose en el diseño y la funcionalidad (capacidad de carga, cámaras integradas). Las notas de subpartida proporcionan los criterios técnicos (peso) para la subclasificación dentro de las partidas.
+CAPÍTULO 89: BARCOS Y DEMÁS ARTEFACTOS FLOTANTES
+ * Nota del Capítulo:
+   * Resumen: Establece que los barcos incompletos o sin terminar, o los cascos, se clasifican en la partida 89.06 si existe duda sobre la clase de barco a la que pertenecen.
+   * Nota de Relevancia Merceológica: Es una regla para casos de duda, asignando una partida residual (89.06) a los cascos y barcos sin terminar que no puedan ser identificados claramente como un tipo específico (ej. pesquero, de recreo, etc.).
+SECCIÓN XVIII: INSTRUMENTOS Y APARATOS DE ÓPTICA, FOTOGRAFÍA...
+Este documento no contiene una nota específica para la Sección XVIII, pero sí para sus capítulos.
+CAPÍTULO 90: INSTRUMENTOS Y APARATOS DE ÓPTICA, FOTOGRAFÍA...
+ * Notas del Capítulo:
+   * Resumen:
+     * Presenta una larga lista de exclusiones (artículos para usos técnicos de caucho o textil, fajas elásticas, artículos del Cap. 69, 70, 71, etc.).
+     * Establece las reglas para la clasificación de partes y accesorios, similares a las de la Sección XVI (partes con partida propia se clasifican por separado, partes específicas se clasifican con el aparato principal).
+     * Las Notas 3 y 4 de la Sección XVI (máquinas multifunción y unidades funcionales) se aplican a este capítulo.
+     * Excluye las miras telescópicas de la partida 90.05.
+     * Da prioridad a la partida 90.31 sobre la 90.13 para instrumentos de medida o control.
+     * Define "artículos y aparatos de ortopedia" (90.21).
+     * Define el alcance de los instrumentos de regulación y control automático de la partida 90.32.
+   * Nota de Relevancia Merceológica: Este capítulo agrupa instrumentos de alta precisión y tecnología. Sus notas de exclusión (Nota 1) son fundamentales para no clasificar aquí artículos que, aunque tengan alguna función de medida, pertenecen a otros capítulos por su naturaleza o uso principal. La Nota 2 establece la regla jerárquica para clasificar las partes. Las Notas 6 y 7 son definitorias y cruciales para entender el alcance de las partidas 90.21 y 90.32.
+CAPÍTULO 91: APARATOS DE RELOJERÍA Y SUS PARTES
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye partes de uso general, cadenas de reloj, bolas de rodamiento, etc.
+     * Limita la partida 91.01 a relojes con caja de metal precioso o chapado.
+     * Define "pequeños mecanismos de relojería" con base en sus dimensiones.
+     * Establece que los mecanismos y partes de relojería, incluso si pudieran tener otros usos (ej. en instrumentos de medida), se clasifican en este capítulo.
+   * Nota de Relevancia Merceológica: La Nota 2 es clave para distinguir los relojes de lujo (91.01) de los demás (91.02) basándose en la materia de la caja. La Nota 4 otorga prioridad a este capítulo para los mecanismos de relojería, evitando que se clasifiquen como partes de otros aparatos.
+CAPÍTULO 92: INSTRUMENTOS MUSICALES; SUS PARTES Y ACCESORIOS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye partes de uso general, aparatos eléctricos del Cap. 85 que no estén incorporados, juguetes (Cap. 95), objetos de colección (Cap. 97), etc.
+     * Establece que los arcos, palillos y accesorios similares se clasifican con los instrumentos a los que se destinan, al igual que las tarjetas, discos y rollos para instrumentos mecánicos.
+   * Nota de Relevancia Merceológica: La Nota 1 delimita el capítulo, separando los instrumentos musicales "reales" de los juguetes, y los instrumentos en sí de los equipos de amplificación externos. La Nota 2 simplifica la clasificación al permitir que los accesorios necesarios se clasifiquen junto con el instrumento principal.
+SECCIÓN XIX: ARMAS, MUNICIONES, Y SUS PARTES Y ACCESORIOS
+Este documento no contiene una nota específica para la Sección XIX, pero sí para su único capítulo, el 93.
+CAPÍTULO 93: ARMAS, MUNICIONES, Y SUS PARTES Y ACCESORIOS
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye cebos y artículos de pirotecnia (Cap. 36), tanques (87.10), miras telescópicas (Cap. 90), arcos y flechas (Cap. 95), y armas de colección o antigüedades (Cap. 97).
+     * Aclara que el término "partes" en la partida 93.06 no incluye aparatos de radio o radar (85.26).
+   * Nota de Relevancia Merceológica: Las notas son principalmente de exclusión. La Nota 1 es fundamental para distinguir las armas de este capítulo de las armas que son juguetes (Cap. 95) o antigüedades (Cap. 97), una distinción clave que a menudo depende de la funcionalidad y la edad del artículo.
+SECCIÓN XX: MERCANCÍAS Y PRODUCTOS DIVERSOS
+Este documento no contiene una nota específica para la Sección XX, pero sí para sus capítulos.
+CAPÍTULO 94: MUEBLES; MOBILIARIO MEDICOQUIRÚRGICO; ARTÍCULOS DE CAMA...
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye colchones neumáticos (Cap. 39, 40, 63), espejos de suelo (70.09), muebles que son partes de otros aparatos (refrigeradores, máquinas de coser), luminarias (Cap. 85), muebles de juguete (95.03), etc.
+     * Aclara que los artículos deben estar diseñados para colocarlos en el suelo, pero hace una excepción para armarios, estanterías, asientos y camas que se cuelgan o fijan a la pared.
+     * No considera "partes" de muebles a las placas de vidrio, mármol, etc., presentadas aisladamente.
+     * Define "construcciones prefabricadas".
+ * Nota de Relevancia Merceológica: La Nota 1 es la más importante, ya que define el alcance del capítulo al excluir una gran cantidad de artículos que, aunque podrían considerarse "mobiliario" en un sentido amplio, tienen una partida más específica por su función. La Nota 2 amplía el concepto de "mueble" para incluir los que se fijan a la pared.
+CAPÍTULO 95: JUGUETES, JUEGOS Y ARTÍCULOS PARA RECREO O DEPORTE...
+ * Notas del Capítulo:
+   * Resumen:
+     * Contiene una extensa lista de exclusiones (velas, pirotecnia, prendas de vestir de deporte, calzado, sombreros, armas, muebles, etc.).
+     * Permite que los artículos del capítulo tengan guarniciones de mínima importancia de metal precioso.
+     * Establece que las partes y accesorios se clasifican con los artículos a los que se destinan.
+     * Crea una regla especial para surtidos de la partida 95.03 que contengan artículos de otras partidas, permitiendo que se clasifiquen como juguetes si la combinación reúne ese carácter esencial.
+     * Excluye los artículos destinados exclusivamente para animales.
+     * Define "atracciones para parques de diversiones", "atracciones de parques acuáticos" y "atracciones de feria" para la partida 95.08.
+ * Nota de Relevancia Merceológica: La Nota 1 es fundamental para distinguir los artículos de deporte o recreo de este capítulo de la indumentaria y el equipo especializado que se clasifican en otras secciones. La Nota 4 es una regla de clasificación para "juegos o surtidos" que es específica para los juguetes y tiene prioridad sobre otras reglas. La Nota 5 establece una distinción importante por el usuario final (humano vs. animal).
+CAPÍTULO 96: MANUFACTURAS DIVERSAS
+ * Notas del Capítulo:
+   * Resumen:
+     * Amplia lista de exclusiones de artículos que tienen su propia clasificación (lápices de maquillaje, partes de paraguas, bisutería, herramientas, muebles, juguetes, etc.).
+     * Define "materias vegetales o minerales para tallar".
+     * Define "cabezas preparadas" para cepillería.
+     * Aclara la clasificación de artículos del capítulo que contengan metales o piedras preciosas.
+ * Nota de Relevancia Merceológica: Este es el capítulo más residual de la nomenclatura. Su principal función es agrupar manufacturas diversas que no tienen cabida en ninguna otra parte. Por ello, la Nota 1, con su larga lista de exclusiones, es la herramienta más importante para el clasificador, ya que obliga a descartar todas las demás posibilidades antes de recurrir al Capítulo 96.
+SECCIÓN XXI: OBJETOS DE ARTE O COLECCIÓN Y ANTIGÜEDADES
+Este documento no contiene una nota específica para la Sección XXI, pero sí para su único capítulo, el 97.
+CAPÍTULO 97: OBJETOS DE ARTE O COLECCIÓN Y ANTIGÜEDADES
+ * Notas del Capítulo:
+   * Resumen:
+     * Excluye sellos sin obliterar (49.07), lienzos pintados para decorados (59.07) y perlas o piedras preciosas sueltas (Cap. 71).
+     * Excluye de la partida 97.01 (pinturas) las que tienen carácter comercial (reproducciones en serie).
+     * Define "grabados, estampas y litografías, originales" para la partida 97.02.
+     * Excluye de la partida 97.03 (esculturas) las que tienen carácter comercial.
+     * Establece una regla de prioridad: los artículos que puedan clasificarse en este capítulo y en otro, se clasifican aquí. Además, los artículos que puedan clasificarse en la 97.06 (antigüedades) y en las partidas 97.01 a 97.05, se clasifican en estas últimas.
+     * Establece que los marcos se clasifican con las obras de arte si sus características y valor están en relación con ellas.
+   * Nota de Relevancia Merceológica: La Nota 5 es la más importante. Otorga a este capítulo prioridad sobre todos los demás (con excepciones), lo que significa que si un artículo es, por ejemplo, un mueble antiguo (Cap. 94 y 97.06), debe clasificarse en la partida 97.06. Las Notas 2, 3 y 4 son cruciales para distinguir entre una "obra de arte original" y una "reproducción comercial", una distinción fundamental en este capítulo.

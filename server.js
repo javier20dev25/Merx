@@ -243,9 +243,15 @@ app.post('/api/find-sac-chapter', async (req, res) => {
 
         const apiKey = await getApiKey();
         const indiceText = await loadContext('secciones-capitulos.json');
-        const promptTemplate = `Eres un asistente experto en clasificación arancelaria. Tu única fuente de verdad es el siguiente índice del Sistema Arancelario. Determina el número de capítulo más probable para la mercancía descrita.\n\nINDICE:\n${indiceText}\n\nDESCRIPCIÓN: "${description}"\n\nSALIDA JSON: { "chapter_number": <número>, "rationale": "<justificación breve>" }`;
+        const legalNotesText = await loadContext('resumen_notas_legales_sac.txt');
+        const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_ubicacion.txt'), 'utf-8');
         
-        const aiResult = await callGemini(promptTemplate, apiKey);
+        const prompt = promptTemplate
+            .replace('{LEGAL_NOTES_CONTEXT}', legalNotesText)
+            .replace('{INDICE_CONTEXT}', indiceText)
+            .replace('{DESCRIPTION}', description);
+
+        const aiResult = await callGemini(prompt, apiKey);
         const chapterNumber = aiResult.chapter_number;
         if (!chapterNumber) return res.status(404).json({ error: 'El modelo no pudo determinar un capítulo.' });
 

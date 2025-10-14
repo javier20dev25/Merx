@@ -681,3 +681,95 @@ body {
   height: 20px;
   stroke: var(--text-color);
 }
+
+/* === INICIO: Rediseño de Header y Footer del Informe === */
+
+#report-view .report-header {
+  width: 100%;
+  background: linear-gradient(to right, #0f172a, #1e293b, #0f172a);
+  color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem 1.5rem; /* py-3 px-6 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid #334155;
+}
+
+#report-view .report-header .rh-title {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  letter-spacing: 0.025em; /* tracking-wide */
+}
+
+#report-view .report-header .rh-nav {
+  display: flex;
+  gap: 1rem; /* space-x-4 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+#report-view .report-header .rh-link {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+#report-view .report-header .rh-link:hover {
+  color: #34d399; /* emerald-400 */
+}
+
+#report-view .report-footer {
+  width: 100%;
+  background-color: #0f172a; /* bg-slate-900 */
+  color: #d1d5db; /* text-gray-300 */
+  font-size: 0.875rem; /* text-sm */
+  padding: 1rem 1.5rem; /* py-4 px-6 */
+  margin-top: 3rem; /* mt-12 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #334155; /* border-slate-700 */
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 1rem;
+}
+
+#report-view .report-footer p,
+#report-view .report-footer a {
+    color: #d1d5db;
+    text-decoration: none;
+}
+
+#report-view .report-footer a:hover {
+    color: #34d399; /* emerald-400 */
+    text-decoration: underline;
+}
+
+#report-view .report-footer .rf-links {
+    display: flex;
+    gap: 0.75rem; /* gap-3 */
+}
+
+/* Estilo para el botón de volver, manteniendo su ID */
+#report-view #reset-button {
+    background: #1e293b; /* slate-800 */
+    color: #d1d5db;
+    border: 1px solid #334155;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px; /* pill shape */
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    box-shadow: none; /* Resetear sombras viejas */
+    backdrop-filter: none; /* Resetear glassmorphism */
+}
+
+#report-view #reset-button:hover {
+    background: #334155; /* slate-700 */
+    color: #ffffff;
+    transform: translateY(-2px); /* lift effect */
+}
+
+/* === FIN: Rediseño de Header y Footer del Informe === */
