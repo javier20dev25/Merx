@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const reportHeader = reportView.querySelector('.report-header');
             if (reportHeader) {
                 // FIX: Crear el logo directamente para evitar problemas de clonación
-                reportHeader.innerHTML = '<h1 class="site-title">Merx</h1>';
+                
             }
 
             reportView.classList.remove('hidden');
