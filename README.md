@@ -16,7 +16,19 @@ El proyecto está construido con una arquitectura simple y funcional, separada e
 
 -   **Backend:** Un servidor de **Node.js** con **Express**, responsable de recibir las solicitudes del usuario y orquestar el flujo de análisis con la IA.
 
--   **Base de Conocimiento:** El razonamiento de la IA se guía por un conjunto de archivos de texto (`.txt`) y JSON ubicados en el directorio `conocimientos/`. Estos archivos contienen el contexto fundamental sobre reglas de clasificación, jurisprudencia, notas legales y más, que son inyectados en los prompts enviados al modelo de IA.
+## Base de Conocimiento
+
+El razonamiento de la IA se guía por un conjunto de archivos de texto (`.txt`) y JSON ubicados en el directorio `conocimientos/`. Estos archivos actúan como el contexto fundamental para las diferentes fases del análisis. Cada archivo tiene un propósito específico:
+
+*   `razonamiento_rgi_avanzado.txt`: Contiene la lógica y jurisprudencia para aplicar las Reglas Generales Interpretativas (RGI), especialmente en casos complejos de mezclas, juegos o productos compuestos. Es el "cerebro" para la clasificación arancelaria.
+*   `jurisprudencia_tata_dga.txt`: Provee un contexto legal crucial con casos y sentencias reales del Tribunal Aduanero y Tributario Administrativo (TATA) de Nicaragua, permitiendo a la IA citar precedentes en disputas de valoración y clasificación.
+*   `contexto_legal_sac.txt`: Describe la estructura y jerarquía del Sistema Arancelario Centroamericano (SAC), que es la base para la clasificación de mercancías en la región.
+*   `analisis_riesgo_tecnico_comercial.txt`: Detalla las barreras no arancelarias en Nicaragua, como controles sanitarios (MINSA), fitosanitarios (IPSA) y ambientales (MARENA), y los permisos que se requieren.
+*   `gestion_riesgos_aduaneros_ni.txt`: Explica el modelo de gestión de riesgos que utiliza la aduana de Nicaragua (DGA), basado en estándares de la Organización Mundial de Aduanas (OMA). Ayuda a la IA a predecir el nivel de riesgo de una importación (selectividad de canal verde, amarillo o rojo).
+*   `regimenes_preferenciales_ni.txt`: Contiene información sobre tratados de libre comercio (como CAFTA-DR) y regímenes de incentivos nacionales (como Zonas Francas) para identificar oportunidades de optimización de aranceles.
+*   `resumen_notas_legales_sac.txt`: Proporciona un resumen de las notas legales del SAC, utilizado por una función auxiliar para sugerir rápidamente el capítulo arancelario de un producto.
+
+Los archivos JSON (`tipos-de-notas.json`, `secciones-capitulos.json`) proveen datos estructurados que el sistema utiliza para complementar los análisis. Los archivos no mencionados en esta lista actualmente no son utilizados por el servidor.
 
 ## Flujo del Servidor
 
