@@ -20,7 +20,7 @@ El proyecto está construido con una arquitectura simple y funcional, separada e
 
 El razonamiento de la IA se guía por un conjunto de archivos de texto (`.txt`) y JSON ubicados en el directorio `conocimientos/`. Estos archivos actúan como el contexto fundamental para las diferentes fases del análisis. Cada archivo tiene un propósito específico:
 
-*   `razonamiento_rgi_avanzado.txt`: Contiene la lógica y jurisprudencia para aplicar las Reglas Generales Interpretativas (RGI), especialmente en casos complejos de mezclas, juegos o productos compuestos. Es el "cerebro" para la clasificación arancelaria.
+*   `razonamiento_rgi_avanzado.txt`: Es el documento clave para el "paso uno". Proporciona el marco para el **análisis merciológico** (el estudio de la naturaleza, función y composición de la mercancía) y contiene la lógica avanzada para aplicar las Reglas Generales Interpretativas (RGI). Es el "cerebro" de la clasificación arancelaria.
 *   `jurisprudencia_tata_dga.txt`: Provee un contexto legal crucial con casos y sentencias reales del Tribunal Aduanero y Tributario Administrativo (TATA) de Nicaragua, permitiendo a la IA citar precedentes en disputas de valoración y clasificación.
 *   `contexto_legal_sac.txt`: Describe la estructura y jerarquía del Sistema Arancelario Centroamericano (SAC), que es la base para la clasificación de mercancías en la región.
 *   `analisis_riesgo_tecnico_comercial.txt`: Detalla las barreras no arancelarias en Nicaragua, como controles sanitarios (MINSA), fitosanitarios (IPSA) y ambientales (MARENA), y los permisos que se requieren.
