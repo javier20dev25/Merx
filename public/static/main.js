@@ -290,4 +290,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateUI(0);
+
+    // --- Policy Section Logic ---
+    const policyBtn = document.getElementById('policy-btn');
+    const privacyBtn = document.getElementById('privacy-btn');
+    const policyContent = document.getElementById('policy-content');
+    const privacyContent = document.getElementById('privacy-content');
+
+    if (policyBtn) { // Check if buttons exist to avoid errors in other views
+        policyBtn.addEventListener('click', () => {
+            const isHidden = policyContent.classList.contains('hidden');
+            
+            // Hide both first
+            policyContent.classList.add('hidden');
+            privacyContent.classList.add('hidden');
+            policyBtn.classList.remove('active');
+            privacyBtn.classList.remove('active');
+
+            // If it was hidden, show it
+            if (isHidden) {
+                policyContent.classList.remove('hidden');
+                policyBtn.classList.add('active');
+            }
+        });
+
+        privacyBtn.addEventListener('click', () => {
+            const isHidden = privacyContent.classList.contains('hidden');
+
+            // Hide both first
+            policyContent.classList.add('hidden');
+            privacyContent.classList.add('hidden');
+            policyBtn.classList.remove('active');
+            privacyBtn.classList.remove('active');
+
+            // If it was hidden, show it
+            if (isHidden) {
+                privacyContent.classList.remove('hidden');
+                privacyBtn.classList.add('active');
+            }
+        });
+    }
 });

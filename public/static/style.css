@@ -652,6 +652,70 @@ body {
   color: #fff;
 }
 
+/* --- Policy Section Styles --- */
+.policy-section {
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--dark-shadow);
+}
+
+.policy-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.policy-toggle-btn {
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  box-shadow: 5px 5px 10px var(--dark-shadow), -5px -5px 10px var(--light-shadow);
+  transition: all 0.2s ease-in-out;
+}
+
+.policy-toggle-btn:hover {
+  transform: translateY(-2px);
+  color: var(--active-text-color);
+}
+
+.policy-toggle-btn.active {
+  background: #8A2BE2;
+  color: white;
+  box-shadow: inset 2px 2px 5px #6a20b3, inset -2px -2px 5px #ac36ff;
+}
+
+.policy-content {
+  background: var(--bg-color);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: inset 4px 4px 10px var(--dark-shadow), inset -4px -4px 10px var(--light-shadow);
+  text-align: left;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.policy-content h4 {
+  margin-top: 0;
+  color: #8A2BE2;
+}
+
+.policy-content a {
+  color: #8A2BE2;
+  font-weight: 600;
+  text-decoration: none;
+}
+.policy-content a:hover {
+  text-decoration: underline;
+}
+
 /* --- Estilos para Contenedor de Textarea y Botón de Pegar --- */
 
 .textarea-container {
