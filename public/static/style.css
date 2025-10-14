@@ -632,19 +632,24 @@ body {
 }
 
 .contact-link {
-  cursor: pointer;
-  user-select: none;
-  font-size: 1.1rem;
-  color: var(--text-color);
-  margin: 0 0 15px 0;
-  padding: 5px 10px;
-  border-radius: 10px;
-  transition: background-color 0.2s ease;
+  background-color: #8A2BE2; /* Purple background */
+  color: #ffffff; /* White text */
+  padding: 12px 24px; /* More padding */
+  border-radius: 25px; /* Pill shape */
   text-decoration: none;
+  font-weight: 500;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin: 15px 0;
 }
 
 .contact-link:hover {
-  background-color: rgba(0,0,0,0.05);
+  background-color: #7b26cb; /* Darker purple on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.5);
+  color: #fff;
 }
 
 /* --- Estilos para Contenedor de Textarea y Botón de Pegar --- */
