@@ -1,0 +1,31 @@
+Análisis Integral de los Criterios de Clasificación Arancelaria y Merciología de la Gruteca (CAAAREM)
+
+1. LA MERCIOLOGÍA COMO CIENCIA DE DATOS
+La merciología permite desentrañar la naturaleza esencial de los bienes mediante el análisis de su origen, composición, proceso de fabricación, función y presentación.
+
+DIMENSIONES DEL ANÁLISIS MERCEOLÓGICO:
+- Origen: Determina si el producto es natural (animal, vegetal, mineral) o sintético. Crucial para Capítulos 01-24 o Químicos (28-38).
+- Composición: Análisis de la materia constitutiva, pureza y porcentajes de mezclas. Define aplicación de RGI 2b y 3b.
+- Proceso de Fabricación: Cómo se transforma la materia (forjado, extrusión, moldeo, síntesis química). Diferencia manufacturas simples de procesos complejos.
+- Función y Uso: La aplicación primordial del bien y sus capacidades operativas. Esencial para Sección XVI (Maquinaria) y XVIII (Precisión).
+- Presentación: Cómo se presenta al despacho (kits, juegos, surtidos, envases al por menor). Determina RGI 5.
+
+2. LÓGICA ALGORÍTMICA DE LAS RGI (CRITERIO GRUTECA)
+- Regla 1: Pilar fundamental. Textos de partida y Notas Legales tienen valor legal; los títulos son indicativos.
+- Regla 2: Artículos incompletos o sin terminar con características esenciales del producto terminado (RGI 2a).
+- Regla 3: Conflictos de partidas. 3a (Específica), 3b (Carácter esencial para mezclas/compuestos), 3c (Última por orden numérico).
+- Regla 4: Analogía para mercancías no expresadas.
+- Regla 5: Envases y estuches diseñados para el artículo.
+
+3. CASOS DE CONVERGENCIA TECNOLÓGICA (GROUND TRUTH)
+- Drones: Función predominante (Cámara emisora 85.25 vs Navegación autónoma 85.26 vs Juguete 95.03). Factores: peso, GPS, autonomía, cámara profesional.
+- Smartwatch (Reloj-Localizador-Teléfono): Aplica RGI 3c (Última partida numéricamente) al tener funciones de telefonía, GPS y reloj sin predominancia clara. Se ubica en 85.26.91.
+- Impresoras 3D: Se clasifican en 84.77 (maquinaria para trabajar plástico) debido al proceso de manufactura aditiva, diferenciándose de las impresoras de oficina (84.43).
+- Lámparas LED: Clasificadas en 85.39 junto con lámparas tradicionales por su función de alumbrado, superando la clasificación inicial genérica en 85.43.
+- Suplementos Alimenticios: Si no cumplen con propiedades terapéuticas específicas avaladas (30.04), se clasifican en 21.06 (Preparaciones alimenticias no expresadas).
+
+4. PREVALENCIA LEGAL:
+Las Notas Legales (Sección/Capítulo) SIEMPRE prevalecen sobre las RGI 2 a 5.
+
+5. IDENTIFICADORES CRÍTICOS:
+Número CAS (químicos), Voltaje/RPM (maquinaria), Certificados de Origen (Tequila/Específicos).

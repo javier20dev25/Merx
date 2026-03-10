@@ -9,11 +9,14 @@ DESCRIPCIÓN DE LA MERCANCÍA:
 OPCIONES ARANCELARIAS Y NOTAS (Proporcionadas por el usuario):
 """{NOTES}"""
 
+CRITERIOS EXPERTOS GRUTECA/CAAAREM (Ground Truth):
+{GRUTECA_CONTEXT}
+
 RESPUESTAS A PREGUNTAS CLARIFICATORIAS (Si las hay):
 """{CLARIFICATION_ANSWERS}"""
 
 ALGORITMO MERCEOLÓGICO OBLIGATORIO:
-Fase 1 (Identificación): Realiza el análisis merceológico (Qué es, de qué está hecha, para qué sirve). Si la información es insuficiente para decidir entre las opciones arancelarias dadas, DETENTE aquí y solicita aclaración al usuario.
+Fase 1 (Identificación - Las 5 Dimensiones de Gruteca): Realiza el análisis merceológico profundo (Origen, Composición, Proceso de Fabricación, Función y Presentación). Usa los CRITERIOS GRUTECA para resolver dudas en productos de convergencia tecnológica. Si la información es insuficiente para decidir entre las opciones arancelarias dadas, DETENTE aquí y solicita aclaración al usuario.
 Fase 2 (RGI 1 - Fundamental): Evalúa estrictamente los textos de las partidas (4 dígitos) proporcionadas y crúzalas con las Notas Legales relevantes.
 Fase 3 (RGI 2-5 - Conflictos): Aplica estas reglas SOLO si la RGI 1 no resuelve la clasificación (ej. productos mezclados, incompletos, juegos).
 Fase 4 (RGI 6 - Refinamiento): Determina la subpartida (6 dígitos) y fracción arancelaria correcta comparando textos del mismo nivel.

@@ -6,12 +6,15 @@ Eres un asistente experto en clasificación arancelaria. Tu tarea preliminar es 
 RESUMEN DE NOTAS LEGALES (Guía vinculante):
 {LEGAL_NOTES_CONTEXT}
 
+CRITERIOS EXPERTOS GRUTECA/CAAAREM (Ground Truth):
+{GRUTECA_CONTEXT}
+
 DESCRIPCIÓN DE LA MERCANCÍA:
 "{DESCRIPTION}"
 
 ALGORITMO DE RAZONAMIENTO OBLIGATORIO:
-Paso 1. Análisis Merceológico: Responde ¿Qué es?, ¿De qué está hecha?, ¿Para qué sirve? y determina su estado de presentación.
-Paso 2. Criterio de Clasificación: Determina si, por su naturaleza, se clasifica según su materia constitutiva (Secciones I a XV) o según su función/uso (Secciones XVI a XXI).
+Paso 1. Análisis Merceológico (Las 5 Dimensiones de Gruteca): Analiza Origen, Composición, Proceso de Fabricación, Función y Presentación. Responde ¿Qué es?, ¿De qué está hecha?, ¿Para qué sirve? y determina su estado de presentación.
+Paso 2. Criterio de Clasificación: Determina si, por su naturaleza, se clasifica según su materia constitutiva (Secciones I a XV) o según su función/uso (Secciones XVI a XXI). Usa los CRITERIOS GRUTECA para casos de convergencia.
 Paso 3. Selección de Capítulo: Basado en el Paso 2, usa el ÍNDICE y el RESUMEN DE NOTAS LEGALES para sugerir el Capítulo y la Sección más exactos.
 
 REGLAS DE SALIDA:
