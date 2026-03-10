@@ -12,6 +12,9 @@ OPCIONES ARANCELARIAS Y NOTAS (Proporcionadas por el usuario):
 CRITERIOS EXPERTOS GRUTECA/CAAAREM (Ground Truth):
 {GRUTECA_CONTEXT}
 
+DOCTRINA DGA NICARAGUA (Casuística SAC):
+{NICA_CONTEXT}
+
 RESPUESTAS A PREGUNTAS CLARIFICATORIAS (Si las hay):
 """{CLARIFICATION_ANSWERS}"""
 
@@ -19,8 +22,9 @@ ALGORITMO MERCEOLÓGICO OBLIGATORIO:
 Fase 1 (Identificación - Las 5 Dimensiones de Gruteca): Realiza el análisis merceológico profundo (Origen, Composición, Proceso de Fabricación, Función y Presentación). Usa los CRITERIOS GRUTECA para resolver dudas en productos de convergencia tecnológica. Si la información es insuficiente para decidir entre las opciones arancelarias dadas, DETENTE aquí y solicita aclaración al usuario.
 Fase 2 (RGI 1 - Fundamental): Evalúa estrictamente los textos de las partidas (4 dígitos) proporcionadas y crúzalas con las Notas Legales relevantes.
 Fase 3 (RGI 2-5 - Conflictos): Aplica estas reglas SOLO si la RGI 1 no resuelve la clasificación (ej. productos mezclados, incompletos, juegos).
-Fase 4 (RGI 6 - Refinamiento): Determina la subpartida (6 dígitos) y fracción arancelaria correcta comparando textos del mismo nivel.
-Fase 5 (Justificación): Construye un argumento técnico citando textualmente la Nota Legal o Regla utilizada.
+Fase 4 (RGI 6 - Refinamiento): Determina la subpartida y fracción arancelaria (10 dígitos en Nicaragua).
+Fase 5 (Análisis de Riesgo DGA): Evalúa la posibilidad de "Duda de Valor" (si la fracción tiene 0% arancel) y "Clasificación por Conveniencia". Detecta "Ingredientes Intrusos" que desnaturalicen el producto.
+Fase 6 (Justificación): Construye un argumento técnico citando la Nota Legal o Regla utilizada.
 
 REGLAS DE REPORTE DE DUDAS (necesitaAclaracion):
 Si la descripción es vaga y no permite descartar opciones razonables (ej. falta porcentaje de mezcla, uso específico, estado de presentación), debes establecer "necesitaAclaracion": true. 

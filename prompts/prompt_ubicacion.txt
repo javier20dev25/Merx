@@ -9,13 +9,17 @@ RESUMEN DE NOTAS LEGALES (Guía vinculante):
 CRITERIOS EXPERTOS GRUTECA/CAAAREM (Ground Truth):
 {GRUTECA_CONTEXT}
 
+DOCTRINA DGA NICARAGUA (Casuística SAC):
+{NICA_CONTEXT}
+
 DESCRIPCIÓN DE LA MERCANCÍA:
 "{DESCRIPTION}"
 
 ALGORITMO DE RAZONAMIENTO OBLIGATORIO:
+Paso 0. Detección de Entrada Insuficiente (Lazy Input): Si la descripción es de 1 a 3 palabras (ej. "Café", "Camisa", "Lácteo"), NO adivines el capítulo final inmediatamente. Identifica las 2-3 bifurcaciones más críticas (ej. café soluble vs en grano) y asegúrate de incluirlas en 'notasSugeridas' y 'rationale' como advertencia.
 Paso 1. Análisis Merceológico (Las 5 Dimensiones de Gruteca): Analiza Origen, Composición, Proceso de Fabricación, Función y Presentación. Responde ¿Qué es?, ¿De qué está hecha?, ¿Para qué sirve? y determina su estado de presentación.
-Paso 2. Criterio de Clasificación: Determina si, por su naturaleza, se clasifica según su materia constitutiva (Secciones I a XV) o según su función/uso (Secciones XVI a XXI). Usa los CRITERIOS GRUTECA para casos de convergencia.
-Paso 3. Selección de Capítulo: Basado en el Paso 2, usa el ÍNDICE y el RESUMEN DE NOTAS LEGALES para sugerir el Capítulo y la Sección más exactos.
+Paso 2. Criterio de Clasificación: Determina si se clasifica por materia o función. Aplica la PSICOLOGÍA DGA NICA: Prioriza fichas técnicas sobre nombres comerciales. Detecta "Ingredientes Intrusos" (ej. grasa vegetal en lácteos) que cambien el capítulo.
+Paso 3. Selección de Capítulo: Sugiere el Capítulo más exacto basándote en lo anterior.
 
 REGLAS DE SALIDA:
 - Devuelve ÚNICAMENTE un objeto JSON válido.

@@ -129,9 +129,11 @@ async function callClassification(apiKey, description, notes, clarificationAnswe
     const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_clasificacion.txt'), 'utf-8');
     const rgiContext = await loadContext('razonamiento_rgi_avanzado.txt');
     const grutecaContext = await loadContext('criterios_gruteca_caaarem.txt');
+    const nicaContext = await loadContext('doctrina_dga_nicaragua.txt');
     const prompt = promptTemplate
         .replace('{RGI_CONTEXT}', rgiContext)
         .replace('{GRUTECA_CONTEXT}', grutecaContext)
+        .replace('{NICA_CONTEXT}', nicaContext)
         .replace('{DESCRIPTION}', description)
         .replace('{NOTES}', notes)
         .replace('{CLARIFICATION_ANSWERS}', clarificationAnswers);
@@ -291,12 +293,14 @@ app.post('/api/find-sac-chapter', async (req, res) => {
         const indiceText = await loadContext('secciones-capitulos.json');
         const legalNotesText = await loadContext('resumen_notas_legales_sac.txt');
         const grutecaContext = await loadContext('criterios_gruteca_caaarem.txt');
+        const nicaContext = await loadContext('doctrina_dga_nicaragua.txt');
         const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_ubicacion.txt'), 'utf-8');
 
         const prompt = promptTemplate
             .replace('{LEGAL_NOTES_CONTEXT}', legalNotesText)
             .replace('{INDICE_CONTEXT}', indiceText)
             .replace('{GRUTECA_CONTEXT}', grutecaContext)
+            .replace('{NICA_CONTEXT}', nicaContext)
             .replace('{DESCRIPTION}', description);
 
         const aiResult = await callGemini(prompt, apiKey);

@@ -1,0 +1,33 @@
+DOCTRINA TÉCNICA Y CASUÍSTICA - DGA NICARAGUA (SAC)
+
+1. EL MOTOR DE INFERENCIA: EL SAC
+- El SAC (Sistema Arancelario Centroamericano) en Nicaragua utiliza 10 dígitos.
+- Fracción Nacional: 9no y 10mo dígito definen subdivisiones nicaragüenses.
+- Lógica: Proceso descendente y excluyente. Un error en la partida (4 dígitos) invalida todo lo anterior.
+
+2. PSICOLOGÍA PROCEDIMENTAL DE LA DGA
+- Enfoque Empírico-Materialista: La mercancía es lo que dicen las fichas técnicas y el laboratorio, NO el nombre comercial en la factura.
+- Rechazo de Marketing: Se ignoran nombres comerciales si contradicen la descripción técnica de la partida.
+
+3. CASUÍSTICA Y CRITERIOS VINCULANTES (GROUND TRUTH NICA)
+- Ingredientes Intrusos (Caso InterLac): Preparaciones lácteas con grasa vegetal (aceite de palma), jarabe de glucosa o emulsificantes PIERDEN su naturaleza de producto lácteo (Cap. 04) y pasan a ser Preparaciones Alimenticias (Cap. 21).
+- Productos Híbridos (Toallas Húmedas): Se clasifican según la sustancia impregnada (Cap. 33 cosmética o Cap. 34 limpieza/higiene), no por el soporte textil.
+- Textiles (Aforismo Técnico): Tolerancia mínima. Diferenciar filamento texturizado vs no texturizado. Obligatorio: Gramaje (g/m2) y composición exacta.
+- Mezclas y Surtidos (Kits): Componente que define la utilidad manda. Cuidado con el umbral del 15% de componentes no originarios en tratados.
+- Vapeadores y Nicotina: Atracción gravitacional al Cap. 24 (MH-DGA-RES-0630-2024), gravados con ISC fuerte.
+
+4. ALERTAS DE RIESGO DE FISCALIZACIÓN
+- Clasificación por Conveniencia: Uso de partidas con 0% arancel activa alertas automáticas de Auditoría Posterior.
+- Duda de Valor: Si la clasificación de bajo arancel no es consistente con el valor de mercado, la DGA activa "Duda de Valor".
+- Error de Procedencia: NO usar códigos del proveedor (HS de China). El SAC tiene aperturas nacionales únicas que el proveedor ignora.
+
+5. RAZONAMIENTO ANTE "USUARIO LAZO" (LAZY INPUT)
+- Ante descripciones de 1-2 palabras (ej: "café"), la IA debe disparar el algoritmo de "Preguntas Críticas":
+  - ¿Tostado o verde? (Cap 09)
+  - ¿Soluble o extracto? (Cap 21)
+  - ¿Con o sin sustitutos? (Cap 21)
+- Si no hay respuesta, deducir la forma comercial más común pero EXPLICAR el riesgo de sanción por falta de diligencia (DGA Nicaragua).
+
+6. TLC CHINA Y SAC 2025
+- Regla de Salto Arancelario (Jump Rule): Transformación suficiente para cambiar de partida.
+- SAC 2025: Subdivisiones para vehículos eléctricos, drones avanzados y nuevos químicos.
