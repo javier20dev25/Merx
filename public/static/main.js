@@ -1,11 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Elementos del DOM ---
-    const infoText = document.getElementById('info-text');
+    const step1Container = document.getElementById('step-1-container');
     const mainTextarea = document.getElementById('main-textarea');
-    const textareaContainer = document.querySelector('.textarea-container'); // Contenedor del textarea
+    const step3Container = document.getElementById('step-3-container');
+    const notesTextarea = document.getElementById('notes-textarea');
+    const clarificationContainer = document.getElementById('clarification-container');
+    const clarificationReason = document.getElementById('clarification-reason');
+    const clarificationQuestions = document.getElementById('clarification-questions');
     const resultCard = document.getElementById('result-card');
     const leftButton = document.getElementById('left-button');
     const rightButton = document.getElementById('right-button');
+    const skipButton = document.getElementById('skip-button');
     const mainContainer = document.getElementById('main-container');
     const reportView = document.getElementById('report-view');
     const resetButton = document.getElementById('reset-button');
@@ -55,20 +60,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const logo = document.getElementById('logo');
         logo.classList.add('loading-animation');
-        
-        transitionElements(textareaContainer, resultCard); // FIX: Ocultar el contenedor del textarea
+
+        transitionElements(step1Container, resultCard);
         resultCard.innerHTML = '';
         rightButton.disabled = true;
 
         try {
-            const response = await fetch('/api/find-sac-chapter', { 
-                method: 'POST', 
-                headers: { 'Content-Type': 'application/json' }, 
+            const response = await fetch('/api/find-sac-chapter', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ description: sessionData.description })
             });
 
             if (!response.ok) throw new Error(`Error del servidor: ${response.statusText}`);
-            
+
             const data = await response.json();
 
             let uiText;
@@ -78,17 +83,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const chapter_number = data.chapter_number;
                 const rationale = data.rationale || '';
                 const chapterText = chapter_number ? `Capítulo ${chapter_number}: ${chapter}` : `Capítulo: ${chapter}`;
-                uiText = `Sección: ${section}\n${chapterText}${rationale ? '\n\nMotivo: ' + rationale : ''}`;
+
+                uiText = `<strong>Sección:</strong> ${section}<br><strong>${chapterText}</strong>`;
+                if (rationale) uiText += `<br><br><strong>Análisis Merceológico Inicial:</strong> ${rationale}`;
+                if (data.extractedNotes) {
+                    uiText += `<br><br><strong>Notas Legales Sugeridas:</strong><br><div style="font-size:0.9em; opacity:0.9; max-height:200px; overflow-y:auto; padding:10px; background:rgba(0,0,0,0.2); border-radius:8px; border-left: 3px solid #6b11ff;">${data.extractedNotes.replace(/\n/g, '<br>')}</div>`;
+                }
             } else if (data.raw_text) {
                 uiText = data.raw_text;
             } else {
                 uiText = 'No se encontró clasificación confiable.';
             }
 
-            resultCard.innerText = uiText;
+            resultCard.innerHTML = uiText;
             sessionData.location = uiText;
-            animateTextChange(rightButtonContent, "Siguiente");
-            subState = 1;
+            updateUI(1);
 
         } catch (error) {
             resultCard.innerText = 'Error al procesar la respuesta del servidor.';
@@ -104,19 +113,41 @@ document.addEventListener('DOMContentLoaded', () => {
         reportWrapper.innerHTML = `<p class="report-final-text" style="color: #c0392b;">${message}</p>`;
     }
 
-    async function generateReport() {
-        const notes = mainTextarea.value;
+    async function generateReport(skip = false) {
+        const notes = notesTextarea.value;
         const logo = document.getElementById('logo');
+
+        let clarificationAnswers = "";
+        if (currentState === 1.5) {
+            if (skip) {
+                clarificationAnswers = "[USUARIO OMITIÓ DAR DETALLES TÉCNICOS. PROCEDE A CLASIFICAR CON LA INFORMACIÓN ACTUAL BASÁNDOTE EN TU MEJOR CRITERIO TÉCNICO]";
+            } else {
+                const inputs = clarificationQuestions.querySelectorAll('input[type="radio"]:checked, textarea.neumorphic-textarea');
+                inputs.forEach(input => {
+                    const QuestionText = input.closest('div').querySelector('.question-label') ? input.closest('div').querySelector('.question-label').innerText : "Pregunta Abierta";
+                    if (input.type === 'radio') {
+                        if (input.value === 'Otro') {
+                            const otherInput = input.closest('label').querySelector('.other-text-input');
+                            clarificationAnswers += `${QuestionText}: Otro - ${otherInput.value || 'No especificado'}\n`;
+                        } else {
+                            clarificationAnswers += `${QuestionText}: ${input.value}\n`;
+                        }
+                    } else {
+                        clarificationAnswers += `${QuestionText}: ${input.value}\n`;
+                    }
+                });
+            }
+        }
 
         mainContainer.classList.add('fade-out');
         mainContainer.addEventListener('animationend', () => {
             mainContainer.classList.add('hidden');
             mainContainer.classList.remove('fade-out');
-            
+
             const reportHeader = reportView.querySelector('.report-header');
             if (reportHeader) {
                 // FIX: Crear el logo directamente para evitar problemas de clonación
-                
+
             }
 
             reportView.classList.remove('hidden');
@@ -127,14 +158,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { once: true });
 
         try {
-            const payload = { 
-                description: sessionData.description, 
+            const payload = {
+                description: sessionData.description,
                 notes: notes,
-                origen: 'No especificado', 
-                perfilImportador: 'General' 
+                origen: 'No especificado',
+                perfilImportador: 'General',
+                clarificationAnswers: clarificationAnswers
             };
             const resp = await fetch('/api/generate-report', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-            
+
             if (!resp.ok) {
                 const errData = await resp.json();
                 throw new Error(errData.message || `Error del servidor: ${resp.statusText}`);
@@ -148,6 +180,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const report = data.report;
+
+            if (report.classification?.necesitaAclaracion) {
+                reportView.classList.add('hidden');
+                mainContainer.classList.remove('hidden');
+                showClarificationPrompt(report.classification);
+                return;
+            }
+
             const reportWrapper = document.getElementById('report-content-wrapper');
             reportWrapper.innerHTML = '';
 
@@ -160,9 +200,9 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             if (report.classification?.clasificacionPropuesta) {
-                const {codigo, descripcion} = report.classification.clasificacionPropuesta;
+                const { codigo, descripcion } = report.classification.clasificacionPropuesta;
                 const { scoreFiabilidad, argumentoMerciologico } = report.classification;
-                const content = 
+                const content =
                     `<p><strong>Código Propuesto:</strong> ${codigo || 'N/A'}</p>` +
                     `<p><strong>Descripción:</strong> ${descripcion || 'N/A'}</p>` +
                     `<p><strong>Fiabilidad:</strong> ${scoreFiabilidad ? Math.round(scoreFiabilidad * 100) + '%' : 'N/A'}</p>` +
@@ -198,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (report.tariff && !report.tariff.error) {
                 const { regimenSugerido, cumpleOrigenPotencial, justificacionOrigen, comparativaArancelaria, recomendacionEstrategica } = report.tariff.analisisOptimizacion;
                 if (regimenSugerido) {
-                    let content = 
+                    let content =
                         `<p><strong>Régimen Sugerido:</strong> ${regimenSugerido}</p>` +
                         `<p><strong>Cumple Origen Potencial:</strong> ${cumpleOrigenPotencial}</p>` +
                         `<p><em>Justificación:</em> ${justificacionOrigen}</p>` +
@@ -218,52 +258,128 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function showClarificationPrompt(classifData) {
+        let reason = classifData.analisisMerciologico?.comentariosDuda || "Requerimos más detalles técnicos para confirmar la clasificación exacta entre las opciones.";
+        clarificationReason.innerText = reason;
+
+        let questionsHTML = '';
+
+        if (classifData.preguntasSeleccion && classifData.preguntasSeleccion.length > 0) {
+            classifData.preguntasSeleccion.forEach((q, qIndex) => {
+                questionsHTML += `<div style="margin-bottom: 15px;">
+                    <strong class="question-label" style="display:block; margin-bottom: 8px; color: #fff;">${q.pregunta}</strong>
+                    <div style="display:flex; flex-direction: column; gap: 8px;" class="question-group">
+                        ${q.opciones.map((op, oIndex) => `
+                            <label style="cursor: pointer; color: #ddd; display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 5px;">
+                                <input type="radio" name="clarif_q_${qIndex}" value="${op}" required> ${op}
+                            </label>
+                        `).join('')}
+                        <label style="cursor: pointer; color: #ddd; display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 5px;">
+                            <input type="radio" name="clarif_q_${qIndex}" value="Otro" class="other-radio" required> Otro:
+                            <input type="text" class="other-text-input neumorphic-input" style="flex: 1; padding: 4px 8px; border-radius: 4px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;" placeholder="Especificar..." disabled>
+                        </label>
+                    </div>
+                </div>`;
+            });
+        }
+
+        if (classifData.preguntaAbierta) {
+            questionsHTML += `<div style="margin-bottom: 15px;">
+                <strong class="question-label" style="display:block; margin-bottom: 8px; color: #fff;">${classifData.preguntaAbierta}</strong>
+                <textarea class="neumorphic-textarea" style="height: 100px;" placeholder="Ingresa la información solicitada aquí..." required></textarea>
+            </div>`;
+        }
+
+        clarificationQuestions.innerHTML = questionsHTML;
+        updateUI(1.5);
+
+        // Añadir lógica para habilitar/deshabilitar el campo de texto "Otro"
+        const questionGroups = clarificationQuestions.querySelectorAll('.question-group');
+        questionGroups.forEach(group => {
+            const radios = group.querySelectorAll('input[type="radio"]');
+            const otherTextInput = group.querySelector('.other-text-input');
+
+            radios.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    if (e.target.value === 'Otro') {
+                        otherTextInput.disabled = false;
+                        otherTextInput.focus();
+                        otherTextInput.required = true;
+                    } else {
+                        otherTextInput.disabled = true;
+                        otherTextInput.value = '';
+                        otherTextInput.required = false;
+                    }
+                });
+            });
+        });
+    }
+
     function updateUI(state) {
         currentState = state;
         if (state === 0) {
-            subState = 0;
             mainContainer.classList.remove('hidden');
             reportView.classList.add('hidden');
-            infoText.classList.add('hidden');
-            textareaContainer.classList.remove('hidden'); // FIX: Mostrar contenedor
-            mainTextarea.classList.remove('tall');
-            mainTextarea.placeholder = "Describe tu mercancía aquí";
-            mainTextarea.value = "";
+            step1Container.classList.remove('hidden');
+            step3Container.classList.add('hidden');
+            clarificationContainer.classList.add('hidden');
             resultCard.classList.add('hidden');
+            skipButton.classList.add('hidden');
+            mainTextarea.value = '';
             animateTextChange(leftButtonContent, trashIcon);
-            animateTextChange(rightButtonContent, "Buscar Ubicacion");
+            animateTextChange(rightButtonContent, "Buscar Ubicación");
         } else if (state === 1) {
             mainContainer.classList.remove('hidden');
             reportView.classList.add('hidden');
-            infoText.classList.remove('hidden');
-            textareaContainer.classList.remove('hidden'); // FIX: Mostrar contenedor
-            mainTextarea.classList.add('tall');
-            mainTextarea.value = '';
-            mainTextarea.placeholder = "Añade notas para el informe...";
-            resultCard.classList.add('hidden');
+            step1Container.classList.add('hidden');
+            resultCard.classList.remove('hidden');
+            step3Container.classList.remove('hidden');
+            clarificationContainer.classList.add('hidden');
+            skipButton.classList.add('hidden');
+            notesTextarea.value = '';
             animateTextChange(leftButtonContent, backIcon);
-            animateTextChange(rightButtonContent, "Generar informe");
+            animateTextChange(rightButtonContent, "Generar Informe");
+        } else if (state === 1.5) {
+            mainContainer.classList.remove('hidden');
+            reportView.classList.add('hidden');
+            step1Container.classList.add('hidden');
+            resultCard.classList.remove('hidden');
+            step3Container.classList.remove('hidden');
+            clarificationContainer.classList.remove('hidden');
+            skipButton.classList.remove('hidden');
+            animateTextChange(leftButtonContent, backIcon);
+            animateTextChange(rightButtonContent, "Responder y Clasificar");
         }
     }
 
     rightButton.addEventListener('click', () => {
         if (currentState === 0) {
-            if (subState === 0) findSacLocation();
-            else updateUI(1);
+            findSacLocation();
         } else if (currentState === 1) {
-            generateReport();
+            if (!notesTextarea.value.trim()) { alert("Por favor pega subpartidas arancelarias"); return; }
+            generateReport(false);
+        } else if (currentState === 1.5) {
+            // Validar campos de texto "Otro" requeridos
+            const unfilledOthers = Array.from(clarificationQuestions.querySelectorAll('.other-text-input[required]')).filter(input => !input.value.trim());
+            if (unfilledOthers.length > 0) {
+                alert("Por favor, especifica el detalle en la opción 'Otro'.");
+                unfilledOthers[0].focus();
+                return;
+            }
+            generateReport(false);
+        }
+    });
+
+    skipButton.addEventListener('click', () => {
+        if (currentState === 1.5) {
+            generateReport(true);
         }
     });
 
     leftButton.addEventListener('click', () => {
         if (currentState === 0) {
-            if (subState === 0) mainTextarea.value = '';
-            else {
-                transitionElements(resultCard, textareaContainer); // FIX: Usar el contenedor
-                animateTextChange(rightButtonContent, "Buscar Ubicacion");
-                subState = 0;
-            }
-        } else if (currentState === 1) {
+            mainTextarea.value = '';
+        } else if (currentState === 1 || currentState === 1.5) {
             updateUI(0);
         }
     });
@@ -300,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (policyBtn) { // Check if buttons exist to avoid errors in other views
         policyBtn.addEventListener('click', () => {
             const isHidden = policyContent.classList.contains('hidden');
-            
+
             // Hide both first
             policyContent.classList.add('hidden');
             privacyContent.classList.add('hidden');

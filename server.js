@@ -6,50 +6,50 @@ const fetch = require('node-fetch');
 
 // --- Helpers de Utilidad ---
 async function fetchWithTimeout(url, options = {}, timeout = 18000) { // Aumentado para prompts complejos
-  const controller = new AbortController();
-  options.signal = controller.signal;
-  const timeoutId = setTimeout(() => controller.abort(), timeout);
-  try {
-    const response = await fetch(url, options);
-    clearTimeout(timeoutId);
-    return response;
-  } catch (error) {
-    clearTimeout(timeoutId);
-    if (error.name === 'AbortError') {
-      throw new Error(`Request timed out after ${timeout / 1000} seconds`);
+    const controller = new AbortController();
+    options.signal = controller.signal;
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    try {
+        const response = await fetch(url, options);
+        clearTimeout(timeoutId);
+        return response;
+    } catch (error) {
+        clearTimeout(timeoutId);
+        if (error.name === 'AbortError') {
+            throw new Error(`Request timed out after ${timeout / 1000} seconds`);
+        }
+        throw error;
     }
-    throw error;
-  }
 }
 
 function cleanModelJsonString(raw) {
-  if (!raw || typeof raw !== 'string') return raw;
-  let s = raw.replace(/^\uFEFF/, '').trim();
-  s = s.replace(/^```(?:json)?\n?/, '');
-  s = s.replace(/\n?```$/, '');
-  return s.trim();
+    if (!raw || typeof raw !== 'string') return raw;
+    let s = raw.replace(/^\uFEFF/, '').trim();
+    s = s.replace(/^```(?:json)?\n?/, '');
+    s = s.replace(/\n?```$/, '');
+    return s.trim();
 }
 
 function tryParseModelJson(raw) {
-  const cleaned = cleanModelJsonString(raw);
-  try {
-    return JSON.parse(cleaned);
-  } catch (e) {
-    console.error("Fallo al parsear JSON, intentando limpiar:", cleaned);
-    throw new Error('No se pudo parsear JSON del modelo: ' + e.message);
-  }
+    const cleaned = cleanModelJsonString(raw);
+    try {
+        return JSON.parse(cleaned);
+    } catch (e) {
+        console.error("Fallo al parsear JSON, intentando limpiar:", cleaned);
+        throw new Error('No se pudo parsear JSON del modelo: ' + e.message);
+    }
 }
 
 async function getApiKey() {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (apiKey) return apiKey;
-  const keyPath = path.join(__dirname, 'credencialgemini');
-  if (fsSync.existsSync(keyPath)) {
-    const txt = await fs.readFile(keyPath, 'utf-8');
-    const m = txt.match(/AIza[A-Za-z0-9_-]{35}/);
-    if (m) return m[0];
-  }
-  throw new Error('API Key de Gemini no encontrada.');
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (apiKey) return apiKey;
+    const keyPath = path.join(__dirname, 'credencialgemini');
+    if (fsSync.existsSync(keyPath)) {
+        const txt = await fs.readFile(keyPath, 'utf-8');
+        const m = txt.match(/AIza[A-Za-z0-9_-]{35}/);
+        if (m) return m[0];
+    }
+    throw new Error('API Key de Gemini no encontrada.');
 }
 
 // --- NUEVA ARQUITECTURA DE LLAMADAS A LA IA ---
@@ -63,10 +63,40 @@ async function loadContext(filePath) {
     }
 }
 
+// Extrae las notas legales de la sección y capítulo específico
+function extractLegalNotes(fullText, sectionRomano, chapterNumber) {
+    let extracted = "";
+
+    // Buscar Sección
+    if (sectionRomano) {
+        const sectionRegex = new RegExp(`SECCIÓN ${sectionRomano}:[\\s\\S]*?(?=SECCIÓN |$)`, 'i');
+        const sectionMatch = fullText.match(sectionRegex);
+        if (sectionMatch) {
+            const chapterStart = sectionMatch[0].search(/CAPÍTULO \d+:/i);
+            if (chapterStart !== -1) {
+                extracted += sectionMatch[0].substring(0, chapterStart).trim() + "\n\n";
+            } else {
+                extracted += sectionMatch[0].trim() + "\n\n";
+            }
+        }
+    }
+
+    // Buscar Capítulo
+    if (chapterNumber) {
+        const chapterRegex = new RegExp(`CAPÍTULO ${chapterNumber}:[\\s\\S]*?(?=CAPÍTULO \\d+:|SECCIÓN |$)`, 'i');
+        const chapterMatch = fullText.match(chapterRegex);
+        if (chapterMatch) {
+            extracted += chapterMatch[0].trim();
+        }
+    }
+
+    return extracted || "Notas legales no encontradas para esta sección/capítulo en el resumen.";
+}
+
 async function callGemini(prompt, apiKey) {
     const modelName = 'gemini-2.5-flash-lite'; // MODELO CORREGIDO Y FIJADO
     const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/${modelName}:generateContent?key=${apiKey}`; // API v1 CORREGIDA
-    
+
     const response = await fetchWithTimeout(geminiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -95,10 +125,14 @@ async function callGemini(prompt, apiKey) {
 }
 
 // 1. Clasificación
-async function callClassification(apiKey, description, notes) {
+async function callClassification(apiKey, description, notes, clarificationAnswers = "") {
     const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_clasificacion.txt'), 'utf-8');
     const rgiContext = await loadContext('razonamiento_rgi_avanzado.txt');
-    const prompt = promptTemplate.replace('{RGI_CONTEXT}', rgiContext).replace('{DESCRIPTION}', description).replace('{NOTES}', notes);
+    const prompt = promptTemplate
+        .replace('{RGI_CONTEXT}', rgiContext)
+        .replace('{DESCRIPTION}', description)
+        .replace('{NOTES}', notes)
+        .replace('{CLARIFICATION_ANSWERS}', clarificationAnswers);
     return callGemini(prompt, apiKey);
 }
 
@@ -139,21 +173,31 @@ async function callTariffOptimization(apiKey, codigo, origen, perfilImportador) 
 }
 
 // --- Orquestador y Formateador ---
-async function generateReportFlow(description, notes, origen, perfilImportador) {
+async function generateReportFlow(description, notes, origen, perfilImportador, clarificationAnswers = "") {
     const apiKey = await getApiKey();
     const fullReport = {};
 
-    console.log("Iniciando Paso 1: Clasificación...");
-    fullReport.classification = await callClassification(apiKey, description, notes);
-    const codigo = fullReport.classification?.clasificacionPropuesta?.codigo;
-    if (!codigo) throw new Error('Paso 1 fallido: No se pudo obtener el código arancelario inicial.');
+    console.log("Iniciando Paso 1: Clasificación" + (clarificationAnswers ? " (con aclaraciones)..." : "..."));
+    fullReport.classification = await callClassification(apiKey, description, notes, clarificationAnswers);
 
-    console.log(`Paso 1 completado. Código: ${codigo}. Iniciando Pasos 2-5 en paralelo...`);
+    // Retorno anticipado si la IA necesita aclaración del usuario
+    if (fullReport.classification?.necesitaAclaracion) {
+        console.log("La IA requiere aclaración del usuario. Retornando preguntas.");
+        return fullReport;
+    }
+
+    const codigo = fullReport.classification?.clasificacionPropuesta?.codigo;
+    if (!codigo) {
+        console.warn("No se obtuvo un código arancelario válido. Análisis cancelado.");
+        throw new Error('No se pudo obtener el código arancelario final.');
+    }
+
+    console.log(`Paso 1 completado. Código propuesto: ${codigo}. Iniciando análisis paralelos...`);
     const [legal, regulatory, risk, tariff] = await Promise.all([
-        callLegalBasis(apiKey, codigo).catch(e => ({error: e.message})),
-        callRegulatoryAnalysis(apiKey, description).catch(e => ({error: e.message})),
-        callCustomsRiskAnalysis(apiKey, description).catch(e => ({error: e.message})),
-        callTariffOptimization(apiKey, codigo, origen, perfilImportador).catch(e => ({error: e.message}))
+        callLegalBasis(apiKey, codigo).catch(e => ({ error: e.message })),
+        callRegulatoryAnalysis(apiKey, description).catch(e => ({ error: e.message })),
+        callCustomsRiskAnalysis(apiKey, description).catch(e => ({ error: e.message })),
+        callTariffOptimization(apiKey, codigo, origen, perfilImportador).catch(e => ({ error: e.message }))
     ]);
     console.log("Pasos 2-5 completados.");
 
@@ -172,7 +216,7 @@ function reportToUI(report) {
     if (report.classification?.clasificacionPropuesta) {
         const { codigo, descripcion } = report.classification.clasificacionPropuesta;
         const { scoreFiabilidad, argumentoMerciologico } = report.classification;
-        addSection('1. Análisis de Clasificación Arancelaria', 
+        addSection('1. Análisis de Clasificación Arancelaria',
             `**Código Propuesto:** ${codigo || 'N/A'}\n` +
             `**Descripción:** ${descripcion || 'N/A'}\n` +
             `**Fiabilidad:** ${scoreFiabilidad ? Math.round(scoreFiabilidad * 100) + '%' : 'N/A'}\n` +
@@ -186,7 +230,7 @@ function reportToUI(report) {
         if (applied_rules?.length > 0) content += '**Reglas Generales Aplicadas:**\n' + applied_rules.map(r => `- **${r.rule_id}:** ${r.descripcion}`).join('\n') + '\n';
         if (notes_applied?.length > 0) content += '**Notas de Sección/Capítulo:**\n' + notes_applied.map(n => `- **${n.note_id} (${n.tipo || 'N/A'}):** ${n.descripcion}`).join('\n') + '\n';
         if (jurisprudencia?.length > 0) content += '**Jurisprudencia Relevante (TATA):**\n' + jurisprudencia.map(j => `- **${j.case_id}:** ${j.summary}`).join('\n') + '\n';
-        if(content) addSection('2. Fundamento Legal y Jurisprudencia', content);
+        if (content) addSection('2. Fundamento Legal y Jurisprudencia', content);
     }
 
     if (report.regulatory && !report.regulatory.error) {
@@ -209,11 +253,11 @@ function reportToUI(report) {
         const { regimenSugerido, cumpleOrigenPotencial, justificacionOrigen, comparativaArancelaria, recomendacionEstrategica } = report.tariff.analisisOptimizacion;
         if (regimenSugerido) {
             let content = `**Régimen Sugerido:** ${regimenSugerido}\n` +
-                          `**Cumple Origen Potencial:** ${cumpleOrigenPotencial}\n` +
-                          `*Justificación:* ${justificacionOrigen}\n\n` +
-                          `**Comparativa:**\n- Arancel Normal (NMF): ${comparativaArancelaria.arancelNMF}\n- Arancel Preferencial: ${comparativaArancelaria.arancelPreferencial}\n`+
-                          `**Ahorro Potencial:** ${comparativaArancelaria.ahorroPotencial}\n\n`+
-                          `**Recomendación Estratégica:** ${recomendacionEstrategica}`;
+                `**Cumple Origen Potencial:** ${cumpleOrigenPotencial}\n` +
+                `*Justificación:* ${justificacionOrigen}\n\n` +
+                `**Comparativa:**\n- Arancel Normal (NMF): ${comparativaArancelaria.arancelNMF}\n- Arancel Preferencial: ${comparativaArancelaria.arancelPreferencial}\n` +
+                `**Ahorro Potencial:** ${comparativaArancelaria.ahorroPotencial}\n\n` +
+                `**Recomendación Estratégica:** ${recomendacionEstrategica}`;
             addSection('5. Análisis de Optimización Arancelaria', content);
         }
     }
@@ -245,7 +289,7 @@ app.post('/api/find-sac-chapter', async (req, res) => {
         const indiceText = await loadContext('secciones-capitulos.json');
         const legalNotesText = await loadContext('resumen_notas_legales_sac.txt');
         const promptTemplate = await fs.readFile(path.join(__dirname, 'prompts', 'prompt_ubicacion.txt'), 'utf-8');
-        
+
         const prompt = promptTemplate
             .replace('{LEGAL_NOTES_CONTEXT}', legalNotesText)
             .replace('{INDICE_CONTEXT}', indiceText)
@@ -253,24 +297,37 @@ app.post('/api/find-sac-chapter', async (req, res) => {
 
         const aiResult = await callGemini(prompt, apiKey);
         const chapterNumber = aiResult.chapter_number;
+
         if (!chapterNumber) return res.status(404).json({ error: 'El modelo no pudo determinar un capítulo.' });
 
         const sectionsData = JSON.parse(indiceText);
         let foundSection = null, foundChapter = null;
+        let romanSection = aiResult.seccion_number || "";
+
         for (const section of sectionsData) {
             const chapter = section.chapters.find(c => c.number == chapterNumber);
             if (chapter) {
-                foundSection = section; foundChapter = chapter; break;
+                foundSection = section;
+                foundChapter = chapter;
+                if (!romanSection) {
+                    // Tratar de extraer el número romano del texto de la sección: "SECCIÓN II: PRODUCTOS..." 
+                    const match = section.name.match(/SECCIÓN\s+([IXV]+)\b/i);
+                    if (match) romanSection = match[1];
+                }
+                break;
             }
         }
 
         if (!foundChapter) return res.status(404).json({ error: `Capítulo ${chapterNumber} no encontrado.` });
 
+        const extractedNotes = extractLegalNotes(legalNotesText, romanSection, chapterNumber);
+
         res.status(200).json({
             section: foundSection.name.split(':')[0],
             chapter: foundChapter.name,
             chapter_number: foundChapter.number,
-            rationale: aiResult.rationale
+            rationale: aiResult.rationale,
+            extractedNotes: extractedNotes
         });
 
     } catch (error) {
@@ -281,14 +338,14 @@ app.post('/api/find-sac-chapter', async (req, res) => {
 
 app.post('/api/generate-report', async (req, res) => {
     try {
-        const { description, notes, origen, perfilImportador } = req.body;
+        const { description, notes, origen, perfilImportador, clarificationAnswers } = req.body;
         if (!description) return res.status(400).json({ error: 'La descripción es obligatoria.' });
 
-        const finalReport = await generateReportFlow(description, notes, origen || 'No especificado', perfilImportador || 'General');
+        const finalReport = await generateReportFlow(description, notes, origen || 'No especificado', perfilImportador || 'General', clarificationAnswers || "");
 
         // Enviar el objeto de informe completo y estructurado
-        res.status(200).json({ 
-            ok: true, 
+        res.status(200).json({
+            ok: true,
             report: finalReport
         });
     } catch (error) {
