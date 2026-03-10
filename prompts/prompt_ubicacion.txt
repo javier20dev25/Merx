@@ -17,6 +17,7 @@ Paso 3. Selección de Capítulo: Basado en el Paso 2, usa el ÍNDICE y el RESUME
 REGLAS DE SALIDA:
 - Devuelve ÚNICAMENTE un objeto JSON válido.
 - No uses markdown para envolver el JSON (sin backticks).
+- Extrae del RESUMEN DE NOTAS LEGALES las 2 a 3 notas más importantes para este caso específico. Resume su contenido y determina su tipo (Definitoria, Incluyente, Excluyente, Clasificatoria, Ampliatoria, Restrictiva, o Mixta).
 
 SALIDA JSON REQUERIDA:
 {
@@ -29,5 +30,11 @@ SALIDA JSON REQUERIDA:
   "criterioClasificacion": "<'Materia constitutiva' o 'Función'>",
   "seccion_number": "<Número Romano de la Sección (ej: 'II')>",
   "chapter_number": <Número entero del capítulo (ej: 7)>,
-  "rationale": "<Justificación técnica breve>"
+  "rationale": "<Justificación técnica breve>",
+  "notasSugeridas": [
+    {
+      "texto": "<Resumen breve de la nota aplicable>",
+      "tipo": "<Tipo de nota legal>"
+    }
+  ]
 }

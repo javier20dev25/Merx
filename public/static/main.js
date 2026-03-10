@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainTextarea = document.getElementById('main-textarea');
     const step3Container = document.getElementById('step-3-container');
     const notesTextarea = document.getElementById('notes-textarea');
+    if (notesTextarea) {
+        notesTextarea.setAttribute('placeholder', 'Pega las OPCIONES ARANCELARIAS que consideras aquí (ej. 0701.10.00.00). Las Notas Legales se incluirán automáticamente.');
+    }
     const clarificationContainer = document.getElementById('clarification-container');
     const clarificationReason = document.getElementById('clarification-reason');
     const clarificationQuestions = document.getElementById('clarification-questions');
@@ -115,9 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 uiText = `<strong>Sección:</strong> ${section}<br><strong>${chapterText}</strong>`;
                 if (rationale) uiText += `<br><br><strong>Análisis Merceológico Inicial:</strong> ${rationale}`;
-                if (data.extractedNotes) {
-                    uiText += `<br><br><strong>Notas Legales Sugeridas:</strong><br><div style="font-size:0.9em; opacity:0.9; max-height:200px; overflow-y:auto; padding:10px; background:rgba(0,0,0,0.2); border-radius:8px; border-left: 3px solid #6b11ff;">${data.extractedNotes.replace(/\n/g, '<br>')}</div>`;
+
+                if (data.notasSugeridas && data.notasSugeridas.length > 0) {
+                    const notasHtml = data.notasSugeridas.map(n => `<li style="margin-bottom: 8px;"><strong style="color:var(--primary-color)">[${n.tipo}]</strong> ${n.texto}</li>`).join('');
+                    uiText += `<br><br><strong>Notas Legales Clave:</strong><br><ul style="font-size:0.9em; opacity:0.9; max-height:200px; overflow-y:auto; padding-left:20px; padding-top:10px; padding-bottom:10px; background:rgba(0,0,0,0.2); border-radius:8px; border-left: 3px solid var(--primary-color);">${notasHtml}</ul>`;
+                } else if (data.extractedNotes) {
+                    uiText += `<br><br><strong>Notas Legales (Resumen):</strong><br><div style="font-size:0.9em; opacity:0.9; max-height:200px; overflow-y:auto; padding:10px; background:rgba(0,0,0,0.2); border-radius:8px; border-left: 3px solid var(--primary-color);">${data.extractedNotes.replace(/\n/g, '<br>')}</div>`;
                 }
+                sessionData.extractedNotes = data.extractedNotes || '';
             } else if (data.raw_text) {
                 uiText = data.raw_text;
             } else {
@@ -143,7 +151,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function generateReport(skip = false) {
-        const notes = notesTextarea.value;
+        let notes = notesTextarea.value;
+        if (sessionData.extractedNotes) {
+            notes += `\n\n[CONTEXTO INTERNO: TEXTO COMPLETO DE NOTAS LEGALES]\n${sessionData.extractedNotes}`;
+        }
 
         let clarificationAnswers = "";
         if (currentState === 1.5) {
@@ -173,8 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContainer.classList.remove('fade-out');
 
             reportView.classList.remove('hidden');
-            const reportWrapper = document.getElementById('report-content-wrapper');
-            if (reportWrapper) reportWrapper.innerHTML = `<div class="loader"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div>`;
+            // FIX: Inject loading animation directly into reportAccordion instead of non-existent wrapper
+            reportAccordion.innerHTML = `<div class="loader-container" style="display:flex; justify-content:center; padding: 40px;"><div class="loader"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div></div>`;
             reportView.classList.add('fade-in');
             logo.classList.add('loading-animation');
         }, { once: true });
@@ -216,16 +227,30 @@ document.addEventListener('DOMContentLoaded', () => {
             updateUI(2);
 
             // 1. Identificación Merceológica
-            const idContent = `<p>${classificationResult.analisisMerciologico?.whatIs || 'No disponible'}</p>` +
-                `<p><strong>Material:</strong> ${classificationResult.analisisMerciologico?.material || 'N/A'}</p>` +
-                `<p><strong>Función:</strong> ${classificationResult.analisisMerciologico?.function || 'N/A'}</p>`;
+            const notasDuda = classificationResult.analisisMerciologico?.comentariosDuda;
+            let idContent = `<p><strong>Identificación:</strong> ${classificationResult.analisisMerciologico?.identificacion || 'No disponible'}</p>`;
+            if (notasDuda && notasDuda !== "N/A" && notasDuda !== "false" && notasDuda.trim() !== '') {
+                idContent += `<div style="margin-top:10px; padding:10px; background:rgba(255,165,0,0.15); border-radius:8px; border-left: 3px solid #ff9800;">
+                                <small>💡 <strong>Nota del Sistema:</strong> ${notasDuda}</small>
+                              </div>`;
+            }
             reportAccordion.appendChild(createAccordionItem('1. Identificación Merceológica', idContent));
 
             // 2. Clasificación Legal
-            const legalContent = `<p><strong>Código Merx:</strong> <span style="font-family: monospace; font-weight: bold; font-size: 1.25rem; color: #8A2BE2;">${classificationResult.clasificacionPropuesta?.codigo || 'N/A'}</span></p>` +
+            let legalContent = `<p><strong>Código Merx:</strong> <span style="font-family: monospace; font-weight: bold; font-size: 1.25rem; color: var(--primary-color);">${classificationResult.clasificacionPropuesta?.codigo || 'N/A'}</span></p>` +
                 `<p><strong>Descripción SAC:</strong> ${classificationResult.clasificacionPropuesta?.descripcion || ''}</p>` +
-                `<p><strong>Base Legal:</strong> ${classificationResult.argumentoMerciologico?.baseLegalCitada || ''}</p>` +
-                `<p><em>Análisis RGI:</em> ${classificationResult.evaluacionRGI1 || classificationResult.argumentoMerciologico?.justificacion || ''}</p>`;
+                `<p><strong>Base Legal Citada:</strong> ${classificationResult.baseLegalCitada || ''}</p>` +
+                `<p><strong>RGI Exacta:</strong> ${classificationResult.rgiExacta || 'No especificada'}</p>`;
+
+            if (classificationResult.prelacionLegal && classificationResult.prelacionLegal !== 'N/A') {
+                legalContent += `<div style="margin-top:10px; margin-bottom:10px; padding:10px; background:rgba(211,84,0,0.15); border-radius:8px; border-left: 3px solid #d35400;">
+                                    <small>⚖️ <strong>Prelación Legal Aplicada:</strong> ${classificationResult.prelacionLegal}</small>
+                                </div>`;
+            }
+
+            legalContent += `<p><em>Análisis RGI:</em> ${classificationResult.evaluacionRGI1 || ''}</p>` +
+                `<p><em>Justificación:</em> ${classificationResult.argumentoMerciologico || ''}</p>`;
+
             reportAccordion.appendChild(createAccordionItem('2. Fundamento Legal (RGI/SAC)', legalContent));
 
             // 3. Riesgos y Permisos
@@ -336,15 +361,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleAcademy(show) {
         if (show) {
             merxAcademy.classList.remove('hidden');
+
+            // Explicitly hide elements instead of the parent container
             step1Container.classList.add('hidden');
-            leftButton.parentElement.classList.add('hidden');
+            step3Container.classList.add('hidden');
+            resultCard.classList.add('hidden');
+            clarificationContainer.classList.add('hidden');
+
             repasoBtn.classList.add('hidden');
+            leftButton.classList.add('hidden');
+            rightButton.classList.add('hidden');
+            skipButton.classList.add('hidden');
+
             initGame();
         } else {
             merxAcademy.classList.add('hidden');
-            step1Container.classList.remove('hidden');
-            leftButton.parentElement.classList.remove('hidden');
-            repasoBtn.classList.remove('hidden');
+            // Restore visibility based on the current state
+            updateUI(currentState);
         }
     }
 
@@ -358,7 +391,11 @@ document.addEventListener('DOMContentLoaded', () => {
             clarificationContainer.classList.add('hidden');
             resultCard.classList.add('hidden');
             skipButton.classList.add('hidden');
+
+            leftButton.classList.remove('hidden');
+            rightButton.classList.remove('hidden');
             repasoBtn.classList.remove('hidden');
+
             mainTextarea.value = '';
             animateTextChange(leftButtonContent, trashIcon);
             animateTextChange(rightButtonContent, "Buscar Ubicación");
@@ -372,6 +409,10 @@ document.addEventListener('DOMContentLoaded', () => {
             clarificationContainer.classList.add('hidden');
             skipButton.classList.add('hidden');
             repasoBtn.classList.add('hidden');
+
+            leftButton.classList.remove('hidden');
+            rightButton.classList.remove('hidden');
+
             notesTextarea.value = '';
             animateTextChange(leftButtonContent, backIcon);
             animateTextChange(rightButtonContent, "Generar Informe");
@@ -385,6 +426,10 @@ document.addEventListener('DOMContentLoaded', () => {
             clarificationContainer.classList.remove('hidden');
             skipButton.classList.remove('hidden');
             repasoBtn.classList.add('hidden');
+
+            leftButton.classList.remove('hidden');
+            rightButton.classList.remove('hidden');
+
             animateTextChange(leftButtonContent, backIcon);
             animateTextChange(rightButtonContent, "Responder y Clasificar");
         } else if (state === 2) {

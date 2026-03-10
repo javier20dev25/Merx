@@ -327,7 +327,8 @@ app.post('/api/find-sac-chapter', async (req, res) => {
             chapter: foundChapter.name,
             chapter_number: foundChapter.number,
             rationale: aiResult.rationale,
-            extractedNotes: extractedNotes
+            extractedNotes: extractedNotes,
+            notasSugeridas: aiResult.notasSugeridas
         });
 
     } catch (error) {
