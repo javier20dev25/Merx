@@ -117,8 +117,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const chapterText = chapter_number ? `Capítulo ${chapter_number}: ${chapter}` : `Capítulo: ${chapter}`;
 
                 uiText = `<strong>Sección:</strong> ${section}<br><strong>${chapterText}</strong>`;
-                if (rationale) uiText += `<br><br><strong>Análisis Merceológico Inicial:</strong> ${rationale}`;
+                if (rationale) {
+                    uiText += `<br><br><div class="neumorphic-data-card" style="margin-bottom:0;"><strong class="data-label">Análisis Merceológico Inicial</strong><span class="data-value">${rationale}</span></div>`;
+                }
 
+                if (data.notasSugeridas && data.notasSugeridas.length > 1 && rationale.toLowerCase().includes("ambigu")) {
+                    uiText += `<div style="margin-top:15px; padding:10px; background:rgba(138,43,226,0.1); border-radius:8px; border-left: 3px solid #8A2BE2;">
+                                 <strong style="color:#8A2BE2; font-size:0.9em;">¡Múltiples Opciones Detectadas!</strong><br>
+                                 <small>Tu descripción puede clasificar en varios capítulos. Revisa las <strong>Notas Legales Clave</strong> abajo para determinar a cuál aplica realmente tu producto, y pega la opción correcta en el paso final.</small>
+                               </div>`;
+                }
                 if (data.notasSugeridas && data.notasSugeridas.length > 0) {
                     const notasHtml = data.notasSugeridas.map(n => `<li style="margin-bottom: 8px;"><strong style="color:var(--primary-color)">[${n.tipo}]</strong> ${n.texto}</li>`).join('');
                     uiText += `<br><br><strong>Notas Legales Clave:</strong><br><ul style="font-size:0.9em; opacity:0.9; max-height:200px; overflow-y:auto; padding-left:20px; padding-top:10px; padding-bottom:10px; background:rgba(0,0,0,0.2); border-radius:8px; border-left: 3px solid var(--primary-color);">${notasHtml}</ul>`;
@@ -184,8 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContainer.classList.remove('fade-out');
 
             reportView.classList.remove('hidden');
-            // FIX: Inject loading animation directly into reportAccordion instead of non-existent wrapper
-            reportAccordion.innerHTML = `<div class="loader-container" style="display:flex; justify-content:center; padding: 40px;"><div class="loader"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div></div>`;
+            reportAccordion.innerHTML = `<div class="loader-container"><div class="neumorphic-spinner"></div></div>`;
             reportView.classList.add('fade-in');
             logo.classList.add('loading-animation');
         }, { once: true });
@@ -228,57 +235,90 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 1. Identificación Merceológica
             const notasDuda = classificationResult.analisisMerciologico?.comentariosDuda;
-            let idContent = `<p><strong>Identificación:</strong> ${classificationResult.analisisMerciologico?.identificacion || 'No disponible'}</p>`;
+            let idContent = `<div class="neumorphic-data-card">
+                                <span class="data-label">Identificación Técnica</span>
+                                <p class="data-value">${classificationResult.analisisMerciologico?.identificacion || 'No disponible'}</p>
+                             </div>`;
             if (notasDuda && notasDuda !== "N/A" && notasDuda !== "false" && notasDuda.trim() !== '') {
-                idContent += `<div style="margin-top:10px; padding:10px; background:rgba(255,165,0,0.15); border-radius:8px; border-left: 3px solid #ff9800;">
-                                <small>💡 <strong>Nota del Sistema:</strong> ${notasDuda}</small>
+                idContent += `<div class="risk-box" style="border-left-color: #ff9800;">
+                                <div class="risk-title">💡 Alerta del Sistema (Deducción)</div>
+                                <div class="data-value" style="font-size: 0.95rem;">${notasDuda}</div>
                               </div>`;
             }
             reportAccordion.appendChild(createAccordionItem('1. Identificación Merceológica', idContent));
 
             // 2. Clasificación Legal
-            let legalContent = `<p><strong>Código Merx:</strong> <span style="font-family: monospace; font-weight: bold; font-size: 1.25rem; color: var(--primary-color);">${classificationResult.clasificacionPropuesta?.codigo || 'N/A'}</span></p>` +
-                `<p><strong>Descripción SAC:</strong> ${classificationResult.clasificacionPropuesta?.descripcion || ''}</p>` +
-                `<p><strong>Base Legal Citada:</strong> ${classificationResult.baseLegalCitada || ''}</p>` +
-                `<p><strong>RGI Exacta:</strong> ${classificationResult.rgiExacta || 'No especificada'}</p>`;
+            let legalContent = `<div class="merx-code-display">
+                                    <span class="data-label" style="margin-bottom: 0;">Código Merx Propuesto</span>
+                                    <div class="merx-code-number">${classificationResult.clasificacionPropuesta?.codigo || 'N/A'}</div>
+                                    <p class="data-value" style="text-align: center; max-width: 90%; margin-top: 10px;">${classificationResult.clasificacionPropuesta?.descripcion || ''}</p>
+                                </div>`;
+
+            legalContent += `<div class="neumorphic-data-card">
+                                <span class="data-label">Justificación Técnica</span>
+                                <p class="data-value">${classificationResult.argumentoMerciologico || ''}</p>
+                             </div>`;
+
+            legalContent += `<div class="neumorphic-data-card">
+                                <span class="data-label">Base Legal Citada</span>
+                                <p class="data-value" style="font-size: 0.9em; color: #666;">${classificationResult.baseLegalCitada || ''}</p>
+                             </div>`;
+
+            legalContent += `<div class="neumorphic-data-card">
+                                <span class="data-label">Análisis de Integridad (RGI)</span>
+                                <p class="data-value"><strong>RGI Aplicada:</strong> ${classificationResult.rgiExacta || 'No especificada'}<br><br>${classificationResult.evaluacionRGI1 || ''}</p>
+                             </div>`;
 
             if (classificationResult.prelacionLegal && classificationResult.prelacionLegal !== 'N/A') {
-                legalContent += `<div style="margin-top:10px; margin-bottom:10px; padding:10px; background:rgba(211,84,0,0.15); border-radius:8px; border-left: 3px solid #d35400;">
-                                    <small>⚖️ <strong>Prelación Legal Aplicada:</strong> ${classificationResult.prelacionLegal}</small>
-                                </div>`;
+                legalContent += `<div class="risk-box" style="border-left-color: #d35400;">
+                                    <div class="risk-title">⚖️ Prelación Legal Automática</div>
+                                    <div class="data-value" style="font-size: 0.95rem;">${classificationResult.prelacionLegal}</div>
+                                 </div>`;
             }
-
-            legalContent += `<p><em>Análisis RGI:</em> ${classificationResult.evaluacionRGI1 || ''}</p>` +
-                `<p><em>Justificación:</em> ${classificationResult.argumentoMerciologico || ''}</p>`;
 
             reportAccordion.appendChild(createAccordionItem('2. Fundamento Legal (RGI/SAC)', legalContent));
 
             // 3. Riesgos y Permisos
             if (report.risk && !report.risk.error) {
                 const riskContent = report.risk.analisisRiesgoMercancia?.map(r =>
-                    `<div style="margin-bottom:10px; padding:10px; background:rgba(255,165,0,0.1); border-radius:8px;">
-                        <strong>${r.riesgoIdentificado}:</strong> ${r.justificacion}<br>
-                        <small>💡 ${r.recomendacion}</small>
+                    `<div class="risk-box">
+                        <div class="risk-title">${r.riesgoIdentificado}</div>
+                        <div class="data-value" style="font-size: 0.95rem;">${r.justificacion}</div>
+                        <div class="risk-tip">💡 <strong>Recomendación DGA:</strong> ${r.recomendacion}</div>
                     </div>`
-                ).join('') || 'No se detectaron riesgos especiales.';
-                reportAccordion.appendChild(createAccordionItem('3. Gestión de Riesgos y Permisos', riskContent));
+                ).join('') || '<div class="neumorphic-data-card">No se detectaron riesgos especiales de fiscalización.</div>';
+                reportAccordion.appendChild(createAccordionItem('3. Gestión de Riesgos y Permisos (DGA)', riskContent));
             }
 
             // 4. Liquidación y Aranceles
             let taxInfo = parseSacTaxes(notesTextarea.value);
-            let taxContent = `<h4>Impuestos Aplicables:</h4>` +
-                (taxInfo ?
-                    `<div style="display:flex; gap:20px; margin-bottom:15px;">
-                                    <div class="digit-box">DAI: ${taxInfo.dai}%</div>
-                                    <div class="digit-box">ISC: ${taxInfo.isc}%</div>
-                                    <div class="digit-box">IVA: ${taxInfo.iva}%</div>
-                                </div>` :
-                    `<p><em>Nota: No se detectaron aranceles en el texto pegado.</em></p>`);
+            let taxContent = `<div class="neumorphic-data-card"><span class="data-label">Impuestos Base</span>`;
+
+            if (taxInfo) {
+                taxContent += `<div class="tax-grid">
+                                    <div class="tax-item">
+                                        <span class="tax-item-label">DAI</span>
+                                        <span class="tax-item-value">${taxInfo.dai}%</span>
+                                    </div>
+                                    <div class="tax-item">
+                                        <span class="tax-item-label">ISC</span>
+                                        <span class="tax-item-value">${taxInfo.isc}%</span>
+                                    </div>
+                                    <div class="tax-item">
+                                        <span class="tax-item-label">IVA</span>
+                                        <span class="tax-item-value">${taxInfo.iva}%</span>
+                                    </div>
+                               </div></div>`;
+            } else {
+                taxContent += `<p class="data-value"><em>No se detectaron aranceles en el texto pegado o la subpartida no los especifica.</em></p></div>`;
+            }
 
             if (report.tariff && !report.tariff.error) {
                 const opt = report.tariff.analisisOptimizacion;
-                taxContent += `<p><strong>Régimen Sugerido:</strong> ${opt.regimenSugerido || 'NMF'}</p>` +
-                    `<p><strong>Ahorro Estimado:</strong> ${opt.comparativaArancelaria?.ahorroPotencial || 'N/A'}</p>`;
+                taxContent += `<div class="savings-highlight">
+                                    TLC / Régimen Sugerido: ${opt.regimenSugerido || 'NMF'}<br>
+                                    <span style="font-size: 1.2rem; display:block; margin-top:5px;">Ahorro Potencial: ${opt.comparativaArancelaria?.ahorroPotencial || 'N/A'}</span>
+                               </div>`;
             }
             reportAccordion.appendChild(createAccordionItem('4. Liquidación y Optimización', taxContent));
 

@@ -420,34 +420,182 @@ body {
 }
 
 
-.loader div {
-  width: 10px;
-  height: 10px;
-  margin: 0 5px;
-  background-color: #ffffff;
+/* --- NUEVO LOADER NEUMÓRFICO --- */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+}
+
+.neumorphic-spinner {
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  animation: bounce 1.4s infinite ease-in-out both;
+  background: var(--bg-color);
+  box-shadow:
+    8px 8px 16px var(--dark-shadow),
+    -8px -8px 16px var(--light-shadow),
+    inset 4px 4px 8px var(--dark-shadow),
+    inset -4px -4px 8px var(--light-shadow);
+  position: relative;
+  animation: spin-pulse 2s linear infinite;
 }
 
-.loader .dot1 {
-  animation-delay: -0.32s;
+.neumorphic-spinner::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8A2BE2, #b8860b);
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+  animation: spin-reverse 1.5s linear infinite;
 }
 
-.loader .dot2 {
-  animation-delay: -0.16s;
-}
+@keyframes spin-pulse {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
 
-@keyframes bounce {
+  50% {
+    transform: rotate(180deg) scale(1.05);
+  }
 
-  0%,
-  80%,
   100% {
-    transform: scale(0);
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes spin-reverse {
+  0% {
+    transform: rotate(360deg);
   }
 
-  40% {
-    transform: scale(1.0);
+  100% {
+    transform: rotate(0deg);
   }
+}
+
+/* --- CLASES ESTRUCTURALES PARA EL INFORME --- */
+.neumorphic-data-card {
+  background: var(--bg-color);
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  box-shadow: inset 4px 4px 8px var(--dark-shadow), inset -4px -4px 8px var(--light-shadow);
+  text-align: left;
+}
+
+.data-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #8A2BE2;
+  /* Primary Purple */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.data-value {
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.merx-code-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: var(--bg-color);
+  border-radius: 16px;
+  box-shadow: 8px 8px 16px var(--dark-shadow), -8px -8px 16px var(--light-shadow);
+  border: 1px solid rgba(138, 43, 226, 0.2);
+}
+
+.merx-code-number {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #8A2BE2;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+}
+
+.risk-box {
+  background: var(--bg-color);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 5px 5px 10px var(--dark-shadow), -5px -5px 10px var(--light-shadow);
+  border-left: 4px solid #ff9800;
+  /* Warning color */
+}
+
+.risk-title {
+  font-weight: 700;
+  color: #d35400;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.risk-tip {
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(255, 152, 0, 0.1);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #b9770e;
+}
+
+.tax-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.tax-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-color);
+  padding: 15px 10px;
+  border-radius: 12px;
+  box-shadow: inset 4px 4px 8px var(--dark-shadow), inset -4px -4px 8px var(--light-shadow);
+}
+
+.tax-item-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #7b7b7b;
+}
+
+.tax-item-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #28a745;
+  /* Green for taxes/savings */
+}
+
+.savings-highlight {
+  text-align: center;
+  padding: 15px;
+  background: rgba(40, 167, 69, 0.1);
+  border-radius: 12px;
+  border: 1px dashed rgba(40, 167, 69, 0.5);
+  color: #1e7e34;
+  font-weight: 600;
+  box-shadow: 4px 4px 10px var(--dark-shadow), -4px -4px 10px var(--light-shadow);
 }
 
 @keyframes fade-in {
