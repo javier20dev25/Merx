@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buscador Glassmorfismo Interactivo</title>
+  <title>Merx | Clasificación Arancelaria & Academy</title>
   <!-- Carga de la fuente Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/style.css">
@@ -16,6 +16,45 @@
   <div id="main-container" class="container">
 
     <h1 id="logo" class="site-title">Merx</h1>
+
+    <!-- Módulo Merx Academy (Oculto por defecto) -->
+    <section id="merx-academy" class="academy-container hidden">
+      <div class="academy-header">
+        <h2 style="font-size: 1.2rem; margin: 0;">🎓 Merx Academy</h2>
+        <button id="close-academy" class="glass-btn circle-btn"
+          style="width: 30px; height: 30px; font-size: 0.8rem;">✕</button>
+        <div class="level-toggles">
+          <button class="level-btn active" data-level="tecnico">Técnico</button>
+          <button class="level-btn" data-level="sencillo">Sencillo</button>
+          <button class="level-btn" data-level="adolescente">Adolescente</button>
+        </div>
+      </div>
+
+      <div id="academy-content" class="academy-body">
+        <div class="academy-intro">
+          <p id="academy-description" style="font-size: 0.9rem; opacity: 0.8;">Aprende la lógica del Sistema Arancelario
+            Centroamericano (SAC).</p>
+          <div class="interactive-blocks" id="structure-game">
+            <p style="font-size: 0.8rem; margin: 10px 0 5px 0; font-weight: 600;">Ordena la jerarquía (Click en orden):
+            </p>
+            <div class="blocks-container" id="blocks-pool"></div>
+            <div class="drop-zone" id="blocks-result"></div>
+            <button id="reset-game" class="glass-btn"
+              style="padding: 5px 15px; font-size: 0.8rem; border-radius: 20px; margin-top: 10px;">Reiniciar</button>
+          </div>
+        </div>
+
+        <div class="code-breakdown" id="code-breakdown">
+          <div class="digit-box" title="Capítulo: Familia general">XX</div>
+          <div class="digit-box" title="Partida: Descripción básica">XX</div>
+          <span class="dot">.</span>
+          <div class="digit-box" title="Subpartida SA: Estándar mundial">XX</div>
+          <span class="dot">.</span>
+          <div class="digit-box" title="Incisos SAC: Centroamérica">XX</div>
+          <div class="digit-box" title="Arancel Nacional: Nicaragua">XX</div>
+        </div>
+      </div>
+    </section>
 
     <div id="step-1-container">
       <div class="mercancia-tip">
@@ -48,81 +87,94 @@
       <div id="clarification-questions" style="display: flex; flex-direction: column; gap: 15px;"></div>
     </div>
 
-    <div style="display:flex; gap:20px; align-items: center; flex-wrap: wrap; justify-content: center;">
-      <!-- Botón Izquierdo (cambia de ícono) -->
-      <button id="left-button" class="glass-btn circle-btn purple-glow" aria-label="Ver categorías">
-        <span><!-- El contenido del botón (SVG) se inyecta aquí por JS --></span>
-      </button>
+    <!-- Botón Repaso (Academy) -->
+    <button id="repaso-btn" class="glass-btn pill-btn purple-glow" style="background: rgba(138, 43, 226, 0.1);">
+      <span>📖 Repaso Académico</span>
+    </button>
 
-      <!-- Botón Derecho (cambia de texto) -->
-      <button id="right-button" class="glass-btn pill-btn orange-glow">
-        <span>Buscar Ubicacion</span>
-      </button>
+    <!-- Botón Izquierdo (cambia de ícono) -->
+    <button id="left-button" class="glass-btn circle-btn purple-glow" aria-label="Ver categorías">
+      <span><!-- El contenido del botón (SVG) se inyecta aquí por JS --></span>
+    </button>
 
-      <!-- Botón Omitir (Oculto por defecto) -->
-      <button id="skip-button" class="glass-btn pill-btn hidden"
-        style="background: rgba(231, 76, 60, 0.2); border-color: rgba(231, 76, 60, 0.4); color: #e74c3c;">
-        <span>Omitir Aclaración</span>
-      </button>
-    </div>
+    <!-- Botón Derecho (cambia de texto) -->
+    <button id="right-button" class="glass-btn pill-btn orange-glow">
+      <span>Buscar Ubicacion</span>
+    </button>
 
-    <!-- Nuevo contenedor para el contenido del footer -->
-    <div class="page-footer">
-      <div class="tech-stack">
-        <div class="tags">
-          <span class="tag">HTML/CSS/JS</span>
-          <span class="tag">Node.js</span>
-          <span class="tag">Google Gemini</span>
-        </div>
-        <div class="github-wrapper" style="text-align: center; margin-top: 10px;">
-          <a href="https://github.com/javier20dev25/Merx" target="_blank" rel="noopener noreferrer"
-            class="tag github-tag">GitHub</a>
-          <small class="github-label">click para ir al repositorio</small>
-        </div>
+    <!-- Botón Omitir (Oculto por defecto) -->
+    <button id="skip-button" class="glass-btn pill-btn hidden"
+      style="background: rgba(231, 76, 60, 0.2); border-color: rgba(231, 76, 60, 0.4); color: #e74c3c;">
+      <span>Omitir Aclaración</span>
+    </button>
+  </div>
+
+  <!-- Nuevo contenedor para el contenido del footer -->
+  <div class="page-footer">
+    <div class="tech-stack">
+      <div class="tags">
+        <span class="tag">HTML/CSS/JS</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Google Gemini</span>
       </div>
-      <p class="credits">Desarrollado por Javier Astaroth</p>
-      <p class="credits">Con documentación de Lic. Axel Troche</p>
-
-      <div class="contact-section">
-        <a href="https://wa.me/50588378547" target="_blank" rel="noopener noreferrer" class="contact-link">Sugerencias o
-          Contacto</a>
-      </div>
-
-      <!-- Policies Section -->
-      <div class="policy-section">
-        <div class="policy-buttons">
-          <button id="policy-btn" class="policy-toggle-btn">Políticas de Uso</button>
-          <button id="privacy-btn" class="policy-toggle-btn">Privacidad</button>
-        </div>
-        <div id="policy-content" class="policy-content hidden">
-          <h4>Políticas de Uso</h4>
-          <p>Esta herramienta fue creada como un proyecto de estudio y debe ser utilizada exclusivamente con fines
-            educativos y de referencia. La información y clasificaciones arancelarias generadas por la IA no constituyen
-            una asesoría legal ni son vinculantes.</p>
-          <p>El uso de esta herramienta es bajo su propio riesgo. Los desarrolladores no se hacen responsables por
-            decisiones comerciales o legales tomadas con base en los resultados obtenidos.</p>
-        </div>
-        <div id="privacy-content" class="policy-content hidden">
-          <h4>Política de Privacidad</h4>
-          <p>Respetamos tu privacidad. La descripción de la mercancía y las notas que ingresas son enviadas a la API de
-            Google Gemini para generar el análisis, pero <strong>no se almacenan en nuestros servidores</strong>. No
-            guardamos, registramos ni compartimos los datos de tus consultas.</p>
-          <p>Este es un proyecto de código abierto. Puedes auditar el código y contribuir en nuestro repositorio de <a
-              href="https://github.com/javier20dev25/Merx" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
-        </div>
+      <div class="github-wrapper" style="text-align: center; margin-top: 10px;">
+        <a href="https://github.com/javier20dev25/Merx" target="_blank" rel="noopener noreferrer"
+          class="tag github-tag">GitHub</a>
+        <small class="github-label">click para ir al repositorio</small>
       </div>
     </div>
+    <p class="credits">Desarrollado por Javier Astaroth</p>
+    <p class="credits">Con documentación de Lic. Axel Troche</p>
+
+    <div class="contact-section">
+      <a href="https://wa.me/50588378547" target="_blank" rel="noopener noreferrer" class="contact-link">Sugerencias o
+        Contacto</a>
+    </div>
+
+    <!-- Policies Section -->
+    <div class="policy-section">
+      <div class="policy-buttons">
+        <button id="policy-btn" class="policy-toggle-btn">Políticas de Uso</button>
+        <button id="privacy-btn" class="policy-toggle-btn">Privacidad</button>
+      </div>
+      <div id="policy-content" class="policy-content hidden">
+        <h4>Políticas de Uso</h4>
+        <p>Esta herramienta fue creada como un proyecto de estudio y debe ser utilizada exclusivamente con fines
+          educativos y de referencia. La información y clasificaciones arancelarias generadas por la IA no constituyen
+          una asesoría legal ni son vinculantes.</p>
+        <p>El uso de esta herramienta es bajo su propio riesgo. Los desarrolladores no se hacen responsables por
+          decisiones comerciales o legales tomadas con base en los resultados obtenidos.</p>
+      </div>
+      <div id="privacy-content" class="policy-content hidden">
+        <h4>Política de Privacidad</h4>
+        <p>Respetamos tu privacidad. La descripción de la mercancía y las notas que ingresas son enviadas a la API de
+          Google Gemini para generar el análisis, pero <strong>no se almacenan en nuestros servidores</strong>. No
+          guardamos, registramos ni compartimos los datos de tus consultas.</p>
+        <p>Este es un proyecto de código abierto. Puedes auditar el código y contribuir en nuestro repositorio de <a
+            href="https://github.com/javier20dev25/Merx" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+      </div>
+    </div>
+  </div>
 
   </div>
 
   <!-- Contenedor para el paso final (Informe) -->
   <div id="report-view" class="container hidden">
     <h1 class="site-title">Merx</h1>
-    <div id="report-content-wrapper">
-      <!-- La animación de carga o el informe se insertarán aquí -->
+
+    <div id="report-accordion" class="accordion-wrapper" style="width: 100%; max-width: 600px;">
+      <!-- Las tarjetas de acordeón se generarán aquí -->
     </div>
-    <div class="report-footer" style="background: none; border: none; backdrop-filter: none;">
-      <button id="reset-button">
+
+    <!-- Sección de Analogía Dinámica (Merx Academy específica) -->
+    <div id="dynamic-academy" class="academy-container dynamic-lesson hidden"
+      style="width: 100%; max-width: 600px; margin-top: 20px;">
+      <h3 style="font-size: 1.1rem; margin-bottom: 15px;">💡 Miniclase de este producto</h3>
+      <div id="dynamic-lesson-content" class="academy-body"></div>
+    </div>
+
+    <div class="report-footer" style="background: none; border: none; backdrop-filter: none; margin-top: 30px;">
+      <button id="reset-button" class="glass-btn pill-btn purple-glow">
         <span>← Volver al inicio</span>
       </button>
     </div>

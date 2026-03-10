@@ -15,6 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const reportView = document.getElementById('report-view');
     const resetButton = document.getElementById('reset-button');
     const pasteButton = document.getElementById('paste-button');
+    const reportAccordion = document.getElementById('report-accordion');
+    const dynamicAcademy = document.getElementById('dynamic-academy');
+    const dynamicLessonContent = document.getElementById('dynamic-lesson-content');
+    const logo = document.getElementById('logo');
+    const merxAcademy = document.getElementById('merx-academy');
+    const repasoBtn = document.getElementById('repaso-btn');
+    const closeAcademyBtn = document.getElementById('close-academy');
+
+    // Academy Elements
+    const academyDescription = document.getElementById('academy-description');
+    const levelBtns = document.querySelectorAll('.level-btn');
+    const blocksPool = document.getElementById('blocks-pool');
+    const blocksResult = document.getElementById('blocks-result');
+    const resetGameBtn = document.getElementById('reset-game');
 
     const leftButtonContent = leftButton.querySelector('span');
     const rightButtonContent = rightButton.querySelector('span');
@@ -27,9 +41,25 @@ document.addEventListener('DOMContentLoaded', () => {
     pasteButtonContent.innerHTML = clipboardIcon;
 
     // --- Estado de la App ---
-    let currentState = -1;
-    let subState = 0;
+    let currentState = 0;
+    let classificationResult = null;
     let sessionData = { description: '', location: '' };
+
+    const academyData = {
+        tecnico: "Estructura legal: Secciones, Capítulos (2 dígs), Partidas (4 dígs), Subpartidas (6 dígs) e Incisos (10-12 dígs). Basado en RGI y Notas Legales.",
+        sencillo: "El SAC es como un mapa: Barrios (Secciones), Calles (Capítulos) y Casas (Incisos). Los primeros 4 números son el 'apellido' de la familia.",
+        adolescente: "Es como Spotify: Sección = Género, Capítulo = Banda, Inciso = ID de la canción. La Partida es el título del álbum."
+    };
+
+    const structureLevels = [
+        { id: 'sec', name: 'Sección (Grupo)', order: 1 },
+        { id: 'cap', name: 'Capítulo (Familia)', order: 2 },
+        { id: 'par', name: 'Partida (Categoría)', order: 3 },
+        { id: 'sub', name: 'Subpartida (Mundial)', order: 4 },
+        { id: 'inc', name: 'Inciso (Nacional)', order: 5 }
+    ];
+
+    let gameOrder = [];
 
     // --- Funciones de UI ---
     function animateTextChange(element, newText) {
@@ -58,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionData.description = mainTextarea.value;
         if (!sessionData.description.trim()) return;
 
-        const logo = document.getElementById('logo');
         logo.classList.add('loading-animation');
 
         transitionElements(step1Container, resultCard);
@@ -115,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function generateReport(skip = false) {
         const notes = notesTextarea.value;
-        const logo = document.getElementById('logo');
 
         let clarificationAnswers = "";
         if (currentState === 1.5) {
@@ -144,15 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContainer.classList.add('hidden');
             mainContainer.classList.remove('fade-out');
 
-            const reportHeader = reportView.querySelector('.report-header');
-            if (reportHeader) {
-                // FIX: Crear el logo directamente para evitar problemas de clonación
-
-            }
-
             reportView.classList.remove('hidden');
             const reportWrapper = document.getElementById('report-content-wrapper');
-            reportWrapper.innerHTML = `<div class="loader"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div>`;
+            if (reportWrapper) reportWrapper.innerHTML = `<div class="loader"><div class="dot1"></div><div class="dot2"></div><div class="dot3"></div></div>`;
             reportView.classList.add('fade-in');
             logo.classList.add('loading-animation');
         }, { once: true });
@@ -180,74 +202,70 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const report = data.report;
+            classificationResult = report.classification;
 
-            if (report.classification?.necesitaAclaracion) {
+            if (classificationResult?.necesitaAclaracion) {
                 reportView.classList.add('hidden');
                 mainContainer.classList.remove('hidden');
-                showClarificationPrompt(report.classification);
+                showClarificationPrompt(classificationResult);
                 return;
             }
 
-            const reportWrapper = document.getElementById('report-content-wrapper');
-            reportWrapper.innerHTML = '';
+            // Limpiar y preparar acordeón
+            reportAccordion.innerHTML = '';
+            updateUI(2);
 
-            const createCard = (title, content) => {
-                if (!content) return;
-                const card = document.createElement('div');
-                card.className = 'report-section-card';
-                card.innerHTML = `<h3>${title}</h3><div class="card-content">${content}</div>`;
-                reportWrapper.appendChild(card);
-            };
+            // 1. Identificación Merceológica
+            const idContent = `<p>${classificationResult.analisisMerciologico?.whatIs || 'No disponible'}</p>` +
+                `<p><strong>Material:</strong> ${classificationResult.analisisMerciologico?.material || 'N/A'}</p>` +
+                `<p><strong>Función:</strong> ${classificationResult.analisisMerciologico?.function || 'N/A'}</p>`;
+            reportAccordion.appendChild(createAccordionItem('1. Identificación Merceológica', idContent));
 
-            if (report.classification?.clasificacionPropuesta) {
-                const { codigo, descripcion } = report.classification.clasificacionPropuesta;
-                const { scoreFiabilidad, argumentoMerciologico } = report.classification;
-                const content =
-                    `<p><strong>Código Propuesto:</strong> ${codigo || 'N/A'}</p>` +
-                    `<p><strong>Descripción:</strong> ${descripcion || 'N/A'}</p>` +
-                    `<p><strong>Fiabilidad:</strong> ${scoreFiabilidad ? Math.round(scoreFiabilidad * 100) + '%' : 'N/A'}</p>` +
-                    `<p><strong>Argumento Merciológico:</strong><br>${argumentoMerciologico?.replace(/\n/g, '<br>') || 'N/A'}</p>`;
-                createCard('1. Análisis de Clasificación Arancelaria', content);
-            }
+            // 2. Clasificación Legal
+            const legalContent = `<p><strong>Código Merx:</strong> <span style="font-family: monospace; font-weight: bold; font-size: 1.25rem; color: #8A2BE2;">${classificationResult.clasificacionPropuesta?.codigo || 'N/A'}</span></p>` +
+                `<p><strong>Descripción SAC:</strong> ${classificationResult.clasificacionPropuesta?.descripcion || ''}</p>` +
+                `<p><strong>Base Legal:</strong> ${classificationResult.argumentoMerciologico?.baseLegalCitada || ''}</p>` +
+                `<p><em>Análisis RGI:</em> ${classificationResult.evaluacionRGI1 || classificationResult.argumentoMerciologico?.justificacion || ''}</p>`;
+            reportAccordion.appendChild(createAccordionItem('2. Fundamento Legal (RGI/SAC)', legalContent));
 
-            if (report.legal && !report.legal.error) {
-                const { applied_rules, notes_applied, jurisprudencia } = report.legal.fundamentoLegal;
-                let content = '';
-                if (applied_rules?.length > 0) content += '<h4>Reglas Generales Aplicadas:</h4><ul>' + applied_rules.map(r => `<li><strong>${r.rule_id}:</strong> ${r.descripcion}</li>`).join('') + '</ul>';
-                if (notes_applied?.length > 0) content += '<h4>Notas de Sección/Capítulo:</h4><ul>' + notes_applied.map(n => `<li><strong>${n.note_id} (${n.tipo || 'N/A'}):</strong> ${n.descripcion}</li>`).join('') + '</ul>';
-                if (jurisprudencia?.length > 0) content += '<h4>Jurisprudencia Relevante (TATA):</h4><ul>' + jurisprudencia.map(j => `<li><strong>${j.case_id}:</strong> ${j.summary}</li>`).join('') + '</ul>';
-                createCard('2. Fundamento Legal y Jurisprudencia', content);
-            }
-
-            if (report.regulatory && !report.regulatory.error) {
-                const { institucionPrincipal, requisitos } = report.regulatory.analisisRegulatorio;
-                if (requisitos?.length > 0) {
-                    let content = `<p><strong>Institución Principal Sugerida:</strong> ${institucionPrincipal || 'N/A'}</p><h4>Requisitos y Permisos:</h4><ul>` + requisitos.map(r => `<li><strong>${r.nombre} (${r.institucion}):</strong> ${r.detalle}</li>`).join('') + '</ul>';
-                    createCard('3. Análisis Regulatorio (Permisos y Barreras)', content);
-                }
-            }
-
+            // 3. Riesgos y Permisos
             if (report.risk && !report.risk.error) {
-                const { analisisRiesgoMercancia } = report.risk;
-                if (analisisRiesgoMercancia?.length > 0) {
-                    let content = analisisRiesgoMercancia.map(r => `<p><strong>${r.riesgoIdentificado}:</strong> ${r.justificacion}<br><em>Recomendación: ${r.recomendacion}</em></p>`).join('');
-                    createCard('4. Análisis de Riesgo Inherente a la Mercancía', content);
-                }
+                const riskContent = report.risk.analisisRiesgoMercancia?.map(r =>
+                    `<div style="margin-bottom:10px; padding:10px; background:rgba(255,165,0,0.1); border-radius:8px;">
+                        <strong>${r.riesgoIdentificado}:</strong> ${r.justificacion}<br>
+                        <small>💡 ${r.recomendacion}</small>
+                    </div>`
+                ).join('') || 'No se detectaron riesgos especiales.';
+                reportAccordion.appendChild(createAccordionItem('3. Gestión de Riesgos y Permisos', riskContent));
             }
+
+            // 4. Liquidación y Aranceles
+            let taxInfo = parseSacTaxes(notesTextarea.value);
+            let taxContent = `<h4>Impuestos Aplicables:</h4>` +
+                (taxInfo ?
+                    `<div style="display:flex; gap:20px; margin-bottom:15px;">
+                                    <div class="digit-box">DAI: ${taxInfo.dai}%</div>
+                                    <div class="digit-box">ISC: ${taxInfo.isc}%</div>
+                                    <div class="digit-box">IVA: ${taxInfo.iva}%</div>
+                                </div>` :
+                    `<p><em>Nota: No se detectaron aranceles en el texto pegado.</em></p>`);
 
             if (report.tariff && !report.tariff.error) {
-                const { regimenSugerido, cumpleOrigenPotencial, justificacionOrigen, comparativaArancelaria, recomendacionEstrategica } = report.tariff.analisisOptimizacion;
-                if (regimenSugerido) {
-                    let content =
-                        `<p><strong>Régimen Sugerido:</strong> ${regimenSugerido}</p>` +
-                        `<p><strong>Cumple Origen Potencial:</strong> ${cumpleOrigenPotencial}</p>` +
-                        `<p><em>Justificación:</em> ${justificacionOrigen}</p>` +
-                        `<h4>Comparativa:</h4>` +
-                        `<ul><li>Arancel Normal (NMF): ${comparativaArancelaria.arancelNMF}</li><li>Arancel Preferencial: ${comparativaArancelaria.arancelPreferencial}</li></ul>` +
-                        `<p><strong>Ahorro Potencial:</strong> ${comparativaArancelaria.ahorroPotencial}</p>` +
-                        `<p><strong>Recomendación Estratégica:</strong> ${recomendacionEstrategica}</p>`;
-                    createCard('5. Análisis de Optimización Arancelaria', content);
-                }
+                const opt = report.tariff.analisisOptimizacion;
+                taxContent += `<p><strong>Régimen Sugerido:</strong> ${opt.regimenSugerido || 'NMF'}</p>` +
+                    `<p><strong>Ahorro Estimado:</strong> ${opt.comparativaArancelaria?.ahorroPotencial || 'N/A'}</p>`;
+            }
+            reportAccordion.appendChild(createAccordionItem('4. Liquidación y Optimización', taxContent));
+
+            // 5. Merx Academy Dinámica (Mini-clase)
+            if (classificationResult.explicacionPedagogica) {
+                dynamicAcademy.classList.remove('hidden');
+                const activeLevelBtn = document.querySelector('.level-btn.active');
+                const level = activeLevelBtn ? activeLevelBtn.getAttribute('data-level') : 'tecnico';
+                const pedagogicalText = classificationResult.explicacionPedagogica[level] || classificationResult.explicacionPedagogica.tecnico;
+                dynamicLessonContent.innerHTML = `<p>${pedagogicalText}</p>`;
+            } else {
+                dynamicAcademy.classList.add('hidden');
             }
 
         } catch (error) {
@@ -315,6 +333,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function toggleAcademy(show) {
+        if (show) {
+            merxAcademy.classList.remove('hidden');
+            step1Container.classList.add('hidden');
+            leftButton.parentElement.classList.add('hidden');
+            repasoBtn.classList.add('hidden');
+            initGame();
+        } else {
+            merxAcademy.classList.add('hidden');
+            step1Container.classList.remove('hidden');
+            leftButton.parentElement.classList.remove('hidden');
+            repasoBtn.classList.remove('hidden');
+        }
+    }
+
     function updateUI(state) {
         currentState = state;
         if (state === 0) {
@@ -325,9 +358,11 @@ document.addEventListener('DOMContentLoaded', () => {
             clarificationContainer.classList.add('hidden');
             resultCard.classList.add('hidden');
             skipButton.classList.add('hidden');
+            repasoBtn.classList.remove('hidden');
             mainTextarea.value = '';
             animateTextChange(leftButtonContent, trashIcon);
             animateTextChange(rightButtonContent, "Buscar Ubicación");
+            merxAcademy.classList.add('hidden'); // Oculta Academy por defecto en 0
         } else if (state === 1) {
             mainContainer.classList.remove('hidden');
             reportView.classList.add('hidden');
@@ -336,9 +371,11 @@ document.addEventListener('DOMContentLoaded', () => {
             step3Container.classList.remove('hidden');
             clarificationContainer.classList.add('hidden');
             skipButton.classList.add('hidden');
+            repasoBtn.classList.add('hidden');
             notesTextarea.value = '';
             animateTextChange(leftButtonContent, backIcon);
             animateTextChange(rightButtonContent, "Generar Informe");
+            merxAcademy.classList.add('hidden');
         } else if (state === 1.5) {
             mainContainer.classList.remove('hidden');
             reportView.classList.add('hidden');
@@ -347,8 +384,13 @@ document.addEventListener('DOMContentLoaded', () => {
             step3Container.classList.remove('hidden');
             clarificationContainer.classList.remove('hidden');
             skipButton.classList.remove('hidden');
+            repasoBtn.classList.add('hidden');
             animateTextChange(leftButtonContent, backIcon);
             animateTextChange(rightButtonContent, "Responder y Clasificar");
+        } else if (state === 2) {
+            mainContainer.classList.add('hidden');
+            reportView.classList.remove('hidden');
+            reportView.classList.add('fade-in');
         }
     }
 
@@ -359,7 +401,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!notesTextarea.value.trim()) { alert("Por favor pega subpartidas arancelarias"); return; }
             generateReport(false);
         } else if (currentState === 1.5) {
-            // Validar campos de texto "Otro" requeridos
             const unfilledOthers = Array.from(clarificationQuestions.querySelectorAll('.other-text-input[required]')).filter(input => !input.value.trim());
             if (unfilledOthers.length > 0) {
                 alert("Por favor, especifica el detalle en la opción 'Otro'.");
@@ -384,46 +425,135 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    resetButton.addEventListener('click', () => {
-        reportView.classList.add('fade-out');
-        reportView.addEventListener('animationend', () => {
-            reportView.classList.add('hidden');
-            reportView.classList.remove('fade-out');
-            updateUI(0);
-        }, { once: true });
-    });
+    if (repasoBtn) repasoBtn.addEventListener('click', () => toggleAcademy(true));
+    if (closeAcademyBtn) closeAcademyBtn.addEventListener('click', () => toggleAcademy(false));
 
-    pasteButton.addEventListener('click', async () => {
-        try {
-            const text = await navigator.clipboard.readText();
-            if (text) {
-                mainTextarea.value = text;
-                mainTextarea.focus();
+    // --- Merx Academy Logic ---
+
+    function initAcademy() {
+        levelBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                levelBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const level = btn.getAttribute('data-level');
+                academyDescription.innerText = academyData[level];
+            });
+        });
+        initGame();
+    }
+
+    function initGame() {
+        blocksPool.innerHTML = '';
+        blocksResult.innerHTML = '';
+        gameOrder = [];
+
+        const shuffled = [...structureLevels].sort(() => Math.random() - 0.5);
+        shuffled.forEach(lvl => {
+            const el = document.createElement('div');
+            el.className = 'hierarchy-block';
+            el.innerText = lvl.name;
+            el.dataset.id = lvl.id;
+            el.addEventListener('click', () => handleBlockClick(lvl, el));
+            blocksPool.appendChild(el);
+        });
+    }
+
+    function handleBlockClick(lvl, el) {
+        if (el.classList.contains('placed')) return;
+
+        const nextOrder = gameOrder.length + 1;
+        if (lvl.order === nextOrder) {
+            el.classList.add('placed');
+            gameOrder.push(lvl.id);
+
+            const resEl = document.createElement('div');
+            resEl.className = 'block-item placed';
+            resEl.innerText = `${nextOrder}. ${lvl.name}`;
+            blocksResult.appendChild(resEl);
+
+            if (gameOrder.length === structureLevels.length) {
+                setTimeout(() => alert("¡Excelente! Has dominado la jerarquía arancelaria."), 300);
             }
-        } catch (err) {
-            console.error('Error al pegar desde el portapapeles:', err);
+        } else {
+            el.classList.add('shake');
+            setTimeout(() => el.classList.remove('shake'), 400);
         }
-    });
+    }
 
-    updateUI(0);
+    function createAccordionItem(title, content) {
+        const item = document.createElement('div');
+        item.className = 'accordion-item';
 
-    // --- Policy Section Logic ---
+        const header = document.createElement('div');
+        header.className = 'accordion-header';
+        header.innerText = title;
+
+        const body = document.createElement('div');
+        body.className = 'accordion-content';
+        body.innerHTML = content;
+
+        header.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
+        });
+
+        item.appendChild(header);
+        item.appendChild(body);
+        return item;
+    }
+
+    function parseSacTaxes(text) {
+        const lines = text.split('\n');
+        let results = [];
+        lines.forEach(line => {
+            const match = line.match(/(\d+|II|E)\s+(\d+|II|E)\s+(\d+|II|E)\s*$/);
+            if (match) {
+                results.push({ dai: match[1], isc: match[2], iva: match[3] });
+            }
+        });
+        return results[0] || null;
+    }
+
+    if (resetGameBtn) resetGameBtn.addEventListener('click', initGame);
+
+    if (pasteButton) {
+        pasteButton.addEventListener('click', async () => {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (text) {
+                    mainTextarea.value = text;
+                    mainTextarea.focus();
+                }
+            } catch (err) {
+                console.error('Error al pegar:', err);
+            }
+        });
+    }
+
+    if (resetButton) {
+        resetButton.addEventListener('click', () => {
+            reportView.classList.add('fade-out');
+            reportView.addEventListener('animationend', () => {
+                reportView.classList.add('hidden');
+                reportView.classList.remove('fade-out');
+                updateUI(0);
+            }, { once: true });
+        });
+    }
+
     const policyBtn = document.getElementById('policy-btn');
     const privacyBtn = document.getElementById('privacy-btn');
     const policyContent = document.getElementById('policy-content');
     const privacyContent = document.getElementById('privacy-content');
 
-    if (policyBtn) { // Check if buttons exist to avoid errors in other views
+    if (policyBtn && privacyBtn) {
         policyBtn.addEventListener('click', () => {
             const isHidden = policyContent.classList.contains('hidden');
-
-            // Hide both first
             policyContent.classList.add('hidden');
             privacyContent.classList.add('hidden');
             policyBtn.classList.remove('active');
             privacyBtn.classList.remove('active');
-
-            // If it was hidden, show it
             if (isHidden) {
                 policyContent.classList.remove('hidden');
                 policyBtn.classList.add('active');
@@ -432,18 +562,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         privacyBtn.addEventListener('click', () => {
             const isHidden = privacyContent.classList.contains('hidden');
-
-            // Hide both first
             policyContent.classList.add('hidden');
             privacyContent.classList.add('hidden');
             policyBtn.classList.remove('active');
             privacyBtn.classList.remove('active');
-
-            // If it was hidden, show it
             if (isHidden) {
                 privacyContent.classList.remove('hidden');
                 privacyBtn.classList.add('active');
             }
         });
     }
+
+    initAcademy();
+    updateUI(0);
 });

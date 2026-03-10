@@ -355,3 +355,10 @@ app.post('/api/generate-report', async (req, res) => {
 });
 
 module.exports = app;
+
+if (require.main === module) {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Servidor Merx corriendo en http://localhost:${PORT}`);
+    });
+}

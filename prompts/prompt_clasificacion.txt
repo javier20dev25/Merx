@@ -49,5 +49,10 @@ SALIDA JSON REQUERIDA:
   },
   "scoreFiabilidad": <número 0.0 a 1.0>,
   "argumentoMerciologico": "<Justificación técnica final>",
-  "baseLegalCitada": "<Cita textual estricta de la Nota Legal o Regla aplicada>"
+  "baseLegalCitada": "<Cita textual estricta de la Nota Legal o Regla aplicada>",
+  "explicacionPedagogica": {
+    "tecnico": "<Explicación avanzada citando estructura del SAC>",
+    "sencillo": "<Explicación usando analogías de mapas/casas/familias>",
+    "adolescente": "<Explicación usando analogías de apps/Spotify/videojuegos>"
+  }
 }
